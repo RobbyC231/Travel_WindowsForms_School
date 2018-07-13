@@ -1,4 +1,4 @@
-﻿namespace WindowsFormsApp1
+﻿namespace TravelExpertsAPP
 {
     partial class Form1
     {
