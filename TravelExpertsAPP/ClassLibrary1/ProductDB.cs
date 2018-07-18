@@ -4,10 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace TravelExpertsAPP
+namespace TravelExpertsLibrary
 {
-    public class Product
+    class ProductDB
     {
-        public Product() { }
     }
 }

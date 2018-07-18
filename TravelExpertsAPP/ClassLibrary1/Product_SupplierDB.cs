@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace TravelExpertsAPP
+namespace TravelExpertsLibrary
 {
-    class SupplierDB
+    class Product_SupplierDB
     {
     }
 }

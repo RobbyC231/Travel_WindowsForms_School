@@ -10,9 +10,9 @@ using System.Windows.Forms;
 
 namespace TravelExpertsAPP
 {
-    public partial class Form1 : Form
+    public partial class TravelExpertsForm : Form
     {
-        public Form1()
+        public TravelExpertsForm()
         {
             InitializeComponent();
         }
