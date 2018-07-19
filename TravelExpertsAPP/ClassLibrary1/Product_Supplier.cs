@@ -10,5 +10,8 @@ namespace TravelExpertsLibrary
     {
         public Product_Supplier() { }
 
+        public int ProductSupplierID { get; set; }
+        public int ProductID { get; set; }
+        public int SupplierID { get; set; }
     }
 }
