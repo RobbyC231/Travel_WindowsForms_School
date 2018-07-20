@@ -9,5 +9,7 @@ namespace TravelExpertsLibrary
     public class Product
     {
         public Product() { }
+        public int ProductID { get; set; }
+        public string ProdName { get; set; }
     }
 }
