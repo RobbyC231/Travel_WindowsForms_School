@@ -6,6 +6,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
+/*
+ * Author: Brian Liang
+ * Date: July/Aug 2018
+ */
+
 namespace TravelExpertsLibrary
 {
     public static class PackageDB
@@ -45,16 +50,13 @@ namespace TravelExpertsLibrary
             return pack;
         }
 
-        public static bool deletePackage(Package PS)
+        public static bool deletePackage(Package pkg)
         {
             SqlConnection con = TravelExpertsDB.GetConnection();
-            string deleteStatement = "delete from Product_Suppliers where ProductSupplierID = @ProductSupplierID " +
-                                        "and ProductID= @ProductID " +
-                                        "and SupplierID=@SupplierID";
+            string deleteStatement = "delete from Packages where PackageId = @PackageId ";
+
             SqlCommand cmd = new SqlCommand(deleteStatement, con);
-            cmd.Parameters.AddWithValue("@ProductSupplierID", PS.ProductSupplierID);
-            cmd.Parameters.AddWithValue("@ProductID", PS.ProductID);
-            cmd.Parameters.AddWithValue("@SupplierID", PS.SupplierID);
+            cmd.Parameters.AddWithValue("@PackageId", pkg.PackageId);
             try
             {
                 con.Open();
@@ -68,6 +70,40 @@ namespace TravelExpertsLibrary
                     return false;
                 }
 
+            }
+            catch (SqlException ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+                con.Close();
+            }
+        }
+
+        public static int AddPackage(Package pkg)
+        {
+            SqlConnection con = TravelExpertsDB.GetConnection();
+            string insertStatement = "insert into Packages (PackageId, PkgName, PkgStartDate, PkgEndDate, PkgDesc, PkgBasePrice, PkgAgencyCommission ) " +
+                                        "values(@PackageId, @PkgName, @PkgStartDate, @PkgEndDate, @PkgDesc, @PkgBasePrice, @PkgAgencyCommission )";
+            SqlCommand cmd = new SqlCommand(insertStatement, con);
+            cmd.Parameters.AddWithValue("@PackageId", pkg.PackageId);
+            cmd.Parameters.AddWithValue("@PkgName", pkg.PkgName);
+            cmd.Parameters.AddWithValue("@PkgStartDate", pkg.PkgStartDate);
+            cmd.Parameters.AddWithValue("@PkgEndDate", pkg.PkgEndDate);
+            cmd.Parameters.AddWithValue("@PkgDesc", pkg.PkgDesc);
+            cmd.Parameters.AddWithValue("@PkgBasePrice", pkg.PkgBasePrice);
+            cmd.Parameters.AddWithValue("@PkgAgencyCommission", pkg.PkgAgencyCommission);
+
+            try
+            {
+                con.Open();
+                cmd.ExecuteNonQuery();
+
+                String selectQuery = "select ident_current('Packages') from Packages";
+                SqlCommand selectCmd = new SqlCommand(selectQuery, con);
+                int PackageId = Convert.ToInt32(selectCmd.ExecuteScalar());
+                return PackageId;
             }
             catch (SqlException ex)
             {
