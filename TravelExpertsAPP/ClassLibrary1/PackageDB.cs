@@ -23,7 +23,7 @@ namespace TravelExpertsLibrary
             {
                 con.Open();
                 SqlDataReader reader = cmd.ExecuteReader(CommandBehavior.SingleRow);
-                if (reader.Read()) // found a customer
+                if (reader.Read()) // found a package
                 {
                     pack = new Package();
                     pack.PkgName = reader["PkgName"].ToString();
@@ -43,6 +43,40 @@ namespace TravelExpertsLibrary
                 con.Close();
             }
             return pack;
+        }
+
+        public static bool deletePackage(Package PS)
+        {
+            SqlConnection con = TravelExpertsDB.GetConnection();
+            string deleteStatement = "delete from Product_Suppliers where ProductSupplierID = @ProductSupplierID " +
+                                        "and ProductID= @ProductID " +
+                                        "and SupplierID=@SupplierID";
+            SqlCommand cmd = new SqlCommand(deleteStatement, con);
+            cmd.Parameters.AddWithValue("@ProductSupplierID", PS.ProductSupplierID);
+            cmd.Parameters.AddWithValue("@ProductID", PS.ProductID);
+            cmd.Parameters.AddWithValue("@SupplierID", PS.SupplierID);
+            try
+            {
+                con.Open();
+                int count = cmd.ExecuteNonQuery();
+                if (count > 0)
+                {
+                    return true;
+                }
+                else
+                {
+                    return false;
+                }
+
+            }
+            catch (SqlException ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+                con.Close();
+            }
         }
     }
         

@@ -8,6 +8,7 @@ namespace TravelExpertsLibrary
 {
     public class Package_Product_Supplier
     {
+        public Package_Product_Supplier() { }
         public int PackageID { get; set; }
         public int ProductSupplierID { get; set; }
     }
