@@ -35,10 +35,10 @@ namespace TravelExpertsAPP
                 this.Text = "Modify Supplier";
         }
 
-        private void DisplaySupplier()
-        {
-            txtSupName.Text = supplier.SupName;
-        }
+        //private void DisplaySupplier()
+        //{
+        //    txtSupName.Text = supplier.SupName;
+        //}
 
         private void btnAccept_Click(object sender, EventArgs e)
         {
