@@ -31,6 +31,7 @@
             this.components = new System.ComponentModel.Container();
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.Products = new System.Windows.Forms.TabPage();
+            this.productDataGridView = new System.Windows.Forms.DataGridView();
             this.btnDeleteProduct = new System.Windows.Forms.Button();
             this.btnModifyProduct = new System.Windows.Forms.Button();
             this.btnAddProduct = new System.Windows.Forms.Button();
@@ -46,16 +47,15 @@
             this.btnDeleteProductSupplier = new System.Windows.Forms.Button();
             this.btnModifyProductSupplier = new System.Windows.Forms.Button();
             this.btnAddProductSupplier = new System.Windows.Forms.Button();
-            this.productDataGridView = new System.Windows.Forms.DataGridView();
             this.dataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewTextBoxColumn2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.productBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.tabControl1.SuspendLayout();
             this.Products.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.productDataGridView)).BeginInit();
             this.Packages.SuspendLayout();
             this.Suppliers.SuspendLayout();
             this.Product_Suppliers.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.productDataGridView)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.productBindingSource)).BeginInit();
             this.SuspendLayout();
             // 
@@ -86,6 +86,19 @@
             this.Products.TabIndex = 0;
             this.Products.Text = "Products";
             this.Products.UseVisualStyleBackColor = true;
+            // 
+            // productDataGridView
+            // 
+            this.productDataGridView.AutoGenerateColumns = false;
+            this.productDataGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.productDataGridView.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.dataGridViewTextBoxColumn1,
+            this.dataGridViewTextBoxColumn2});
+            this.productDataGridView.DataSource = this.productBindingSource;
+            this.productDataGridView.Location = new System.Drawing.Point(51, 42);
+            this.productDataGridView.Name = "productDataGridView";
+            this.productDataGridView.Size = new System.Drawing.Size(300, 220);
+            this.productDataGridView.TabIndex = 3;
             // 
             // btnDeleteProduct
             // 
@@ -234,19 +247,6 @@
             this.btnAddProductSupplier.Text = "Add";
             this.btnAddProductSupplier.UseVisualStyleBackColor = true;
             // 
-            // productDataGridView
-            // 
-            this.productDataGridView.AutoGenerateColumns = false;
-            this.productDataGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.productDataGridView.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.dataGridViewTextBoxColumn1,
-            this.dataGridViewTextBoxColumn2});
-            this.productDataGridView.DataSource = this.productBindingSource;
-            this.productDataGridView.Location = new System.Drawing.Point(51, 42);
-            this.productDataGridView.Name = "productDataGridView";
-            this.productDataGridView.Size = new System.Drawing.Size(300, 220);
-            this.productDataGridView.TabIndex = 3;
-            // 
             // dataGridViewTextBoxColumn1
             // 
             this.dataGridViewTextBoxColumn1.DataPropertyName = "ProductID";
@@ -267,6 +267,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.AutoSize = true;
             this.ClientSize = new System.Drawing.Size(795, 396);
             this.Controls.Add(this.tabControl1);
             this.Name = "TravelExpertsForm";
@@ -274,10 +275,10 @@
             this.Load += new System.EventHandler(this.TravelExpertsForm_Load);
             this.tabControl1.ResumeLayout(false);
             this.Products.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.productDataGridView)).EndInit();
             this.Packages.ResumeLayout(false);
             this.Suppliers.ResumeLayout(false);
             this.Product_Suppliers.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.productDataGridView)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.productBindingSource)).EndInit();
             this.ResumeLayout(false);
 
