@@ -26,16 +26,21 @@ namespace TravelExpertsAPP
             // form-load event
             private void TravelExpertsForm_Load(object sender, EventArgs e)
         {
-            suppliers = SupplierDB.GetAllSuppliers();
-            supplierDataGridView.DataSource = suppliers; // bind the grid view to the suppliers list
+            DisplaySupplier(); // bind the grid view to the suppliers list
         }
 
- /***************************************************************
- * Author : Sneha Patel(000783907)
- * Date : 24th July, 2018
- * Purpose: The application will also require simple add/edit 
- *          access for maintaining the suppliers data.
- ***************************************************************/
+        private void DisplaySupplier()
+        {
+            suppliers = SupplierDB.GetAllSuppliers();
+            supplierDataGridView.DataSource = suppliers;
+        }
+
+        /***************************************************************
+        * Author : Sneha Patel(000783907)
+        * Date : 24th July, 2018
+        * Purpose: The application will also require simple add/edit 
+        *          access for maintaining the suppliers data.
+        ***************************************************************/
 
         // Supplier's Add Button
         private void btnAddSupplier_Click(object sender, EventArgs e)
@@ -46,7 +51,7 @@ namespace TravelExpertsAPP
             if (result == DialogResult.OK)
             {
                 supplier = addSupplierForm.supplier;
-                //this.DisplaySupplier();
+                DisplaySupplier();
             }
         }
 
