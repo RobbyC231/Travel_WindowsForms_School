@@ -16,10 +16,10 @@ namespace TravelExpertsLibrary
     // Database class for Supplier table in Travel-Experts Database
     public static class SupplierDB
     {
-        public static List<Supplier> GetSuppliers()
+        public static List<Supplier> GetAllSuppliers()
         {
             List<Supplier> suppliers = new List<Supplier>(); //empty list
-
+            Supplier s = null;
             SqlConnection connection = TravelExpertsDB.GetConnection();
             string selectStatement = "SELECT SupplierId, SupName FROM Suppliers ORDER BY SupplierId";
             SqlCommand cmd = new SqlCommand(selectStatement, connection);
@@ -27,8 +27,7 @@ namespace TravelExpertsLibrary
             {
                 connection.Open();
                 SqlDataReader reader = cmd.ExecuteReader();
-                Supplier s;
-                while(reader.Read()) // while there is another record
+                while (reader.Read()) // while there is another record
                 {
                     s = new Supplier();
                     s.SupplierId = (int)reader["SupplierId"];
@@ -36,7 +35,7 @@ namespace TravelExpertsLibrary
                     suppliers.Add(s);
                 }
             }
-            catch(SqlException ex)
+            catch (SqlException ex)
             {
                 throw ex;
             }
@@ -45,6 +44,105 @@ namespace TravelExpertsLibrary
                 connection.Close();
             }
             return suppliers;
+        }
+
+        /// <summary>
+        /// Adds a new supplier to the Suppliers table in TravelExperts database
+        /// </summary>
+        /// <param name="s"> supplier object that cotaing data for the new record</param>
+        /// <returns>generated SupplierId</returns>
+        public static int AddSupplier(Supplier s)
+        {
+            SqlConnection connection = TravelExpertsDB.GetConnection();
+            string insertStatement = "INSERT INTO Suppliers (SupName) " +
+                                     "VALUES(SupName)";
+            SqlCommand cmd = new SqlCommand(insertStatement, connection);
+            cmd.Parameters.AddWithValue("@SupName", s.SupName);
+            try
+            {
+                connection.Open();
+                cmd.ExecuteNonQuery(); // run the insert command
+
+                // get the generated ID - current identity value for  Suppliers table
+                string selectQuery = "SELECT IDENT_CURRENT('Suppliers') FROM Suppliers";
+                SqlCommand selectCmd = new SqlCommand(selectQuery, connection);
+                int supplierId = Convert.ToInt32(selectCmd.ExecuteScalar()); // single value
+
+                return supplierId;
+            }
+            catch (SqlException ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+                connection.Close();
+            }
+        }
+
+        /// <summary>
+        /// Updates existing supplier record
+        /// </summary>
+        /// <param name="oldS">data before update</param>
+        /// <param name="newS">new data for the update</param>
+        /// <returns>indicator of success</returns>
+        public static bool UpdateSupplier(Supplier oldS, Supplier newS)
+        {
+            SqlConnection connection = TravelExpertsDB.GetConnection();
+            string updateStatement = "UPDATE Suppliers " +
+                                     "SET SupName = @NewSupName " +
+                                     "WHERE SupplierId = @SupplierId " +
+                                     "AND SupName = @OldSupName";
+            SqlCommand cmd = new SqlCommand(updateStatement, connection);
+            cmd.Parameters.AddWithValue("NewSupName", newS.SupName);
+            cmd.Parameters.AddWithValue("OldSupName", oldS.SupName);
+            try
+            {
+                connection.Open();
+                int count = cmd.ExecuteNonQuery();
+                if (count > 0) return true;
+                else return false;
+            }
+            catch (SqlException ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+                connection.Close();
+            }
+        }
+
+        /// <summary>
+        /// Delete a new supplier to the Suppliers table in TravelExperts database
+        /// </summary>
+        /// <param name="s"> supplier object that cotaing data for the new record</param>
+        /// <returns>generated SupplierId</returns>
+        public static bool DeleteSupplier(Supplier s)
+        {
+            SqlConnection connection = TravelExpertsDB.GetConnection();
+            string deleteStatement = "DELETE FROM Suppliers " +
+                                     "WHERE SupplierId = @SupplierId " + // to identify the supplier to be  deleted
+                                     "AND SupName = @SupName";  // remaining conditions - to ensure optimistic concurrency
+            SqlCommand cmd = new SqlCommand(deleteStatement, connection);
+            cmd.Parameters.AddWithValue("@SupplierId", s.SupplierId);
+            cmd.Parameters.AddWithValue("@SupName", s.SupName);
+            try
+            {
+                connection.Open();
+                int count = cmd.ExecuteNonQuery();
+                if (count > 0) return true;
+                else return false;
+
+            }
+            catch (SqlException ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+                connection.Close();
+            }
         }
     }
 }

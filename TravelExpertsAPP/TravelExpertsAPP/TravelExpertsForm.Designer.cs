@@ -28,27 +28,35 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.Products = new System.Windows.Forms.TabPage();
-            this.Packages = new System.Windows.Forms.TabPage();
-            this.Suppliers = new System.Windows.Forms.TabPage();
-            this.Product_Suppliers = new System.Windows.Forms.TabPage();
-            this.btnAddProduct = new System.Windows.Forms.Button();
-            this.btnModifyProduct = new System.Windows.Forms.Button();
             this.btnDeleteProduct = new System.Windows.Forms.Button();
+            this.btnModifyProduct = new System.Windows.Forms.Button();
+            this.btnAddProduct = new System.Windows.Forms.Button();
+            this.Packages = new System.Windows.Forms.TabPage();
             this.btnDeletePackage = new System.Windows.Forms.Button();
             this.btnModifyPackage = new System.Windows.Forms.Button();
             this.btnAddPackage = new System.Windows.Forms.Button();
+            this.Suppliers = new System.Windows.Forms.TabPage();
+            this.supplierDataGridView = new System.Windows.Forms.DataGridView();
+            this.dataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.supplierBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.btnDeleteSupplier = new System.Windows.Forms.Button();
             this.btnModifySupplier = new System.Windows.Forms.Button();
             this.btnAddSupplier = new System.Windows.Forms.Button();
+            this.Product_Suppliers = new System.Windows.Forms.TabPage();
             this.btnDeleteProductSupplier = new System.Windows.Forms.Button();
             this.btnModifyProductSupplier = new System.Windows.Forms.Button();
             this.btnAddProductSupplier = new System.Windows.Forms.Button();
+            this.backgroundWorker1 = new System.ComponentModel.BackgroundWorker();
             this.tabControl1.SuspendLayout();
             this.Products.SuspendLayout();
             this.Packages.SuspendLayout();
             this.Suppliers.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.supplierDataGridView)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.supplierBindingSource)).BeginInit();
             this.Product_Suppliers.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -78,6 +86,33 @@
             this.Products.Text = "Products";
             this.Products.UseVisualStyleBackColor = true;
             // 
+            // btnDeleteProduct
+            // 
+            this.btnDeleteProduct.Location = new System.Drawing.Point(489, 345);
+            this.btnDeleteProduct.Name = "btnDeleteProduct";
+            this.btnDeleteProduct.Size = new System.Drawing.Size(75, 23);
+            this.btnDeleteProduct.TabIndex = 2;
+            this.btnDeleteProduct.Text = "Delete";
+            this.btnDeleteProduct.UseVisualStyleBackColor = true;
+            // 
+            // btnModifyProduct
+            // 
+            this.btnModifyProduct.Location = new System.Drawing.Point(345, 345);
+            this.btnModifyProduct.Name = "btnModifyProduct";
+            this.btnModifyProduct.Size = new System.Drawing.Size(75, 23);
+            this.btnModifyProduct.TabIndex = 1;
+            this.btnModifyProduct.Text = "Modify";
+            this.btnModifyProduct.UseVisualStyleBackColor = true;
+            // 
+            // btnAddProduct
+            // 
+            this.btnAddProduct.Location = new System.Drawing.Point(208, 345);
+            this.btnAddProduct.Name = "btnAddProduct";
+            this.btnAddProduct.Size = new System.Drawing.Size(75, 23);
+            this.btnAddProduct.TabIndex = 0;
+            this.btnAddProduct.Text = "Add";
+            this.btnAddProduct.UseVisualStyleBackColor = true;
+            // 
             // Packages
             // 
             this.Packages.Controls.Add(this.btnDeletePackage);
@@ -90,57 +125,6 @@
             this.Packages.TabIndex = 1;
             this.Packages.Text = "Packages";
             this.Packages.UseVisualStyleBackColor = true;
-            // 
-            // Suppliers
-            // 
-            this.Suppliers.Controls.Add(this.btnDeleteSupplier);
-            this.Suppliers.Controls.Add(this.btnModifySupplier);
-            this.Suppliers.Controls.Add(this.btnAddSupplier);
-            this.Suppliers.Location = new System.Drawing.Point(4, 22);
-            this.Suppliers.Name = "Suppliers";
-            this.Suppliers.Size = new System.Drawing.Size(787, 370);
-            this.Suppliers.TabIndex = 2;
-            this.Suppliers.Text = "Suppliers";
-            this.Suppliers.UseVisualStyleBackColor = true;
-            // 
-            // Product_Suppliers
-            // 
-            this.Product_Suppliers.Controls.Add(this.btnDeleteProductSupplier);
-            this.Product_Suppliers.Controls.Add(this.btnModifyProductSupplier);
-            this.Product_Suppliers.Controls.Add(this.btnAddProductSupplier);
-            this.Product_Suppliers.Location = new System.Drawing.Point(4, 22);
-            this.Product_Suppliers.Name = "Product_Suppliers";
-            this.Product_Suppliers.Size = new System.Drawing.Size(787, 370);
-            this.Product_Suppliers.TabIndex = 3;
-            this.Product_Suppliers.Text = "Product_Suppliers";
-            this.Product_Suppliers.UseVisualStyleBackColor = true;
-            // 
-            // btnAddProduct
-            // 
-            this.btnAddProduct.Location = new System.Drawing.Point(208, 345);
-            this.btnAddProduct.Name = "btnAddProduct";
-            this.btnAddProduct.Size = new System.Drawing.Size(75, 23);
-            this.btnAddProduct.TabIndex = 0;
-            this.btnAddProduct.Text = "Add";
-            this.btnAddProduct.UseVisualStyleBackColor = true;
-            // 
-            // btnModifyProduct
-            // 
-            this.btnModifyProduct.Location = new System.Drawing.Point(345, 345);
-            this.btnModifyProduct.Name = "btnModifyProduct";
-            this.btnModifyProduct.Size = new System.Drawing.Size(75, 23);
-            this.btnModifyProduct.TabIndex = 1;
-            this.btnModifyProduct.Text = "Modify";
-            this.btnModifyProduct.UseVisualStyleBackColor = true;
-            // 
-            // btnDeleteProduct
-            // 
-            this.btnDeleteProduct.Location = new System.Drawing.Point(489, 345);
-            this.btnDeleteProduct.Name = "btnDeleteProduct";
-            this.btnDeleteProduct.Size = new System.Drawing.Size(75, 23);
-            this.btnDeleteProduct.TabIndex = 2;
-            this.btnDeleteProduct.Text = "Delete";
-            this.btnDeleteProduct.UseVisualStyleBackColor = true;
             // 
             // btnDeletePackage
             // 
@@ -169,6 +153,52 @@
             this.btnAddPackage.Text = "Add";
             this.btnAddPackage.UseVisualStyleBackColor = true;
             // 
+            // Suppliers
+            // 
+            this.Suppliers.AutoScroll = true;
+            this.Suppliers.Controls.Add(this.supplierDataGridView);
+            this.Suppliers.Controls.Add(this.btnDeleteSupplier);
+            this.Suppliers.Controls.Add(this.btnModifySupplier);
+            this.Suppliers.Controls.Add(this.btnAddSupplier);
+            this.Suppliers.Location = new System.Drawing.Point(4, 22);
+            this.Suppliers.Name = "Suppliers";
+            this.Suppliers.Size = new System.Drawing.Size(787, 370);
+            this.Suppliers.TabIndex = 2;
+            this.Suppliers.Text = "Suppliers";
+            this.Suppliers.UseVisualStyleBackColor = true;
+            // 
+            // supplierDataGridView
+            // 
+            this.supplierDataGridView.AutoGenerateColumns = false;
+            this.supplierDataGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.supplierDataGridView.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.dataGridViewTextBoxColumn1,
+            this.dataGridViewTextBoxColumn2});
+            this.supplierDataGridView.DataSource = this.supplierBindingSource;
+            this.supplierDataGridView.Location = new System.Drawing.Point(8, 21);
+            this.supplierDataGridView.Name = "supplierDataGridView";
+            this.supplierDataGridView.ReadOnly = true;
+            this.supplierDataGridView.Size = new System.Drawing.Size(244, 292);
+            this.supplierDataGridView.TabIndex = 6;
+            // 
+            // dataGridViewTextBoxColumn1
+            // 
+            this.dataGridViewTextBoxColumn1.DataPropertyName = "SupplierId";
+            this.dataGridViewTextBoxColumn1.HeaderText = "SupplierId";
+            this.dataGridViewTextBoxColumn1.Name = "dataGridViewTextBoxColumn1";
+            this.dataGridViewTextBoxColumn1.ReadOnly = true;
+            // 
+            // dataGridViewTextBoxColumn2
+            // 
+            this.dataGridViewTextBoxColumn2.DataPropertyName = "SupName";
+            this.dataGridViewTextBoxColumn2.HeaderText = "SupName";
+            this.dataGridViewTextBoxColumn2.Name = "dataGridViewTextBoxColumn2";
+            this.dataGridViewTextBoxColumn2.ReadOnly = true;
+            // 
+            // supplierBindingSource
+            // 
+            this.supplierBindingSource.DataSource = typeof(TravelExpertsLibrary.Supplier);
+            // 
             // btnDeleteSupplier
             // 
             this.btnDeleteSupplier.Location = new System.Drawing.Point(489, 344);
@@ -177,6 +207,7 @@
             this.btnDeleteSupplier.TabIndex = 6;
             this.btnDeleteSupplier.Text = "Delete";
             this.btnDeleteSupplier.UseVisualStyleBackColor = true;
+            this.btnDeleteSupplier.Click += new System.EventHandler(this.btnDeleteSupplier_Click);
             // 
             // btnModifySupplier
             // 
@@ -186,6 +217,7 @@
             this.btnModifySupplier.TabIndex = 5;
             this.btnModifySupplier.Text = "Modify";
             this.btnModifySupplier.UseVisualStyleBackColor = true;
+            this.btnModifySupplier.Click += new System.EventHandler(this.btnModifySupplier_Click);
             // 
             // btnAddSupplier
             // 
@@ -195,6 +227,19 @@
             this.btnAddSupplier.TabIndex = 4;
             this.btnAddSupplier.Text = "Add";
             this.btnAddSupplier.UseVisualStyleBackColor = true;
+            this.btnAddSupplier.Click += new System.EventHandler(this.btnAddSupplier_Click);
+            // 
+            // Product_Suppliers
+            // 
+            this.Product_Suppliers.Controls.Add(this.btnDeleteProductSupplier);
+            this.Product_Suppliers.Controls.Add(this.btnModifyProductSupplier);
+            this.Product_Suppliers.Controls.Add(this.btnAddProductSupplier);
+            this.Product_Suppliers.Location = new System.Drawing.Point(4, 22);
+            this.Product_Suppliers.Name = "Product_Suppliers";
+            this.Product_Suppliers.Size = new System.Drawing.Size(787, 370);
+            this.Product_Suppliers.TabIndex = 3;
+            this.Product_Suppliers.Text = "Product_Suppliers";
+            this.Product_Suppliers.UseVisualStyleBackColor = true;
             // 
             // btnDeleteProductSupplier
             // 
@@ -231,10 +276,13 @@
             this.Controls.Add(this.tabControl1);
             this.Name = "TravelExpertsForm";
             this.Text = "TravelExpertsForm";
+            this.Load += new System.EventHandler(this.TravelExpertsForm_Load);
             this.tabControl1.ResumeLayout(false);
             this.Products.ResumeLayout(false);
             this.Packages.ResumeLayout(false);
             this.Suppliers.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.supplierDataGridView)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.supplierBindingSource)).EndInit();
             this.Product_Suppliers.ResumeLayout(false);
             this.ResumeLayout(false);
 
@@ -259,5 +307,10 @@
         private System.Windows.Forms.Button btnDeleteProductSupplier;
         private System.Windows.Forms.Button btnModifyProductSupplier;
         private System.Windows.Forms.Button btnAddProductSupplier;
+        private System.Windows.Forms.BindingSource supplierBindingSource;
+        private System.ComponentModel.BackgroundWorker backgroundWorker1;
+        private System.Windows.Forms.DataGridView supplierDataGridView;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn1;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn2;
     }
 }
