@@ -82,6 +82,62 @@ namespace TravelExpertsLibrary
             }
             return productID;
         }
+
+        public static bool DeleteProduct(Product product)
+        {
+            SqlConnection con = TravelExpertsDB.GetConnection();
+            string deleteStatement = "DELETE FROM Products " +
+                                     "WHERE ProductID = @ProductID " +
+                                     "AND ProdName = @ProdName";
+            SqlCommand cmd = new SqlCommand(deleteStatement, con);
+            cmd.Parameters.AddWithValue("@ProductID", product.ProductID);
+            cmd.Parameters.AddWithValue("@ProdName", product.ProdName);
+            try
+            {
+                con.Open();
+                int count = cmd.ExecuteNonQuery();
+                if (count > 0) return true;
+                else return false;
+            }
+            catch (SqlException ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+                con.Close();
+            }
+
+        }
+        public static bool UpdateProduct(Product oldProduct, Product newProduct)
+        {
+            SqlConnection con = TravelExpertsDB.GetConnection();
+            string updateStatement = "UPDATE Products " +
+                                     "SET ProdName = @NewProdName " +
+                                     "WHERE ProductID = @OldProductID " +
+                                     "AND ProdName = @OldProdName";
+            SqlCommand cmd = new SqlCommand(updateStatement, con);
+            cmd.Parameters.AddWithValue("@NewProdName", newProduct.ProdName);
+            //start adding vlaues of old product
+            cmd.Parameters.AddWithValue("@OldProductID", oldProduct.ProductID);
+            cmd.Parameters.AddWithValue("@OldProdName", oldProduct.ProdName);
+            try
+            {
+                con.Open();
+                int count = cmd.ExecuteNonQuery();
+                if (count > 0) return true;
+                else return false;
+            }
+            catch (SqlException ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+                con.Close();
+            }
+
+        }
     }
 
 }

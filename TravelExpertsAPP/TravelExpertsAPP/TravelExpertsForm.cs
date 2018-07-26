@@ -26,6 +26,7 @@ namespace TravelExpertsAPP
         {
             products = ProductDB.GetAllProduct();
             productDataGridView.DataSource = products;
+            
         }
 
         /// <summary>
@@ -43,9 +44,6 @@ namespace TravelExpertsAPP
                 product = addModifyProducts.product;
                 DisplayProducts();
             }
-            {
-
-            }
         }
 
         /// <summary>
@@ -54,7 +52,45 @@ namespace TravelExpertsAPP
         /// </summary>
         private void btnDeleteProduct_Click(object sender, EventArgs e)
         {
+            DialogResult result = MessageBox.Show("Are you sure?", "Confirm Delete", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
 
+            SelectedRowProduct();
+
+            if (result == DialogResult.Yes)
+            {
+                try
+                {
+                    if (!ProductDB.DeleteProduct(product))
+                    {
+                        MessageBox.Show("Another user has updated or deleted product" + product.ProdName, "Datebase Error");
+                    }
+                    DisplayProducts();
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.Message, ex.GetType().ToString());
+                }
+            }
         }
-    }
-}
+
+        private void SelectedRowProduct()
+        {
+            product = new Product();
+            int index = productDataGridView.CurrentCell.RowIndex;
+            DataGridViewRow selectedRow = productDataGridView.Rows[index];
+            product.ProductID = Convert.ToInt32(selectedRow.Cells[0].Value);
+            product.ProdName = selectedRow.Cells[1].Value.ToString();
+        }
+
+        private void btnModifyProduct_Click(object sender, EventArgs e)
+        {
+            SelectedRowProduct();
+            AddModifyProduct modifyProduct = new AddModifyProduct();
+            modifyProduct.addProdcut = false;
+            modifyProduct.product = product;
+            DialogResult result = modifyProduct.ShowDialog();
+            DisplayProducts();
+            
+        }
+    } //end class travel experts form
+} //end namespace

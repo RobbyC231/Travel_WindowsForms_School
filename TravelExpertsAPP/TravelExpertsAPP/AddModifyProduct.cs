@@ -55,6 +55,29 @@ namespace TravelExpertsAPP
                     throw ex;
                 }
             }
+            else // if modify button was selected from main form
+            {
+                Product newProduct = new Product();
+                newProduct.ProductID = product.ProductID;
+                this.ProductData(newProduct);
+                try
+                {
+                    if (!ProductDB.UpdateProduct(product, newProduct))
+                    {
+                        MessageBox.Show("Another user has updated or " +
+                                "deleted that customer.", "Database Error");
+                        this.DialogResult = DialogResult.Retry;
+                    }
+                    else
+                    {
+                        this.DialogResult = DialogResult.OK;
+                    }
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.Message, ex.GetType().ToString());
+                }
+            }
         }
 
         //sets product name to product typed by user
