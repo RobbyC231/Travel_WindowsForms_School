@@ -43,6 +43,7 @@
             this.btnModifyPackage = new System.Windows.Forms.Button();
             this.btnAddPackage = new System.Windows.Forms.Button();
             this.Suppliers = new System.Windows.Forms.TabPage();
+            this.supplierDataGridView = new System.Windows.Forms.DataGridView();
             this.btnDeleteSupplier = new System.Windows.Forms.Button();
             this.btnModifySupplier = new System.Windows.Forms.Button();
             this.btnAddSupplier = new System.Windows.Forms.Button();
@@ -50,13 +51,19 @@
             this.btnDeleteProductSupplier = new System.Windows.Forms.Button();
             this.btnModifyProductSupplier = new System.Windows.Forms.Button();
             this.btnAddProductSupplier = new System.Windows.Forms.Button();
+            this.backgroundWorker1 = new System.ComponentModel.BackgroundWorker();
+            this.dataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.supplierBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.tabControl1.SuspendLayout();
             this.Products.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.productDataGridView)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.productBindingSource)).BeginInit();
             this.Packages.SuspendLayout();
             this.Suppliers.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.supplierDataGridView)).BeginInit();
             this.Product_Suppliers.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.supplierBindingSource)).BeginInit();
             this.SuspendLayout();
             // 
             // tabControl1
@@ -88,6 +95,7 @@
             this.Products.UseVisualStyleBackColor = true;
             // 
             // productDataGridView
+            // btnDeleteProduct
             // 
             this.productDataGridView.AutoGenerateColumns = false;
             this.productDataGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
@@ -99,8 +107,15 @@
             this.productDataGridView.Name = "productDataGridView";
             this.productDataGridView.Size = new System.Drawing.Size(300, 220);
             this.productDataGridView.TabIndex = 3;
+            this.btnDeleteProduct.Location = new System.Drawing.Point(489, 345);
+            this.btnDeleteProduct.Name = "btnDeleteProduct";
+            this.btnDeleteProduct.Size = new System.Drawing.Size(75, 23);
+            this.btnDeleteProduct.TabIndex = 2;
+            this.btnDeleteProduct.Text = "Delete";
+            this.btnDeleteProduct.UseVisualStyleBackColor = true;
             // 
             // dataGridViewTextBoxColumn1
+            // btnModifyProduct
             // 
             this.dataGridViewTextBoxColumn1.DataPropertyName = "ProductID";
             this.dataGridViewTextBoxColumn1.HeaderText = "ProductID";
@@ -111,6 +126,12 @@
             this.dataGridViewTextBoxColumn2.DataPropertyName = "ProdName";
             this.dataGridViewTextBoxColumn2.HeaderText = "ProdName";
             this.dataGridViewTextBoxColumn2.Name = "dataGridViewTextBoxColumn2";
+            this.btnModifyProduct.Location = new System.Drawing.Point(345, 345);
+            this.btnModifyProduct.Name = "btnModifyProduct";
+            this.btnModifyProduct.Size = new System.Drawing.Size(75, 23);
+            this.btnModifyProduct.TabIndex = 1;
+            this.btnModifyProduct.Text = "Modify";
+            this.btnModifyProduct.UseVisualStyleBackColor = true;
             // 
             // productBindingSource
             // 
@@ -126,7 +147,7 @@
             this.btnDeleteProduct.UseVisualStyleBackColor = true;
             this.btnDeleteProduct.Click += new System.EventHandler(this.btnDeleteProduct_Click);
             // 
-            // btnModifyProduct
+            // Packages
             // 
             this.btnModifyProduct.Location = new System.Drawing.Point(163, 286);
             this.btnModifyProduct.Name = "btnModifyProduct";
@@ -188,6 +209,8 @@
             // 
             // Suppliers
             // 
+            this.Suppliers.AutoScroll = true;
+            this.Suppliers.Controls.Add(this.supplierDataGridView);
             this.Suppliers.Controls.Add(this.btnDeleteSupplier);
             this.Suppliers.Controls.Add(this.btnModifySupplier);
             this.Suppliers.Controls.Add(this.btnAddSupplier);
@@ -198,6 +221,21 @@
             this.Suppliers.Text = "Suppliers";
             this.Suppliers.UseVisualStyleBackColor = true;
             // 
+            // supplierDataGridView
+            // 
+            this.supplierDataGridView.AutoGenerateColumns = false;
+            this.supplierDataGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.supplierDataGridView.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.dataGridViewTextBoxColumn1,
+            this.dataGridViewTextBoxColumn2});
+            this.supplierDataGridView.DataSource = this.supplierBindingSource;
+            this.supplierDataGridView.Location = new System.Drawing.Point(8, 21);
+            this.supplierDataGridView.Name = "supplierDataGridView";
+            this.supplierDataGridView.ReadOnly = true;
+            this.supplierDataGridView.Size = new System.Drawing.Size(338, 292);
+            this.supplierDataGridView.TabIndex = 6;
+            
+            // 
             // btnDeleteSupplier
             // 
             this.btnDeleteSupplier.Location = new System.Drawing.Point(489, 344);
@@ -206,6 +244,7 @@
             this.btnDeleteSupplier.TabIndex = 6;
             this.btnDeleteSupplier.Text = "Delete";
             this.btnDeleteSupplier.UseVisualStyleBackColor = true;
+            this.btnDeleteSupplier.Click += new System.EventHandler(this.btnDeleteSupplier_Click);
             // 
             // btnModifySupplier
             // 
@@ -215,6 +254,7 @@
             this.btnModifySupplier.TabIndex = 5;
             this.btnModifySupplier.Text = "Modify";
             this.btnModifySupplier.UseVisualStyleBackColor = true;
+            this.btnModifySupplier.Click += new System.EventHandler(this.btnModifySupplier_Click);
             // 
             // btnAddSupplier
             // 
@@ -224,6 +264,9 @@
             this.btnAddSupplier.TabIndex = 4;
             this.btnAddSupplier.Text = "Add";
             this.btnAddSupplier.UseVisualStyleBackColor = true;
+            this.btnAddSupplier.Click += new System.EventHandler(this.btnAddSupplier_Click);
+            // 
+            // Product_Suppliers
             // 
             // Product_Suppliers
             // 
@@ -264,6 +307,29 @@
             this.btnAddProductSupplier.Text = "Add";
             this.btnAddProductSupplier.UseVisualStyleBackColor = true;
             // 
+            // dataGridViewTextBoxColumn1
+            // 
+            this.dataGridViewTextBoxColumn1.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells;
+            this.dataGridViewTextBoxColumn1.DataPropertyName = "SupplierId";
+            this.dataGridViewTextBoxColumn1.HeaderText = "SupplierId";
+            this.dataGridViewTextBoxColumn1.MinimumWidth = 20;
+            this.dataGridViewTextBoxColumn1.Name = "dataGridViewTextBoxColumn1";
+            this.dataGridViewTextBoxColumn1.ReadOnly = true;
+            this.dataGridViewTextBoxColumn1.Width = 79;
+            // 
+            // dataGridViewTextBoxColumn2
+            // 
+            this.dataGridViewTextBoxColumn2.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
+            this.dataGridViewTextBoxColumn2.DataPropertyName = "SupName";
+            this.dataGridViewTextBoxColumn2.HeaderText = "SupName";
+            this.dataGridViewTextBoxColumn2.Name = "dataGridViewTextBoxColumn2";
+            this.dataGridViewTextBoxColumn2.ReadOnly = true;
+            this.dataGridViewTextBoxColumn2.Width = 79;
+            // 
+            // supplierBindingSource
+            // 
+            this.supplierBindingSource.DataSource = typeof(TravelExpertsLibrary.Supplier);
+            // 
             // TravelExpertsForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -280,7 +346,9 @@
             ((System.ComponentModel.ISupportInitialize)(this.productBindingSource)).EndInit();
             this.Packages.ResumeLayout(false);
             this.Suppliers.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.supplierDataGridView)).EndInit();
             this.Product_Suppliers.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.supplierBindingSource)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -308,5 +376,9 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn1;
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn2;
         private System.Windows.Forms.BindingSource productBindingSource;
+        private System.Windows.Forms.BindingSource supplierBindingSource;
+        private System.ComponentModel.BackgroundWorker backgroundWorker1;
+        private System.Windows.Forms.DataGridView supplierDataGridView;
+
     }
 }

@@ -51,6 +51,12 @@
     <Compile Include="AddModifyProduct.Designer.cs">
       <DependentUpon>AddModifyProduct.cs</DependentUpon>
     </Compile>
+    <Compile Include="frmSupplierAddModify.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmSupplierAddModify.Designer.cs">
+      <DependentUpon>frmSupplierAddModify.cs</DependentUpon>
+    </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="TravelExpertsForm.cs">
@@ -61,6 +67,9 @@
     </Compile>
     <EmbeddedResource Include="AddModifyProduct.resx">
       <DependentUpon>AddModifyProduct.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmSupplierAddModify.resx">
+      <DependentUpon>frmSupplierAddModify.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
@@ -75,6 +84,7 @@
       <DependentUpon>TravelExpertsForm.cs</DependentUpon>
     </EmbeddedResource>
     <None Include="Properties\DataSources\TravelExpertsLibrary.Product.datasource" />
+    <None Include="Properties\DataSources\TravelExpertsLibrary.Supplier.datasource" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
