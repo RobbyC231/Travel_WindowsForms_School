@@ -32,6 +32,8 @@
             this.txtSupName = new System.Windows.Forms.TextBox();
             this.btnAccept = new System.Windows.Forms.Button();
             this.btnCancel = new System.Windows.Forms.Button();
+            this.txtSupplierId = new System.Windows.Forms.TextBox();
+            this.lblSupplierId = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // label1
@@ -68,12 +70,31 @@
             this.btnCancel.TabIndex = 4;
             this.btnCancel.Text = "Cancel";
             this.btnCancel.UseVisualStyleBackColor = true;
+            this.btnCancel.Click += new System.EventHandler(this.btnCancel_Click);
+            // 
+            // txtSupplierId
+            // 
+            this.txtSupplierId.Location = new System.Drawing.Point(131, 20);
+            this.txtSupplierId.Name = "txtSupplierId";
+            this.txtSupplierId.Size = new System.Drawing.Size(172, 20);
+            this.txtSupplierId.TabIndex = 6;
+            // 
+            // lblSupplierId
+            // 
+            this.lblSupplierId.AutoSize = true;
+            this.lblSupplierId.Location = new System.Drawing.Point(33, 20);
+            this.lblSupplierId.Name = "lblSupplierId";
+            this.lblSupplierId.Size = new System.Drawing.Size(57, 13);
+            this.lblSupplierId.TabIndex = 5;
+            this.lblSupplierId.Text = "Supplier Id";
             // 
             // frmSupplierAddModify
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(334, 151);
+            this.Controls.Add(this.txtSupplierId);
+            this.Controls.Add(this.lblSupplierId);
             this.Controls.Add(this.btnCancel);
             this.Controls.Add(this.btnAccept);
             this.Controls.Add(this.txtSupName);
@@ -92,5 +113,7 @@
         private System.Windows.Forms.TextBox txtSupName;
         private System.Windows.Forms.Button btnAccept;
         private System.Windows.Forms.Button btnCancel;
+        private System.Windows.Forms.TextBox txtSupplierId;
+        private System.Windows.Forms.Label lblSupplierId;
     }
 }

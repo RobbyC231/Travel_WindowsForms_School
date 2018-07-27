@@ -19,27 +19,22 @@ namespace TravelExpertsAPP
 {
     public partial class frmSupplierAddModify : Form
     {
+        public bool addSupplier;
+        public Supplier supplier; // current supplier
+        
         public frmSupplierAddModify()
         {
             InitializeComponent();
         }
-
-        public bool addSupplier;
-        public Supplier supplier;
 
         private void frmSupplierAddModify_Load(object sender, EventArgs e)
         {
             if (addSupplier)
                 this.Text = "Add Supplier";
             else
-                this.Text = "Modify Supplier";
+                this.Text = "Modify Supplier";        
         }
-
-        //private void DisplaySupplier()
-        //{
-        //    txtSupName.Text = supplier.SupName;
-        //}
-
+       
         private void btnAccept_Click(object sender, EventArgs e)
         {
             if (IsValidData())
@@ -53,7 +48,7 @@ namespace TravelExpertsAPP
                         supplier.SupplierId = SupplierDB.AddSupplier(supplier);
                         this.DialogResult = DialogResult.OK;
                     }
-                    catch(Exception ex)
+                    catch (Exception ex)
                     {
                         MessageBox.Show(ex.Message, ex.GetType().ToString());
                     }
@@ -65,7 +60,7 @@ namespace TravelExpertsAPP
                     this.PutSupplierData(newSupplier);
                     try
                     {
-                        if(SupplierDB.UpdateSupplier(supplier, newSupplier))
+                        if (SupplierDB.UpdateSupplier(supplier, newSupplier))
                         {
                             MessageBox.Show("Another user has updated or " +
                                "deleted that customer.", "Database Error");
@@ -75,7 +70,7 @@ namespace TravelExpertsAPP
                         {
                             supplier = newSupplier;
                             this.DialogResult = DialogResult.OK;
-                        }                 
+                        }
                     }
                     catch (Exception ex)
                     {
@@ -92,7 +87,13 @@ namespace TravelExpertsAPP
 
         private void PutSupplierData(Supplier supplier)
         {
+            supplier.SupplierId = Convert.ToInt32(txtSupplierId.Text);
             supplier.SupName = txtSupName.Text;
+        }
+
+        private void btnCancel_Click(object sender, EventArgs e)
+        {
+            this.DialogResult = DialogResult.Retry;
         }
     }
 }

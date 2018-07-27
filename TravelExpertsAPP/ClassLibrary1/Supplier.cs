@@ -20,5 +20,13 @@ namespace TravelExpertsLibrary
 
         public string SupName { get; set; }
 
+        public Supplier CopySupplier()
+        {
+            Supplier copy = new Supplier();
+            copy.SupplierId = SupplierId;
+            copy.SupName = SupName;
+            return copy;
+        }
+
     }
 }

@@ -21,7 +21,8 @@ namespace TravelExpertsLibrary
             List<Supplier> suppliers = new List<Supplier>(); //empty list
             Supplier s = null;
             SqlConnection connection = TravelExpertsDB.GetConnection();
-            string selectStatement = "SELECT SupplierId, SupName FROM Suppliers ORDER BY SupplierId";
+            string selectStatement = "SELECT SupplierId, SupName " +
+                                     "FROM Suppliers";
             SqlCommand cmd = new SqlCommand(selectStatement, connection);
             try
             {
@@ -51,24 +52,27 @@ namespace TravelExpertsLibrary
         /// </summary>
         /// <param name="s"> supplier object that cotaing data for the new record</param>
         /// <returns>generated SupplierId</returns>
-        public static int AddSupplier(Supplier s)
+        public static int AddSupplier(Supplier supplier)
         {
+            int supplierId;
             SqlConnection connection = TravelExpertsDB.GetConnection();
-            string insertStatement = "INSERT INTO Suppliers (SupName) " +
-                                     "VALUES(SupName)";
+            string insertStatement = "INSERT INTO Suppliers (SupplierId, SupName) " +
+                                     "VALUES(@SupplierId, @SupName)";
             SqlCommand cmd = new SqlCommand(insertStatement, connection);
-            cmd.Parameters.AddWithValue("@SupName", s.SupName);
+            cmd.Parameters.AddWithValue("@SupplierId", supplier.SupplierId);
+            cmd.Parameters.AddWithValue("@SupName", supplier.SupName);
             try
             {
                 connection.Open();
                 cmd.ExecuteNonQuery(); // run the insert command
 
                 // get the generated ID - current identity value for  Suppliers table
-                string selectQuery = "SELECT IDENT_CURRENT('Suppliers') FROM Suppliers";
+                //string selectQuery = "SELECT IDENT_CURRENT('Suppliers')";
+                string selectQuery = "SELECT MAX(SupplierId)+1 FROM Suppliers";
                 SqlCommand selectCmd = new SqlCommand(selectQuery, connection);
-                int supplierId = Convert.ToInt32(selectCmd.ExecuteScalar()); // single value
-
-                return supplierId;
+                object result = selectCmd.ExecuteScalar();
+                Console.WriteLine("Result: " + result.ToString());
+                supplierId = Convert.ToInt32(result); // single value             
             }
             catch (SqlException ex)
             {
@@ -78,6 +82,7 @@ namespace TravelExpertsLibrary
             {
                 connection.Close();
             }
+            return supplierId;
         }
 
         /// <summary>
@@ -123,7 +128,8 @@ namespace TravelExpertsLibrary
             SqlConnection connection = TravelExpertsDB.GetConnection();
             string deleteStatement = "DELETE FROM Suppliers " +
                                      "WHERE SupplierId = @SupplierId " + // to identify the supplier to be  deleted
-                                     "AND SupName = @SupName";  // remaining conditions - to ensure optimistic concurrency
+                                     "AND SupName = @SupName" +
+                                     "ORDER BY SupplireId";  // remaining conditions - to ensure optimistic concurrency
             SqlCommand cmd = new SqlCommand(deleteStatement, connection);
             cmd.Parameters.AddWithValue("@SupplierId", s.SupplierId);
             cmd.Parameters.AddWithValue("@SupName", s.SupName);

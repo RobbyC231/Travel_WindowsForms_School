@@ -40,9 +40,6 @@
             this.btnAddPackage = new System.Windows.Forms.Button();
             this.Suppliers = new System.Windows.Forms.TabPage();
             this.supplierDataGridView = new System.Windows.Forms.DataGridView();
-            this.dataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dataGridViewTextBoxColumn2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.supplierBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.btnDeleteSupplier = new System.Windows.Forms.Button();
             this.btnModifySupplier = new System.Windows.Forms.Button();
             this.btnAddSupplier = new System.Windows.Forms.Button();
@@ -51,13 +48,16 @@
             this.btnModifyProductSupplier = new System.Windows.Forms.Button();
             this.btnAddProductSupplier = new System.Windows.Forms.Button();
             this.backgroundWorker1 = new System.ComponentModel.BackgroundWorker();
+            this.dataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.supplierBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.tabControl1.SuspendLayout();
             this.Products.SuspendLayout();
             this.Packages.SuspendLayout();
             this.Suppliers.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.supplierDataGridView)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.supplierBindingSource)).BeginInit();
             this.Product_Suppliers.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.supplierBindingSource)).BeginInit();
             this.SuspendLayout();
             // 
             // tabControl1
@@ -178,26 +178,9 @@
             this.supplierDataGridView.Location = new System.Drawing.Point(8, 21);
             this.supplierDataGridView.Name = "supplierDataGridView";
             this.supplierDataGridView.ReadOnly = true;
-            this.supplierDataGridView.Size = new System.Drawing.Size(244, 292);
+            this.supplierDataGridView.Size = new System.Drawing.Size(338, 292);
             this.supplierDataGridView.TabIndex = 6;
-            // 
-            // dataGridViewTextBoxColumn1
-            // 
-            this.dataGridViewTextBoxColumn1.DataPropertyName = "SupplierId";
-            this.dataGridViewTextBoxColumn1.HeaderText = "SupplierId";
-            this.dataGridViewTextBoxColumn1.Name = "dataGridViewTextBoxColumn1";
-            this.dataGridViewTextBoxColumn1.ReadOnly = true;
-            // 
-            // dataGridViewTextBoxColumn2
-            // 
-            this.dataGridViewTextBoxColumn2.DataPropertyName = "SupName";
-            this.dataGridViewTextBoxColumn2.HeaderText = "SupName";
-            this.dataGridViewTextBoxColumn2.Name = "dataGridViewTextBoxColumn2";
-            this.dataGridViewTextBoxColumn2.ReadOnly = true;
-            // 
-            // supplierBindingSource
-            // 
-            this.supplierBindingSource.DataSource = typeof(TravelExpertsLibrary.Supplier);
+            
             // 
             // btnDeleteSupplier
             // 
@@ -268,6 +251,29 @@
             this.btnAddProductSupplier.Text = "Add";
             this.btnAddProductSupplier.UseVisualStyleBackColor = true;
             // 
+            // dataGridViewTextBoxColumn1
+            // 
+            this.dataGridViewTextBoxColumn1.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells;
+            this.dataGridViewTextBoxColumn1.DataPropertyName = "SupplierId";
+            this.dataGridViewTextBoxColumn1.HeaderText = "SupplierId";
+            this.dataGridViewTextBoxColumn1.MinimumWidth = 20;
+            this.dataGridViewTextBoxColumn1.Name = "dataGridViewTextBoxColumn1";
+            this.dataGridViewTextBoxColumn1.ReadOnly = true;
+            this.dataGridViewTextBoxColumn1.Width = 79;
+            // 
+            // dataGridViewTextBoxColumn2
+            // 
+            this.dataGridViewTextBoxColumn2.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
+            this.dataGridViewTextBoxColumn2.DataPropertyName = "SupName";
+            this.dataGridViewTextBoxColumn2.HeaderText = "SupName";
+            this.dataGridViewTextBoxColumn2.Name = "dataGridViewTextBoxColumn2";
+            this.dataGridViewTextBoxColumn2.ReadOnly = true;
+            this.dataGridViewTextBoxColumn2.Width = 79;
+            // 
+            // supplierBindingSource
+            // 
+            this.supplierBindingSource.DataSource = typeof(TravelExpertsLibrary.Supplier);
+            // 
             // TravelExpertsForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -282,8 +288,8 @@
             this.Packages.ResumeLayout(false);
             this.Suppliers.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.supplierDataGridView)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.supplierBindingSource)).EndInit();
             this.Product_Suppliers.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.supplierBindingSource)).EndInit();
             this.ResumeLayout(false);
 
         }
