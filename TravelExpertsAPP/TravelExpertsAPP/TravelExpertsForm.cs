@@ -21,6 +21,7 @@ namespace TravelExpertsAPP
         private void TravelExpertsForm_Load(object sender, EventArgs e)
         {
             DisplayProducts(); //calling method for displaying products
+            DisplaySupplier();
         }
         /// <summary>
         /// Author: Robert Clements
@@ -96,15 +97,7 @@ namespace TravelExpertsAPP
             DisplayProducts();
             
         }
-    } //end class travel experts form
-} //end namespace
       
-        // form-load event
-        private void TravelExpertsForm_Load(object sender, EventArgs e)
-        {           
-            DisplaySupplier(); // bind the grid view to the suppliers list
-        }
-
         /**************************************************************************************************************
         * Author : Sneha Patel(000783907)
         * Date : 27th July, 2018
