@@ -7,12 +7,12 @@ namespace TravelExpertsAPP
 {
     public partial class TravelExpertsForm : Form
     {
+        List<Product> products;
+        private Product product;
         
         List<Supplier> suppliers; //empty list       
         private Supplier supplier;
        
-        List<Product> products;
-        private Product product;
         public TravelExpertsForm()
         {
             InitializeComponent();
@@ -21,7 +21,6 @@ namespace TravelExpertsAPP
         private void TravelExpertsForm_Load(object sender, EventArgs e)
         {
             DisplayProducts(); //calling method for displaying products
-            DisplaySupplier(); // bind the grid view to the suppliers list
         }
         /// <summary>
         /// Author: Robert Clements
@@ -100,7 +99,11 @@ namespace TravelExpertsAPP
     } //end class travel experts form
 } //end namespace
       
-       
+        // form-load event
+        private void TravelExpertsForm_Load(object sender, EventArgs e)
+        {           
+            DisplaySupplier(); // bind the grid view to the suppliers list
+        }
 
         /**************************************************************************************************************
         * Author : Sneha Patel(000783907)

@@ -94,9 +94,15 @@
             this.Products.Text = "Products";
             this.Products.UseVisualStyleBackColor = true;
             // 
-            // productDataGridView
             // btnDeleteProduct
+            // productDataGridView
             // 
+            this.btnDeleteProduct.Location = new System.Drawing.Point(489, 345);
+            this.btnDeleteProduct.Name = "btnDeleteProduct";
+            this.btnDeleteProduct.Size = new System.Drawing.Size(75, 23);
+            this.btnDeleteProduct.TabIndex = 2;
+            this.btnDeleteProduct.Text = "Delete";
+            this.btnDeleteProduct.UseVisualStyleBackColor = true;
             this.productDataGridView.AutoGenerateColumns = false;
             this.productDataGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.productDataGridView.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
@@ -107,12 +113,6 @@
             this.productDataGridView.Name = "productDataGridView";
             this.productDataGridView.Size = new System.Drawing.Size(300, 220);
             this.productDataGridView.TabIndex = 3;
-            this.btnDeleteProduct.Location = new System.Drawing.Point(489, 345);
-            this.btnDeleteProduct.Name = "btnDeleteProduct";
-            this.btnDeleteProduct.Size = new System.Drawing.Size(75, 23);
-            this.btnDeleteProduct.TabIndex = 2;
-            this.btnDeleteProduct.Text = "Delete";
-            this.btnDeleteProduct.UseVisualStyleBackColor = true;
             // 
             // dataGridViewTextBoxColumn1
             // btnModifyProduct
@@ -166,6 +166,16 @@
             this.btnAddProduct.Text = "Add";
             this.btnAddProduct.UseVisualStyleBackColor = true;
             this.btnAddProduct.Click += new System.EventHandler(this.btnAddProduct_Click);
+            this.Packages.Controls.Add(this.btnDeletePackage);
+            this.Packages.Controls.Add(this.btnModifyPackage);
+            this.Packages.Controls.Add(this.btnAddPackage);
+            this.Packages.Location = new System.Drawing.Point(4, 22);
+            this.Packages.Name = "Packages";
+            this.Packages.Padding = new System.Windows.Forms.Padding(3);
+            this.Packages.Size = new System.Drawing.Size(787, 370);
+            this.Packages.TabIndex = 1;
+            this.Packages.Text = "Packages";
+            this.Packages.UseVisualStyleBackColor = true;
             // 
             // Packages
             // 
@@ -372,13 +382,14 @@
         private System.Windows.Forms.Button btnDeleteProductSupplier;
         private System.Windows.Forms.Button btnModifyProductSupplier;
         private System.Windows.Forms.Button btnAddProductSupplier;
+        private System.Windows.Forms.BindingSource supplierBindingSource;
+        private System.ComponentModel.BackgroundWorker backgroundWorker1;
+        private System.Windows.Forms.DataGridView supplierDataGridView;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn1;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn2;
         private System.Windows.Forms.DataGridView productDataGridView;
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn1;
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn2;
         private System.Windows.Forms.BindingSource productBindingSource;
-        private System.Windows.Forms.BindingSource supplierBindingSource;
-        private System.ComponentModel.BackgroundWorker backgroundWorker1;
-        private System.Windows.Forms.DataGridView supplierDataGridView;
-
     }
 }
