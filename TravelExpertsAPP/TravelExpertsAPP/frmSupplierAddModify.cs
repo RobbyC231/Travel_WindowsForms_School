@@ -60,7 +60,7 @@ namespace TravelExpertsAPP
                     this.PutSupplierData(newSupplier);
                     try
                     {
-                        if (SupplierDB.UpdateSupplier(supplier, newSupplier))
+                        if (!SupplierDB.UpdateSupplier(supplier, newSupplier))
                         {
                             MessageBox.Show("Another user has updated or " +
                                "deleted that customer.", "Database Error");
@@ -68,7 +68,7 @@ namespace TravelExpertsAPP
                         }
                         else
                         {
-                            supplier = newSupplier;
+                            //supplier = newSupplier;
                             this.DialogResult = DialogResult.OK;
                         }
                     }
@@ -87,7 +87,7 @@ namespace TravelExpertsAPP
 
         private void PutSupplierData(Supplier supplier)
         {
-            supplier.SupplierId = Convert.ToInt32(txtSupplierId.Text);
+            //supplier.SupplierId = Convert.ToInt32(txtSupplierId.Text);
             supplier.SupName = txtSupName.Text;
         }
 

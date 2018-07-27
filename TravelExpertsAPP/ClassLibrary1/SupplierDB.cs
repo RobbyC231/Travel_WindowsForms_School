@@ -91,16 +91,18 @@ namespace TravelExpertsLibrary
         /// <param name="oldS">data before update</param>
         /// <param name="newS">new data for the update</param>
         /// <returns>indicator of success</returns>
-        public static bool UpdateSupplier(Supplier oldS, Supplier newS)
+        public static bool UpdateSupplier(Supplier oldSup, Supplier newSup)
         {
             SqlConnection connection = TravelExpertsDB.GetConnection();
             string updateStatement = "UPDATE Suppliers " +
                                      "SET SupName = @NewSupName " +
-                                     "WHERE SupplierId = @SupplierId " +
+                                     "WHERE SupplierId = @OldSupplierId " +
                                      "AND SupName = @OldSupName";
             SqlCommand cmd = new SqlCommand(updateStatement, connection);
-            cmd.Parameters.AddWithValue("NewSupName", newS.SupName);
-            cmd.Parameters.AddWithValue("OldSupName", oldS.SupName);
+            cmd.Parameters.AddWithValue("NewSupName", newSup.SupName);
+
+            cmd.Parameters.AddWithValue("@OldSupplierId", newSup.SupplierId);
+            cmd.Parameters.AddWithValue("OldSupName", oldSup.SupName);
             try
             {
                 connection.Open();
@@ -123,16 +125,15 @@ namespace TravelExpertsLibrary
         /// </summary>
         /// <param name="s"> supplier object that cotaing data for the new record</param>
         /// <returns>generated SupplierId</returns>
-        public static bool DeleteSupplier(Supplier s)
+        public static bool DeleteSupplier(Supplier sup)
         {
             SqlConnection connection = TravelExpertsDB.GetConnection();
             string deleteStatement = "DELETE FROM Suppliers " +
                                      "WHERE SupplierId = @SupplierId " + // to identify the supplier to be  deleted
-                                     "AND SupName = @SupName" +
-                                     "ORDER BY SupplireId";  // remaining conditions - to ensure optimistic concurrency
+                                     "AND SupName = @SupName";  // remaining conditions - to ensure optimistic concurrency
             SqlCommand cmd = new SqlCommand(deleteStatement, connection);
-            cmd.Parameters.AddWithValue("@SupplierId", s.SupplierId);
-            cmd.Parameters.AddWithValue("@SupName", s.SupName);
+            cmd.Parameters.AddWithValue("@SupplierId", sup.SupplierId);
+            cmd.Parameters.AddWithValue("@SupName", sup.SupName);
             try
             {
                 connection.Open();

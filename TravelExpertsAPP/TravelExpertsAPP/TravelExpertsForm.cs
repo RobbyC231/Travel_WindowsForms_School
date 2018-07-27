@@ -13,24 +13,26 @@ namespace TravelExpertsAPP
 {
     public partial class TravelExpertsForm : Form
     {
-        const int EDIT_BUTTON_INDX = 2;
-
+        
         List<Supplier> suppliers; //empty list       
         private Supplier supplier;
-        int indexrow;
-
+       
         public TravelExpertsForm()
         {
             InitializeComponent();
         }
-
-        
-
-            // form-load event
+      
+        // form-load event
         private void TravelExpertsForm_Load(object sender, EventArgs e)
         {           
             DisplaySupplier(); // bind the grid view to the suppliers list
         }
+
+        /**************************************************************************************************************
+        * Author : Sneha Patel(000783907)
+        * Date : 27th July, 2018
+        * Purpose: Add, Modify and Delete Buttons Events
+        **************************************************************************************************************/
 
         private void DisplaySupplier()
         {
@@ -46,15 +48,8 @@ namespace TravelExpertsAPP
             supplier.SupplierId = Convert.ToInt32(selectedRow.Cells[0].Value);
             supplier.SupName = selectedRow.Cells[1].Value.ToString();
         }
-      
-        /***************************************************************
-         * Author : Sneha Patel(000783907)
-         * Date : 24th July, 2018
-         * Purpose: The application will also require simple add/edit 
-         *          access for maintaining the suppliers data.
-         ***************************************************************/
-
-            // Supplier's Add Button
+         
+        // Supplier's Add Button
         private void btnAddSupplier_Click(object sender, EventArgs e)
         {
             frmSupplierAddModify addSupplierForm = new frmSupplierAddModify();
@@ -81,9 +76,26 @@ namespace TravelExpertsAPP
         // Supplier's Delete Button
         private void btnDeleteSupplier_Click(object sender, EventArgs e)
         {
-            
-        }
+            DialogResult result = MessageBox.Show("DO you really want to delete this Supplier?", "Confirm Delete", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
 
-        
+            SelectedRowSupplier();
+
+            if(result == DialogResult.Yes)
+            {
+                try
+                {
+                    if (!SupplierDB.DeleteSupplier(supplier))
+                    {
+                        MessageBox.Show("Another user has updated or deleted product" + supplier.SupName, "Datebase Error");
+                    }
+                    DisplaySupplier();
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.Message, ex.GetType().ToString());
+                }
+            }
+        }
+        /**********************************************Supplier's Session End*********************************************/
     }
 }
