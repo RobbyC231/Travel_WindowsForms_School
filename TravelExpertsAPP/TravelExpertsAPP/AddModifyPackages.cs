@@ -29,7 +29,19 @@ namespace TravelExpertsAPP
             else //if modify button was picked
             {
                 this.Text = "Modify Package";
+                this.DisplayPackage();
             }
+        }
+
+        private void DisplayPackage()
+        {
+            txtPackageId.Text = package.PackageId.ToString();
+            txtPkgName.Text = package.PkgName;
+            txtPkgAgencyCommission.Text = package.PkgAgencyCommission.ToString();
+            txtBasePrice.Text = package.PkgBasePrice.ToString();
+            txtPkgDescription.Text = package.PkgDesc;
+            dtpPkgEndDate.Text = package.PkgEndDate.ToShortDateString();
+            dtpPkgStartDate.Text = package.PkgStartDate.ToShortDateString();
         }
 
         private void btnAccept_Click(object sender, EventArgs e)

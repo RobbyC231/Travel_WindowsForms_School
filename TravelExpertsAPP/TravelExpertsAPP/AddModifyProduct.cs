@@ -34,9 +34,16 @@ namespace TravelExpertsAPP
             else //if modify button was picked
             {
                 this.Text = "Modify Product";
+                this.DisplayProduct();
             }
         }
-        
+
+        private void DisplayProduct()
+        {
+            txtProdID.Text = product.ProductID.ToString();
+            txtProdName.Text = product.ProdName.ToString();
+        }
+
         //when accept button has been clicked
         private void btnAccept_Click(object sender, EventArgs e)
         {

@@ -38,6 +38,7 @@ namespace TravelExpertsAPP
 
         private void DisplayProductSuppliers()
         {
+            txtProdSupplierID.Text = productSupplier.ProductSupplierID.ToString();
             cbProductId.SelectedValue = productSupplier.ProductID;
             cbSupplierID.SelectedValue = productSupplier.SupplierID;
         }

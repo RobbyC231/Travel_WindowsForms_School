@@ -29,11 +29,22 @@ namespace TravelExpertsAPP
         private void frmSupplierAddModify_Load(object sender, EventArgs e)
         {
             if (addSupplier)
+            {
                 this.Text = "Add Supplier";
+            }
             else
-                this.Text = "Modify Supplier";        
+            {
+                this.Text = "Modify Supplier";
+                this.DisplaySupplier();
+            }
         }
-       
+
+        private void DisplaySupplier()
+        {
+            txtSupplierId.Text = supplier.SupplierId.ToString();
+            txtSupName.Text = supplier.SupName;
+        }
+
         private void btnAccept_Click(object sender, EventArgs e)
         {
             if (addSupplier)
