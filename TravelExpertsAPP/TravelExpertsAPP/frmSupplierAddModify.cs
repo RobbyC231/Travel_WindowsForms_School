@@ -1,5 +1,4 @@
-﻿using ClassLibrary1;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -37,54 +36,45 @@ namespace TravelExpertsAPP
        
         private void btnAccept_Click(object sender, EventArgs e)
         {
-            if (IsValidData())
+            if (addSupplier)
             {
-                if (addSupplier)
+                supplier = new Supplier();
+                this.PutSupplierData(supplier);
+                try
                 {
-                    supplier = new Supplier();
-                    this.PutSupplierData(supplier);
-                    try
+                    supplier.SupplierId = SupplierDB.AddSupplier(supplier);
+                    this.DialogResult = DialogResult.OK;
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.Message, ex.GetType().ToString());
+                }
+            }
+            else
+            {
+                Supplier newSupplier = new Supplier();
+                newSupplier.SupplierId = supplier.SupplierId;
+                this.PutSupplierData(newSupplier);
+                try
+                {
+                    if (!SupplierDB.UpdateSupplier(supplier, newSupplier))
                     {
-                        supplier.SupplierId = SupplierDB.AddSupplier(supplier);
+                        MessageBox.Show("Another user has updated or " +
+                           "deleted that customer.", "Database Error");
+                        this.DialogResult = DialogResult.Retry;
+                    }
+                    else
+                    {
+                        //supplier = newSupplier;
                         this.DialogResult = DialogResult.OK;
                     }
-                    catch (Exception ex)
-                    {
-                        MessageBox.Show(ex.Message, ex.GetType().ToString());
-                    }
                 }
-                else
+                catch (Exception ex)
                 {
-                    Supplier newSupplier = new Supplier();
-                    newSupplier.SupplierId = supplier.SupplierId;
-                    this.PutSupplierData(newSupplier);
-                    try
-                    {
-                        if (!SupplierDB.UpdateSupplier(supplier, newSupplier))
-                        {
-                            MessageBox.Show("Another user has updated or " +
-                               "deleted that customer.", "Database Error");
-                            this.DialogResult = DialogResult.Retry;
-                        }
-                        else
-                        {
-                            //supplier = newSupplier;
-                            this.DialogResult = DialogResult.OK;
-                        }
-                    }
-                    catch (Exception ex)
-                    {
-                        MessageBox.Show(ex.Message, ex.GetType().ToString());
-                    }
+                    MessageBox.Show(ex.Message, ex.GetType().ToString());
                 }
             }
         }
-
-        private bool IsValidData()
-        {
-            return Validator.IsPresent(txtSupName);
-        }
-
         private void PutSupplierData(Supplier supplier)
         {
             //supplier.SupplierId = Convert.ToInt32(txtSupplierId.Text);

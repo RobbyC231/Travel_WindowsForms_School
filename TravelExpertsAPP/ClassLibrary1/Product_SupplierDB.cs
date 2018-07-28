@@ -8,37 +8,31 @@ using System.Threading.Tasks;
 
 namespace TravelExpertsLibrary
 {
-    class Product_SupplierDB
+    public class Product_SupplierDB
     {
         /// <summary>
         /// function to get data from Product_Supplier table
         /// </summary>
         /// <param name="ProdcutSupplierID"></param>
         /// <returns></returns>
-        public static Product_Supplier GetProduct_Supplier(int ProdcutSupplierID)
+        public static List<Product_Supplier> GetProduct_Supplier()
         {
+            List<Product_Supplier> productSuppliers = new List<Product_Supplier>();
+            Product_Supplier ps;
             SqlConnection con = TravelExpertsDB.GetConnection();
-            string selectStatement = "select * from Product_Suppliers " +
-                                        "where ProductSupplierID = @ProductSupplierID";
+            string selectStatement = "SELECT ProductSupplierID, ProductID, SupplierID FROM Products_Suppliers";
             SqlCommand cmd = new SqlCommand(selectStatement, con);
-            cmd.Parameters.AddWithValue("@ProductSupplierID", ProdcutSupplierID);
-
             try
             {
                 con.Open();
-                SqlDataReader reader = cmd.ExecuteReader(CommandBehavior.SingleRow);
-                if (reader.Read())
+                SqlDataReader reader = cmd.ExecuteReader();
+                while (reader.Read())
                 {
-                    Product_Supplier ps = new Product_Supplier();
+                    ps = new Product_Supplier();
                     ps.ProductSupplierID = (int)reader["ProductSupplierID"];
                     ps.ProductID = (int)reader["ProductID"];
                     ps.SupplierID = (int)reader["SupplierID"];
-
-                    return ps;
-                }
-                else
-                {
-                    return null;
+                    productSuppliers.Add(ps);
                 }
             }
             catch (SqlException ex)
@@ -49,6 +43,7 @@ namespace TravelExpertsLibrary
             {
                 con.Close();
             }
+            return productSuppliers;
         }
 
         /// <summary>
@@ -57,15 +52,15 @@ namespace TravelExpertsLibrary
         /// <param name="oldProduct_Supplier"></param>
         /// <param name="newProduct_Supplier"></param>
         /// <returns></returns>
-        public static bool updateProduct_Supplier(Product_Supplier oldProduct_Supplier, Product_Supplier newProduct_Supplier)
+        public static bool UpdateProduct_Supplier(Product_Supplier oldProduct_Supplier, Product_Supplier newProduct_Supplier)
         {
             SqlConnection con = TravelExpertsDB.GetConnection();
-            string updateStatement = "update Product_Suppliers " +
-                                "set ProductID = @newProductID " +
+            string updateStatement = "UPDATE Products_Suppliers " +
+                                "SET ProductID = @newProductID, " +
                                 "SupplierID = @newSupplierID " +
-                                "where ProductSupplierID = @oldProductSupplierID " +
-                                "and ProductID = @oldProductID " +
-                                "and SupplierID = @oldSupplierID ";
+                                "WHERE ProductSupplierID = @oldProductSupplierID " +
+                                "AND ProductID = @oldProductID " +
+                                "AND SupplierID = @oldSupplierID ";
             SqlCommand cmd = new SqlCommand(updateStatement, con);
             cmd.Parameters.AddWithValue("@newProductID", newProduct_Supplier.ProductID);
             cmd.Parameters.AddWithValue("@newSupplierID", newProduct_Supplier.SupplierID);
@@ -102,16 +97,16 @@ namespace TravelExpertsLibrary
         /// </summary>
         /// <param name="PS"></param>
         /// <returns></returns>
-        public static bool deleteProduct_Supplier(Product_Supplier PS)
+        public static bool DeleteProduct_Supplier(Product_Supplier productSupplier)
         {
             SqlConnection con = TravelExpertsDB.GetConnection();
-            string deleteStatement = "delete from Product_Suppliers where ProductSupplierID = @ProductSupplierID " +
-                                        "and ProductID= @ProductID " +
-                                        "and SupplierID=@SupplierID";
+            string deleteStatement = "DELETE FROM Products_Suppliers WHERE ProductSupplierID = @ProductSupplierID " +
+                                        "AND ProductID=@ProductID " +
+                                        "AND SupplierID=@SupplierID";
             SqlCommand cmd = new SqlCommand(deleteStatement, con);
-            cmd.Parameters.AddWithValue("@ProductSupplierID", PS.ProductSupplierID);
-            cmd.Parameters.AddWithValue("@ProductID", PS.ProductID);
-            cmd.Parameters.AddWithValue("@SupplierID", PS.SupplierID);
+            cmd.Parameters.AddWithValue("@ProductSupplierID", productSupplier.ProductSupplierID);
+            cmd.Parameters.AddWithValue("@ProductID", productSupplier.ProductID);
+            cmd.Parameters.AddWithValue("@SupplierID", productSupplier.SupplierID);
             try
             {
                 con.Open();
@@ -141,25 +136,23 @@ namespace TravelExpertsLibrary
         /// </summary>
         /// <param name="PS"></param>
         /// <returns></returns>
-        public static int AddProduct_Supplier(Product_Supplier PS)
+        public static int AddProduct_Supplier(Product_Supplier productSupplier)
         {
+            int productSupplierID;
             SqlConnection con = TravelExpertsDB.GetConnection();
-            string insertStatement = "insert into Product_Suppliers (ProductSuppleirID, ProductID, SupplierID) " +
-                                        "values(@ProductSupplierID, @ProductID, @SupplierID)";
+            string insertStatement = "INSERT INTO Products_Suppliers (ProductID, SupplierID) " +
+                                        "VALUES (@ProductID, @SupplierID)";
             SqlCommand cmd = new SqlCommand(insertStatement, con);
-            cmd.Parameters.AddWithValue("@ProductSupplierID", PS.ProductSupplierID);
-            cmd.Parameters.AddWithValue("@ProductID", PS.ProductID);
-            cmd.Parameters.AddWithValue("@SupplierID", PS.SupplierID);
+            cmd.Parameters.AddWithValue("@ProductID", productSupplier.ProductID);
+            cmd.Parameters.AddWithValue("@SupplierID", productSupplier.SupplierID);
 
             try
             {
                 con.Open();
                 cmd.ExecuteNonQuery();
-
-                String selectQuery = "select ident_current('Product_Suppliers') from Product_Suppliers";
+                string selectQuery = "SELECT IDENT_CURRENT ('Products_Suppliers')";
                 SqlCommand selectCmd = new SqlCommand(selectQuery, con);
-                int ProductSupplierID = Convert.ToInt32(selectCmd.ExecuteScalar());
-                return ProductSupplierID;
+                productSupplierID = Convert.ToInt32(selectCmd.ExecuteScalar());
             }
             catch (SqlException ex)
             {
@@ -169,6 +162,7 @@ namespace TravelExpertsLibrary
             {
                 con.Close();
             }
+            return productSupplierID;
         }
     }
 }

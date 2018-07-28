@@ -7,11 +7,20 @@ namespace TravelExpertsAPP
 {
     public partial class TravelExpertsForm : Form
     {
-        List<Product> products;
+        List<Product> products; //holds list of returned products from database 
         private Product product;
+
+        List<Product_Supplier> productSuppliers;
+        private Product_Supplier productSupplier;
         
         List<Supplier> suppliers; //empty list       
         private Supplier supplier;
+
+        List<Package> packages;
+        private Package package;
+
+        List<Packages_Products_Suppliers> packProdSups;
+        private Packages_Products_Suppliers packProdSup;
        
         public TravelExpertsForm()
         {
@@ -22,7 +31,22 @@ namespace TravelExpertsAPP
         {
             DisplayProducts(); //calling method for displaying products
             DisplaySupplier();
+            DisplayProductSupplier();
+            DisplayPackages();
         }
+
+        private void DisplayPackages()
+        {
+            packages = PackageDB.GetPackage();
+            packageDataGridView.DataSource = packages;
+        }
+
+        private void DisplayProductSupplier()
+        {
+            productSuppliers = Product_SupplierDB.GetProduct_Supplier();
+            product_SupplierDataGridView.DataSource = productSuppliers;
+        }
+
         /// <summary>
         /// Author: Robert Clements
         /// Purpose: displays all of the products from database in data grid view
@@ -46,7 +70,7 @@ namespace TravelExpertsAPP
             DialogResult result = addModifyProducts.ShowDialog();
             if (result == DialogResult.OK) //if accept button was clicked
             {
-                product = addModifyProducts.product;
+                product = addModifyProducts.product; // TODO: might not need this code
                 DisplayProducts();
             }
         }
@@ -69,13 +93,14 @@ namespace TravelExpertsAPP
                     {
                         MessageBox.Show("Another user has updated or deleted product" + product.ProdName, "Datebase Error");
                     }
-                    DisplayProducts();
+                    
                 }
                 catch (Exception ex)
                 {
                     MessageBox.Show(ex.Message, ex.GetType().ToString());
                 }
             }
+            DisplayProducts();
         }
 
         private void SelectedRowProduct()
@@ -166,6 +191,123 @@ namespace TravelExpertsAPP
                 }
             }
         }
-        /**********************************************Supplier's Session End*********************************************/
-    }
-}
+
+        private void btnAddProductSupplier_Click(object sender, EventArgs e)
+        {
+            AddModifyProductsSupplier addProductsSupplier = new AddModifyProductsSupplier();
+            addProductsSupplier.addProductSupplier = true;
+            DialogResult result = addProductsSupplier.ShowDialog();
+            if (result == DialogResult.OK)
+            {
+                productSupplier = addProductsSupplier.productSupplier;
+                DisplayProductSupplier();
+            }
+        }
+
+        private void btnDeleteProductSupplier_Click(object sender, EventArgs e)
+        {
+            DialogResult result = MessageBox.Show("Are you sure?", "Confirm Delete", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+
+            SelectRowProducts_Suppliers();
+            if (result == DialogResult.Yes)
+            {
+                try
+                {
+                    if (!Product_SupplierDB.DeleteProduct_Supplier(productSupplier))
+                    {
+                        MessageBox.Show("Another user has updated or deleted this product supplier information", "Datebase Error");
+                    }
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.Message, ex.GetType().ToString());
+                }
+            }
+            DisplayProductSupplier();
+        }
+
+        private void SelectRowProducts_Suppliers()
+        {
+            productSupplier = new Product_Supplier();
+            int index = product_SupplierDataGridView.CurrentCell.RowIndex;
+            DataGridViewRow selectedRow = product_SupplierDataGridView.Rows[index];
+            productSupplier.ProductSupplierID = Convert.ToInt32(selectedRow.Cells[0].Value);
+            productSupplier.ProductID = Convert.ToInt32(selectedRow.Cells[1].Value);
+            productSupplier.SupplierID = Convert.ToInt32(selectedRow.Cells[2].Value);
+        }
+
+        private void btnModifyProductSupplier_Click(object sender, EventArgs e)
+        {
+            SelectRowProducts_Suppliers();
+            AddModifyProductsSupplier modifyProductsSupplier = new AddModifyProductsSupplier();
+            modifyProductsSupplier.addProductSupplier = false;
+            modifyProductsSupplier.productSupplier = productSupplier;
+            DialogResult result = modifyProductsSupplier.ShowDialog();
+            DisplayProductSupplier();
+        }
+
+        private void btnAddPackage_Click(object sender, EventArgs e)
+        {
+            AddModifyPackages addModifyPackage = new AddModifyPackages();
+            addModifyPackage.addPackage = true;
+            DialogResult result = addModifyPackage.ShowDialog();
+            if (result == DialogResult.OK)
+            {
+                package = addModifyPackage.package;
+                DisplayPackages();
+            }
+        }
+
+        private void btnDeletePackage_Click(object sender, EventArgs e)
+        {
+            DialogResult result = MessageBox.Show("Are you sure?", "Confirm Delete", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+            SelectedRowPackage();
+            if (result == DialogResult.Yes)
+            {
+                try
+                {
+                    if (!PackageDB.DeletePackage(package))
+                    {
+                        MessageBox.Show("Another user has updated or deleted package" + package.PkgName, "Datebase Error");
+                    }
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.Message, ex.GetType().ToString());
+                }
+                DisplayPackages();
+            }
+
+        }
+        private void SelectedRowPackage()
+        {
+            package = new Package();
+            int index = packageDataGridView.CurrentCell.RowIndex;
+            DataGridViewRow selectedRow = packageDataGridView.Rows[index];
+            package.PackageId = Convert.ToInt32(selectedRow.Cells[0].Value);
+            package.PkgName = selectedRow.Cells[1].Value.ToString();
+            package.PkgStartDate = Convert.ToDateTime(selectedRow.Cells[2].Value);
+            package.PkgEndDate = Convert.ToDateTime(selectedRow.Cells[3].Value);
+            package.PkgDesc = selectedRow.Cells[4].Value.ToString();
+            package.PkgBasePrice = Convert.ToDouble(selectedRow.Cells[5].Value);
+            package.PkgAgencyCommission = Convert.ToDouble(selectedRow.Cells[6].Value);
+        }
+
+        private void btnModifyPackage_Click(object sender, EventArgs e)
+        {
+            SelectedRowPackage();
+            AddModifyPackages modifyPackages = new AddModifyPackages();
+            modifyPackages.addPackage = false;
+            modifyPackages.package = package;
+            DialogResult result = modifyPackages.ShowDialog();
+            DisplayPackages();
+        }
+
+        private void packageDataGridView_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+            SelectedRowPackage();
+            packProdSups = Packages_Products_SuppliersDB.GetAllPackagesProductsSuppliers(package);
+            packages_Products_SuppliersDataGridView.DataSource = packProdSups;
+        }
+    }//end of class
+}//end of namespace

@@ -45,11 +45,23 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AddModifyPackages.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="AddModifyPackages.Designer.cs">
+      <DependentUpon>AddModifyPackages.cs</DependentUpon>
+    </Compile>
     <Compile Include="AddModifyProduct.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="AddModifyProduct.Designer.cs">
       <DependentUpon>AddModifyProduct.cs</DependentUpon>
+    </Compile>
+    <Compile Include="AddModifyProductsSupplier.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="AddModifyProductsSupplier.Designer.cs">
+      <DependentUpon>AddModifyProductsSupplier.cs</DependentUpon>
     </Compile>
     <Compile Include="frmSupplierAddModify.cs">
       <SubType>Form</SubType>
@@ -65,8 +77,14 @@
     <Compile Include="TravelExpertsForm.Designer.cs">
       <DependentUpon>TravelExpertsForm.cs</DependentUpon>
     </Compile>
+    <EmbeddedResource Include="AddModifyPackages.resx">
+      <DependentUpon>AddModifyPackages.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="AddModifyProduct.resx">
       <DependentUpon>AddModifyProduct.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="AddModifyProductsSupplier.resx">
+      <DependentUpon>AddModifyProductsSupplier.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="frmSupplierAddModify.resx">
       <DependentUpon>frmSupplierAddModify.cs</DependentUpon>
@@ -83,7 +101,10 @@
     <EmbeddedResource Include="TravelExpertsForm.resx">
       <DependentUpon>TravelExpertsForm.cs</DependentUpon>
     </EmbeddedResource>
+    <None Include="Properties\DataSources\TravelExpertsLibrary.Package.datasource" />
+    <None Include="Properties\DataSources\TravelExpertsLibrary.Packages_Products_Suppliers.datasource" />
     <None Include="Properties\DataSources\TravelExpertsLibrary.Product.datasource" />
+    <None Include="Properties\DataSources\TravelExpertsLibrary.Product_Supplier.datasource" />
     <None Include="Properties\DataSources\TravelExpertsLibrary.Supplier.datasource" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>

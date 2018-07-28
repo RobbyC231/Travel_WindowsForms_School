@@ -30,11 +30,14 @@
         {
             this.components = new System.ComponentModel.Container();
             System.Windows.Forms.Label prodNameLabel;
+            System.Windows.Forms.Label label1;
             this.txtProdName = new System.Windows.Forms.TextBox();
             this.productBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.btnAccept = new System.Windows.Forms.Button();
             this.btnCancel = new System.Windows.Forms.Button();
+            this.txtProdID = new System.Windows.Forms.TextBox();
             prodNameLabel = new System.Windows.Forms.Label();
+            label1 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.productBindingSource)).BeginInit();
             this.SuspendLayout();
             // 
@@ -80,12 +83,32 @@
             this.btnCancel.Text = "&Cancel";
             this.btnCancel.UseVisualStyleBackColor = true;
             // 
+            // txtProdID
+            // 
+            this.txtProdID.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.productBindingSource, "ProdName", true));
+            this.txtProdID.Location = new System.Drawing.Point(89, 23);
+            this.txtProdID.Name = "txtProdID";
+            this.txtProdID.ReadOnly = true;
+            this.txtProdID.Size = new System.Drawing.Size(100, 20);
+            this.txtProdID.TabIndex = 7;
+            // 
+            // label1
+            // 
+            label1.AutoSize = true;
+            label1.Location = new System.Drawing.Point(33, 26);
+            label1.Name = "label1";
+            label1.Size = new System.Drawing.Size(46, 13);
+            label1.TabIndex = 8;
+            label1.Text = "Prod ID:";
+            // 
             // AddModifyProduct
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoSize = true;
             this.ClientSize = new System.Drawing.Size(265, 137);
+            this.Controls.Add(label1);
+            this.Controls.Add(this.txtProdID);
             this.Controls.Add(this.btnCancel);
             this.Controls.Add(this.btnAccept);
             this.Controls.Add(prodNameLabel);
@@ -105,5 +128,6 @@
         private System.Windows.Forms.TextBox txtProdName;
         private System.Windows.Forms.Button btnAccept;
         private System.Windows.Forms.Button btnCancel;
+        private System.Windows.Forms.TextBox txtProdID;
     }
 }

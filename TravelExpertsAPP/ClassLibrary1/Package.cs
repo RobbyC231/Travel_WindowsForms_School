@@ -20,7 +20,7 @@ namespace TravelExpertsLibrary
         public DateTime PkgStartDate { get; set; }  //getter/setter for PkgStartDate
         public DateTime PkgEndDate { get; set; }    //getter/setter for PkgEndDate
         public string PkgDesc { get; set; }         //getter/setter for PkgDesc
-        public decimal PkgBasePrice { get; set; }   //getter/setter for PkgBasePrice
-        public decimal PkgAgencyCommission { get; set; }    //getter/setter for PkgAgencyCommission
+        public double PkgBasePrice { get; set; }   //getter/setter for PkgBasePrice
+        public double PkgAgencyCommission { get; set; }    //getter/setter for PkgAgencyCommission
     }
 }

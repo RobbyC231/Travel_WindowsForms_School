@@ -25,7 +25,7 @@ namespace TravelExpertsLibrary
             //create connection
             SqlConnection con = TravelExpertsDB.GetConnection();
             //SQL string to make selection
-            string selectStatement = "Select ProductID, ProdName " +
+            string selectStatement = "SELECT ProductID, ProdName " +
                 "FROM Products";
             SqlCommand cmd = new SqlCommand(selectStatement, con);
             try
@@ -118,7 +118,7 @@ namespace TravelExpertsLibrary
                                      "AND ProdName = @OldProdName";
             SqlCommand cmd = new SqlCommand(updateStatement, con);
             cmd.Parameters.AddWithValue("@NewProdName", newProduct.ProdName);
-            //start adding vlaues of old product
+            //start adding values of old product
             cmd.Parameters.AddWithValue("@OldProductID", oldProduct.ProductID);
             cmd.Parameters.AddWithValue("@OldProdName", oldProduct.ProdName);
             try
