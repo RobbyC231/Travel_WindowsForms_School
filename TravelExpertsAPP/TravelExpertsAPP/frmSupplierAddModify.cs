@@ -31,6 +31,7 @@ namespace TravelExpertsAPP
             if (addSupplier)
             {
                 this.Text = "Add Supplier";
+                txtSupplierId.Text = SupplierDB.GetNextSupplierID().ToString();
             }
             else
             {
@@ -47,54 +48,61 @@ namespace TravelExpertsAPP
 
         private void btnAccept_Click(object sender, EventArgs e)
         {
-            if (addSupplier)
+            if (ValidData())
             {
-                supplier = new Supplier();
-                this.PutSupplierData(supplier);
-                try
+                if (addSupplier)
                 {
-                    supplier.SupplierId = SupplierDB.AddSupplier(supplier);
-                    this.DialogResult = DialogResult.OK;
-                }
-                catch (Exception ex)
-                {
-                    MessageBox.Show(ex.Message, ex.GetType().ToString());
-                }
-            }
-            else
-            {
-                Supplier newSupplier = new Supplier();
-                newSupplier.SupplierId = supplier.SupplierId;
-                this.PutSupplierData(newSupplier);
-                try
-                {
-                    if (!SupplierDB.UpdateSupplier(supplier, newSupplier))
+                    supplier = new Supplier();
+                    this.PutSupplierData(supplier);
+                    try
                     {
-                        MessageBox.Show("Another user has updated or " +
-                           "deleted that customer.", "Database Error");
-                        this.DialogResult = DialogResult.Retry;
+                        if (SupplierDB.AddSupplier(supplier))
+                        {
+                            this.DialogResult = DialogResult.OK;
+                        }
                     }
-                    else
+                    catch (Exception ex)
                     {
-                        //supplier = newSupplier;
-                        this.DialogResult = DialogResult.OK;
+                        MessageBox.Show(ex.Message, ex.GetType().ToString());
                     }
                 }
-                catch (Exception ex)
+                else
                 {
-                    MessageBox.Show(ex.Message, ex.GetType().ToString());
-                }
+                    Supplier newSupplier = new Supplier();
+                    newSupplier.SupplierId = supplier.SupplierId;
+                    this.PutSupplierData(newSupplier);
+                    try
+                    {
+                        if (!SupplierDB.UpdateSupplier(supplier, newSupplier))
+                        {
+                            MessageBox.Show("Another user has updated or " +
+                               "deleted that customer.", "Database Error");
+                            this.DialogResult = DialogResult.Retry;
+                        }
+                        else
+                        {
+                            //supplier = newSupplier;
+                            this.DialogResult = DialogResult.OK;
+                        }
+                    }
+                    catch (Exception ex)
+                    {
+                        MessageBox.Show(ex.Message, ex.GetType().ToString());
+                    }
+                } 
             }
-        }
-        private void PutSupplierData(Supplier supplier)
-        {
-            //supplier.SupplierId = Convert.ToInt32(txtSupplierId.Text);
-            supplier.SupName = txtSupName.Text;
         }
 
-        private void btnCancel_Click(object sender, EventArgs e)
+        private bool ValidData()
         {
-            this.DialogResult = DialogResult.Retry;
+            return
+                Validator.IsPresent(txtSupName);
+        }
+
+        private void PutSupplierData(Supplier supplier)
+        {
+            supplier.SupplierId = Convert.ToInt32(txtSupplierId.Text);
+            supplier.SupName = txtSupName.Text;
         }
     }
 }

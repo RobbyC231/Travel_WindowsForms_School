@@ -47,44 +47,53 @@ namespace TravelExpertsAPP
         //when accept button has been clicked
         private void btnAccept_Click(object sender, EventArgs e)
         {
-            if (addProdcut) //if add button was picked from main form
+            if (ValidData())
             {
-                product = new Product();
-                this.ProductData(product); //setting new product name to the name typed by user
-                try
+                if (addProdcut) //if add button was picked from main form
                 {
-                    //calling method used to add product to database returing the auto incremented ProdcutID
-                    product.ProductID = ProductDB.AddProduct(product);
-                    this.DialogResult = DialogResult.OK; //setting dialog result to OK
-                }
-                catch (Exception ex)
-                {
-                    throw ex;
-                }
-            }
-            else // if modify button was selected from main form
-            {
-                Product newProduct = new Product();
-                newProduct.ProductID = product.ProductID;
-                this.ProductData(newProduct);
-                try
-                {
-                    if (!ProductDB.UpdateProduct(product, newProduct))
+                    product = new Product();
+                    this.ProductData(product); //setting new product name to the name typed by user
+                    try
                     {
-                        MessageBox.Show("Another user has updated or " +
-                                "deleted that customer.", "Database Error");
-                        this.DialogResult = DialogResult.Retry;
+                        //calling method used to add product to database returing the auto incremented ProdcutID
+                        product.ProductID = ProductDB.AddProduct(product);
+                        this.DialogResult = DialogResult.OK; //setting dialog result to OK
                     }
-                    else
+                    catch (Exception ex)
                     {
-                        this.DialogResult = DialogResult.OK;
+                        throw ex;
                     }
                 }
-                catch (Exception ex)
+                else // if modify button was selected from main form
                 {
-                    MessageBox.Show(ex.Message, ex.GetType().ToString());
-                }
+                    Product newProduct = new Product();
+                    newProduct.ProductID = product.ProductID;
+                    this.ProductData(newProduct);
+                    try
+                    {
+                        if (!ProductDB.UpdateProduct(product, newProduct))
+                        {
+                            MessageBox.Show("Another user has updated or " +
+                                    "deleted that customer.", "Database Error");
+                            this.DialogResult = DialogResult.Retry;
+                        }
+                        else
+                        {
+                            this.DialogResult = DialogResult.OK;
+                        }
+                    }
+                    catch (Exception ex)
+                    {
+                        MessageBox.Show(ex.Message, ex.GetType().ToString());
+                    }
+                } 
             }
+        }
+
+        private bool ValidData()
+        {
+            return
+                Validator.IsPresent(txtProdName);
         }
 
         //sets product name to product typed by user

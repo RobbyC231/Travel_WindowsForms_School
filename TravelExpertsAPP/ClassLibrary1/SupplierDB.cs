@@ -52,9 +52,8 @@ namespace TravelExpertsLibrary
         /// </summary>
         /// <param name="s"> supplier object that cotaing data for the new record</param>
         /// <returns>generated SupplierId</returns>
-        public static int AddSupplier(Supplier supplier)
+        public static bool AddSupplier(Supplier supplier)
         {
-            int supplierId;
             SqlConnection connection = TravelExpertsDB.GetConnection();
             string insertStatement = "INSERT INTO Suppliers (SupplierId, SupName) " +
                                      "VALUES(@SupplierId, @SupName)";
@@ -64,15 +63,9 @@ namespace TravelExpertsLibrary
             try
             {
                 connection.Open();
-                cmd.ExecuteNonQuery(); // run the insert command
-
-                // get the generated ID - current identity value for  Suppliers table
-                //string selectQuery = "SELECT IDENT_CURRENT('Suppliers')";
-                string selectQuery = "SELECT MAX(SupplierId)+1 FROM Suppliers";
-                SqlCommand selectCmd = new SqlCommand(selectQuery, connection);
-                object result = selectCmd.ExecuteScalar();
-                Console.WriteLine("Result: " + result.ToString());
-                supplierId = Convert.ToInt32(result); // single value             
+                int count = cmd.ExecuteNonQuery(); // run the insert command 
+                if (count > 0) return true;
+                else return false;
             }
             catch (SqlException ex)
             {
@@ -82,7 +75,28 @@ namespace TravelExpertsLibrary
             {
                 connection.Close();
             }
-            return supplierId;
+        }
+
+        public static int GetNextSupplierID()
+        {
+            int supplierID;
+            SqlConnection con = TravelExpertsDB.GetConnection();
+            string selectQuery = "SELECT MAX(SupplierId)+1 FROM Suppliers";
+            SqlCommand selectCmd = new SqlCommand(selectQuery, con);
+            try
+            {
+                con.Open();
+                supplierID = Convert.ToInt32(selectCmd.ExecuteScalar());
+                return supplierID;
+            }
+            catch (SqlException ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+                con.Close();
+            }
         }
 
         /// <summary>

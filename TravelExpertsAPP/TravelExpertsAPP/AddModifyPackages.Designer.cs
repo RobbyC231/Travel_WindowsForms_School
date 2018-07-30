@@ -145,6 +145,7 @@
             this.txtPkgAgencyCommission.Name = "txtPkgAgencyCommission";
             this.txtPkgAgencyCommission.Size = new System.Drawing.Size(200, 20);
             this.txtPkgAgencyCommission.TabIndex = 4;
+            this.txtPkgAgencyCommission.Tag = "Package Agency Commission";
             // 
             // txtBasePrice
             // 
@@ -153,6 +154,7 @@
             this.txtBasePrice.Name = "txtBasePrice";
             this.txtBasePrice.Size = new System.Drawing.Size(200, 20);
             this.txtBasePrice.TabIndex = 6;
+            this.txtBasePrice.Tag = "Package Base Price";
             // 
             // txtPkgDescription
             // 
@@ -161,6 +163,7 @@
             this.txtPkgDescription.Name = "txtPkgDescription";
             this.txtPkgDescription.Size = new System.Drawing.Size(200, 20);
             this.txtPkgDescription.TabIndex = 8;
+            this.txtPkgDescription.Tag = "Package Description";
             // 
             // dtpPkgEndDate
             // 
@@ -169,6 +172,7 @@
             this.dtpPkgEndDate.Name = "dtpPkgEndDate";
             this.dtpPkgEndDate.Size = new System.Drawing.Size(200, 20);
             this.dtpPkgEndDate.TabIndex = 10;
+            this.dtpPkgEndDate.Tag = "Package End Date";
             // 
             // txtPkgName
             // 
@@ -177,6 +181,7 @@
             this.txtPkgName.Name = "txtPkgName";
             this.txtPkgName.Size = new System.Drawing.Size(200, 20);
             this.txtPkgName.TabIndex = 12;
+            this.txtPkgName.Tag = "Package Name";
             // 
             // dtpPkgStartDate
             // 
@@ -185,10 +190,10 @@
             this.dtpPkgStartDate.Name = "dtpPkgStartDate";
             this.dtpPkgStartDate.Size = new System.Drawing.Size(200, 20);
             this.dtpPkgStartDate.TabIndex = 14;
+            this.dtpPkgStartDate.Tag = "Package Start Date";
             // 
             // btnAccept
             // 
-            this.btnAccept.DialogResult = System.Windows.Forms.DialogResult.OK;
             this.btnAccept.Location = new System.Drawing.Point(131, 265);
             this.btnAccept.Name = "btnAccept";
             this.btnAccept.Size = new System.Drawing.Size(75, 23);

@@ -46,39 +46,56 @@ namespace TravelExpertsAPP
 
         private void btnAccept_Click(object sender, EventArgs e)
         {
-            if (addPackage)
+            if (ValidDate())
             {
-                package = new Package();
-                this.PackageData(package);
-                try
+
+                if (addPackage)
                 {
-                    package.PackageId = PackageDB.AddPackage(package);
-                    this.DialogResult = DialogResult.OK;
-                }
-                catch (Exception ex)
-                {
-                    throw ex;
-                }
-            }
-            else
-            {
-                Package newPackage = new Package();
-                newPackage.PackageId = package.PackageId;
-                this.PackageData(newPackage);
-                try
-                {
-                    if (!PackageDB.UpdatePackages(package, newPackage))
+                    package = new Package();
+                    this.PackageData(package);
+                    try
                     {
-                        MessageBox.Show("Another user has updated or deleted" +
-                               package.PkgName, "Database Error");
-                        this.DialogResult = DialogResult.Retry;
+                        package.PackageId = PackageDB.AddPackage(package);
+                        this.DialogResult = DialogResult.OK;
+                    }
+                    catch (Exception ex)
+                    {
+                        throw ex;
                     }
                 }
-                catch (Exception ex)
+                else
                 {
-                    MessageBox.Show(ex.Message, ex.GetType().ToString());
-                }
+                    Package newPackage = new Package();
+                    newPackage.PackageId = package.PackageId;
+                    this.PackageData(newPackage);
+                    try
+                    {
+                        if (!PackageDB.UpdatePackages(package, newPackage))
+                        {
+                            MessageBox.Show("Another user has updated or deleted" +
+                                   package.PkgName, "Database Error");
+                            this.DialogResult = DialogResult.Retry;
+                        }
+                    }
+                    catch (Exception ex)
+                    {
+                        MessageBox.Show(ex.Message, ex.GetType().ToString());
+                    }
+                } 
             }
+        }
+
+        private bool ValidDate()
+        {
+            return
+                Validator.IsPresent(txtPkgAgencyCommission) &&
+                Validator.IsPresent(txtBasePrice) &&
+                Validator.IsPresent(txtPkgDescription) &&
+                Validator.IsPresent(txtPkgName) &&
+                Validator.EndAfterStart(dtpPkgStartDate, dtpPkgEndDate) &&
+                Validator.IsDecimal(txtBasePrice) &&
+                Validator.IsDecimal(txtPkgAgencyCommission) &&
+                Validator.AgentCommissionLessBasePrice(txtBasePrice, txtPkgAgencyCommission);
         }
 
         private void PackageData(Package package)

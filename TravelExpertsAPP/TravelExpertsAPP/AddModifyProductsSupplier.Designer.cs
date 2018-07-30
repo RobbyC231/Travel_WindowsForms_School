@@ -36,14 +36,32 @@
             this.btnAccept = new System.Windows.Forms.Button();
             this.btnCancel = new System.Windows.Forms.Button();
             this.cbProductId = new System.Windows.Forms.ComboBox();
+            this.productBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.cbSupplierID = new System.Windows.Forms.ComboBox();
             this.supplierBindingSource = new System.Windows.Forms.BindingSource(this.components);
-            this.productBindingSource = new System.Windows.Forms.BindingSource(this.components);
             productIDLabel = new System.Windows.Forms.Label();
             supplierIdLabel = new System.Windows.Forms.Label();
-            ((System.ComponentModel.ISupportInitialize)(this.supplierBindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.productBindingSource)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.supplierBindingSource)).BeginInit();
             this.SuspendLayout();
+            // 
+            // productIDLabel
+            // 
+            productIDLabel.AutoSize = true;
+            productIDLabel.Location = new System.Drawing.Point(106, 112);
+            productIDLabel.Name = "productIDLabel";
+            productIDLabel.Size = new System.Drawing.Size(61, 13);
+            productIDLabel.TabIndex = 8;
+            productIDLabel.Text = "Product ID:";
+            // 
+            // supplierIdLabel
+            // 
+            supplierIdLabel.AutoSize = true;
+            supplierIdLabel.Location = new System.Drawing.Point(106, 139);
+            supplierIdLabel.Name = "supplierIdLabel";
+            supplierIdLabel.Size = new System.Drawing.Size(60, 13);
+            supplierIdLabel.TabIndex = 9;
+            supplierIdLabel.Text = "Supplier Id:";
             // 
             // label1
             // 
@@ -64,7 +82,6 @@
             // 
             // btnAccept
             // 
-            this.btnAccept.DialogResult = System.Windows.Forms.DialogResult.OK;
             this.btnAccept.Location = new System.Drawing.Point(111, 215);
             this.btnAccept.Name = "btnAccept";
             this.btnAccept.Size = new System.Drawing.Size(75, 23);
@@ -83,15 +100,6 @@
             this.btnCancel.Text = "&Cancel";
             this.btnCancel.UseVisualStyleBackColor = true;
             // 
-            // productIDLabel
-            // 
-            productIDLabel.AutoSize = true;
-            productIDLabel.Location = new System.Drawing.Point(106, 112);
-            productIDLabel.Name = "productIDLabel";
-            productIDLabel.Size = new System.Drawing.Size(61, 13);
-            productIDLabel.TabIndex = 8;
-            productIDLabel.Text = "Product ID:";
-            // 
             // cbProductId
             // 
             this.cbProductId.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.productBindingSource, "ProductID", true));
@@ -101,15 +109,11 @@
             this.cbProductId.Name = "cbProductId";
             this.cbProductId.Size = new System.Drawing.Size(121, 21);
             this.cbProductId.TabIndex = 9;
+            this.cbProductId.Tag = "Product ID";
             // 
-            // supplierIdLabel
+            // productBindingSource
             // 
-            supplierIdLabel.AutoSize = true;
-            supplierIdLabel.Location = new System.Drawing.Point(106, 139);
-            supplierIdLabel.Name = "supplierIdLabel";
-            supplierIdLabel.Size = new System.Drawing.Size(60, 13);
-            supplierIdLabel.TabIndex = 9;
-            supplierIdLabel.Text = "Supplier Id:";
+            this.productBindingSource.DataSource = typeof(TravelExpertsLibrary.Product);
             // 
             // cbSupplierID
             // 
@@ -120,14 +124,11 @@
             this.cbSupplierID.Name = "cbSupplierID";
             this.cbSupplierID.Size = new System.Drawing.Size(121, 21);
             this.cbSupplierID.TabIndex = 10;
+            this.cbSupplierID.Tag = "Supplier ID";
             // 
             // supplierBindingSource
             // 
             this.supplierBindingSource.DataSource = typeof(TravelExpertsLibrary.Supplier);
-            // 
-            // productBindingSource
-            // 
-            this.productBindingSource.DataSource = typeof(TravelExpertsLibrary.Product);
             // 
             // AddModifyProductsSupplier
             // 
@@ -145,8 +146,8 @@
             this.Name = "AddModifyProductsSupplier";
             this.Text = "AddModifyProductsSupplier";
             this.Load += new System.EventHandler(this.AddModifyProductsSupplier_Load);
-            ((System.ComponentModel.ISupportInitialize)(this.supplierBindingSource)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.productBindingSource)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.supplierBindingSource)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 

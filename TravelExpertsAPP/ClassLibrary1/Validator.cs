@@ -5,29 +5,18 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace ClassLibrary1
+namespace TravelExpertsLibrary
 {
     /// <summary>
     /// Provides static methods for validating data.
     /// </summary>
     public static class Validator
     {
-        private static string title = "Entry Error";
 
         /// <summary>
         /// The title that will appear in dialog boxes.
         /// </summary>
-        public static string Title
-        {
-            get
-            {
-                return title;
-            }
-            set
-            {
-                title = value;
-            }
-        }
+        public static string Title { get; set; } = "Entry Error";
 
         /// <summary>
         /// Checks whether the user entered data into a text box.
@@ -106,14 +95,25 @@ namespace ClassLibrary1
         /// <param name="min">The minimum value for the range.</param>
         /// <param name="max">The maximum value for the range.</param>
         /// <returns>True if the user has entered a value within the specified range.</returns>
-        public static bool IsWithinRange(TextBox textBox, decimal min, decimal max)
+        public static bool EndAfterStart(DateTimePicker startDate, DateTimePicker endDate)
         {
-            decimal number = Convert.ToDecimal(textBox.Text);
-            if (number < min || number > max)
+            if (startDate.Value > endDate.Value)
             {
-                MessageBox.Show(textBox.Tag + " must be between " + min
-                    + " and " + max + ".", Title);
-                textBox.Focus();
+                MessageBox.Show("Package end date must be after package start date.", Title);
+                endDate.Focus();
+                return false;
+            }
+            return true;
+        }
+
+        public static bool AgentCommissionLessBasePrice(TextBox basePrice, TextBox agentCommission)
+        {
+            double baseP = Convert.ToDouble(basePrice.Text);
+            double agentC = Convert.ToDouble(agentCommission.Text);
+            if (agentC > baseP)
+            {
+                MessageBox.Show("Agents commission must be less then the base price.", Title);
+                agentCommission.Focus();
                 return false;
             }
             return true;

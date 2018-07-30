@@ -46,17 +46,27 @@
             prodNameLabel.AutoSize = true;
             prodNameLabel.Location = new System.Drawing.Point(20, 52);
             prodNameLabel.Name = "prodNameLabel";
-            prodNameLabel.Size = new System.Drawing.Size(63, 13);
+            prodNameLabel.Size = new System.Drawing.Size(78, 13);
             prodNameLabel.TabIndex = 1;
-            prodNameLabel.Text = "Prod Name:";
+            prodNameLabel.Text = "Product Name:";
+            // 
+            // label1
+            // 
+            label1.AutoSize = true;
+            label1.Location = new System.Drawing.Point(33, 26);
+            label1.Name = "label1";
+            label1.Size = new System.Drawing.Size(61, 13);
+            label1.TabIndex = 8;
+            label1.Text = "Product ID:";
             // 
             // txtProdName
             // 
             this.txtProdName.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.productBindingSource, "ProdName", true));
-            this.txtProdName.Location = new System.Drawing.Point(89, 49);
+            this.txtProdName.Location = new System.Drawing.Point(104, 49);
             this.txtProdName.Name = "txtProdName";
             this.txtProdName.Size = new System.Drawing.Size(100, 20);
             this.txtProdName.TabIndex = 2;
+            this.txtProdName.Tag = "Product Name";
             // 
             // productBindingSource
             // 
@@ -64,7 +74,6 @@
             // 
             // btnAccept
             // 
-            this.btnAccept.DialogResult = System.Windows.Forms.DialogResult.OK;
             this.btnAccept.Location = new System.Drawing.Point(36, 93);
             this.btnAccept.Name = "btnAccept";
             this.btnAccept.Size = new System.Drawing.Size(75, 23);
@@ -86,20 +95,11 @@
             // txtProdID
             // 
             this.txtProdID.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.productBindingSource, "ProdName", true));
-            this.txtProdID.Location = new System.Drawing.Point(89, 23);
+            this.txtProdID.Location = new System.Drawing.Point(104, 23);
             this.txtProdID.Name = "txtProdID";
             this.txtProdID.ReadOnly = true;
             this.txtProdID.Size = new System.Drawing.Size(100, 20);
             this.txtProdID.TabIndex = 7;
-            // 
-            // label1
-            // 
-            label1.AutoSize = true;
-            label1.Location = new System.Drawing.Point(33, 26);
-            label1.Name = "label1";
-            label1.Size = new System.Drawing.Size(46, 13);
-            label1.TabIndex = 8;
-            label1.Text = "Prod ID:";
             // 
             // AddModifyProduct
             // 

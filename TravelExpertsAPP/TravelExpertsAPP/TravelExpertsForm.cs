@@ -254,7 +254,7 @@ namespace TravelExpertsAPP
             if (result == DialogResult.OK)
             {
                 package = addModifyPackage.package;
-                DisplayPackages();
+                this.DisplayPackages();
             }
         }
 

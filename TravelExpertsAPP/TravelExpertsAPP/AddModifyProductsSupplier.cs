@@ -68,43 +68,53 @@ namespace TravelExpertsAPP
 
         private void btnAccept_Click(object sender, EventArgs e)
         {
-            if (addProductSupplier)
+            if (ValidData())
             {
-                productSupplier = new Product_Supplier();
-                this.ProductSupplierData(productSupplier);
-                try
+                if (addProductSupplier)
                 {
-                    productSupplier.ProductSupplierID = Product_SupplierDB.AddProduct_Supplier(productSupplier);
-                    this.DialogResult = DialogResult.OK;
-                }
-                catch (Exception ex)
-                {
-                    MessageBox.Show(ex.Message, ex.GetType().ToString());
-                }
-            }
-            else
-            {
-                Product_Supplier newProductSupplier = new Product_Supplier();
-                newProductSupplier.ProductSupplierID = productSupplier.ProductSupplierID;
-                this.ProductSupplierData(newProductSupplier);
-                try
-                {
-                    if (!Product_SupplierDB.UpdateProduct_Supplier(productSupplier, newProductSupplier))
+                    productSupplier = new Product_Supplier();
+                    this.ProductSupplierData(productSupplier);
+                    try
                     {
-                        MessageBox.Show("Another user has updated or " +
-                                "deleted that customer.", "Database Error");
-                        this.DialogResult = DialogResult.Retry;
-                    }
-                    else
-                    {
+                        productSupplier.ProductSupplierID = Product_SupplierDB.AddProduct_Supplier(productSupplier);
                         this.DialogResult = DialogResult.OK;
                     }
+                    catch (Exception ex)
+                    {
+                        MessageBox.Show(ex.Message, ex.GetType().ToString());
+                    }
                 }
-                catch (Exception ex)
+                else
                 {
-                    throw ex;
-                }
+                    Product_Supplier newProductSupplier = new Product_Supplier();
+                    newProductSupplier.ProductSupplierID = productSupplier.ProductSupplierID;
+                    this.ProductSupplierData(newProductSupplier);
+                    try
+                    {
+                        if (!Product_SupplierDB.UpdateProduct_Supplier(productSupplier, newProductSupplier))
+                        {
+                            MessageBox.Show("Another user has updated or " +
+                                    "deleted that customer.", "Database Error");
+                            this.DialogResult = DialogResult.Retry;
+                        }
+                        else
+                        {
+                            this.DialogResult = DialogResult.OK;
+                        }
+                    }
+                    catch (Exception ex)
+                    {
+                        throw ex;
+                    }
+                } 
             }
+        }
+
+        private bool ValidData()
+        {
+            return
+                Validator.IsPresent(cbProductId) &&
+                Validator.IsPresent(cbSupplierID);
         }
 
         private void ProductSupplierData(Product_Supplier productSupplier)
