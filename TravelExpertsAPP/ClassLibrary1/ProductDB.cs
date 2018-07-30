@@ -26,7 +26,7 @@ namespace TravelExpertsLibrary
             SqlConnection con = TravelExpertsDB.GetConnection();
             //SQL string to make selection
             string selectStatement = "SELECT ProductID, ProdName " +
-                "FROM Products";
+                "FROM Products ORDER BY ProductID";
             SqlCommand cmd = new SqlCommand(selectStatement, con);
             try
             {
@@ -83,7 +83,29 @@ namespace TravelExpertsLibrary
             return productID;
         }
 
-        public static bool DeleteProduct(Product product)
+        public static int GetNextProductID()
+        {
+            int supplierID;
+            SqlConnection con = TravelExpertsDB.GetConnection();
+            string selectQuery = "SELECT IDENT_CURRENT('Products') + IDENT_INCR('Products')";
+            SqlCommand selectCmd = new SqlCommand(selectQuery, con);
+            try
+            {
+                con.Open();
+                supplierID = Convert.ToInt32(selectCmd.ExecuteScalar());
+                return supplierID;
+            }
+            catch (SqlException ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+                con.Close();
+            }
+
+        }
+            public static bool DeleteProduct(Product product)
         {
             SqlConnection con = TravelExpertsDB.GetConnection();
             string deleteStatement = "DELETE FROM Products " +

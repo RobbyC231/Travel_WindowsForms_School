@@ -11,39 +11,30 @@ using TravelExpertsLibrary;
 
 namespace TravelExpertsAPP
 {
-    public partial class AddModifyProductsSupplier : Form
+    public partial class AddModifyProdSup : Form
     {
-        public bool addProductSupplier;
+        public bool addPackageProdSup;
         public Product_Supplier productSupplier;
-        public AddModifyProductsSupplier()
+        public Package package;
+        public AddModifyProdSup()
         {
             InitializeComponent();
         }
 
-        private void AddModifyProductsSupplier_Load(object sender, EventArgs e)
+        private void AddModifyProdSup_Load(object sender, EventArgs e)
         {
             this.LoadComboBox();
-            if (addProductSupplier)
+            if (addPackageProdSup)
             {
                 this.Text = "Add Product Supplier";
-                cbProductId.SelectedIndex = -1;
-                cbSupplierID.SelectedIndex = -1;
-                txtProdSupplierID.Text = Product_SupplierDB.GetNextProductSupplierID().ToString();
+                cbProdName.SelectedIndex = -1;
+                cbSupName.SelectedIndex = -1;
             }
             else
             {
                 this.Text = "Modify Product Supplier";
-                DisplayProductSuppliers();
             }
         }
-
-        private void DisplayProductSuppliers()
-        {
-            txtProdSupplierID.Text = productSupplier.ProductSupplierID.ToString();
-            cbProductId.SelectedValue = productSupplier.ProductID;
-            cbSupplierID.SelectedValue = productSupplier.SupplierID;
-        }
-
         private void LoadComboBox()
         {
             List<Product> products = new List<Product>();
@@ -51,14 +42,14 @@ namespace TravelExpertsAPP
             try
             {
                 products = ProductDB.GetAllProduct();
-                cbProductId.DataSource = products;
-                cbProductId.DisplayMember = "ProdName";
-                cbProductId.ValueMember = "ProductID";
+                cbProdName.DataSource = products;
+                cbProdName.DisplayMember = "ProdName";
+                cbProdName.ValueMember = "ProductID";
 
                 suppliers = SupplierDB.GetAllSuppliers();
-                cbSupplierID.DataSource = suppliers;
-                cbSupplierID.DisplayMember = "SupName";
-                cbSupplierID.ValueMember = "SupplierId";
+                cbSupName.DataSource = suppliers;
+                cbSupName.DisplayMember = "SupName";
+                cbSupName.ValueMember = "SupplierId";
             }
             catch (Exception ex)
             {
@@ -71,13 +62,14 @@ namespace TravelExpertsAPP
         {
             if (ValidData())
             {
-                if (addProductSupplier)
+                if (addPackageProdSup)
                 {
                     productSupplier = new Product_Supplier();
                     this.ProductSupplierData(productSupplier);
                     try
                     {
                         productSupplier.ProductSupplierID = Product_SupplierDB.AddProduct_Supplier(productSupplier);
+                        Packages_Products_SuppliersDB.Add(productSupplier, package);
                         this.DialogResult = DialogResult.OK;
                     }
                     catch (Exception ex)
@@ -107,21 +99,20 @@ namespace TravelExpertsAPP
                     {
                         throw ex;
                     }
-                } 
+                }
             }
         }
 
         private bool ValidData()
         {
             return
-                Validator.IsPresent(cbProductId) &&
-                Validator.IsPresent(cbSupplierID);
+                Validator.IsPresent(cbSupName) &&
+                Validator.IsPresent(cbProdName);
         }
-
         private void ProductSupplierData(Product_Supplier productSupplier)
         {
-            productSupplier.ProductID = Convert.ToInt32(cbProductId.SelectedValue);
-            productSupplier.SupplierID = Convert.ToInt32(cbSupplierID.SelectedValue);
+            productSupplier.ProductID = Convert.ToInt32(cbProdName.SelectedValue);
+            productSupplier.SupplierID = Convert.ToInt32(cbSupName.SelectedValue);
         }
     }
 }

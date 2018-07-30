@@ -20,7 +20,7 @@ namespace TravelExpertsLibrary
             List<Product_Supplier> productSuppliers = new List<Product_Supplier>();
             Product_Supplier ps;
             SqlConnection con = TravelExpertsDB.GetConnection();
-            string selectStatement = "SELECT ProductSupplierID, ProductID, SupplierID FROM Products_Suppliers";
+            string selectStatement = "SELECT ProductSupplierID, ProductID, SupplierID FROM Products_Suppliers ORDER BY ProductSupplierID";
             SqlCommand cmd = new SqlCommand(selectStatement, con);
             try
             {
@@ -163,6 +163,28 @@ namespace TravelExpertsLibrary
                 con.Close();
             }
             return productSupplierID;
+        }
+        public static int GetNextProductSupplierID()
+        {
+            int productSupplier;
+            SqlConnection con = TravelExpertsDB.GetConnection();
+            string selectQuery = "SELECT IDENT_CURRENT('Products_Suppliers') + IDENT_INCR('Products_Suppliers')";
+            SqlCommand selectCmd = new SqlCommand(selectQuery, con);
+            try
+            {
+                con.Open();
+                productSupplier = Convert.ToInt32(selectCmd.ExecuteScalar());
+                return productSupplier;
+            }
+            catch (SqlException ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+                con.Close();
+            }
+
         }
     }
 }

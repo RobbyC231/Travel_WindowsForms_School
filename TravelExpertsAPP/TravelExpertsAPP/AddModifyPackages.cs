@@ -15,6 +15,7 @@ namespace TravelExpertsAPP
     {
         public bool addPackage;
         public Package package;
+        public List<Product_Supplier> productsSuppliers; 
         public AddModifyPackages()
         {
             InitializeComponent();
@@ -25,6 +26,7 @@ namespace TravelExpertsAPP
             if (addPackage) //if addProduct is true then add button was picked
             {
                 this.Text = "Add Package";//changed form title
+                txtPackageId.Text = PackageDB.GetNextPackageID().ToString();
             }
             else //if modify button was picked
             {
@@ -76,12 +78,16 @@ namespace TravelExpertsAPP
                                    package.PkgName, "Database Error");
                             this.DialogResult = DialogResult.Retry;
                         }
+                        else
+                        {
+                            this.DialogResult = DialogResult.OK;
+                        }
                     }
                     catch (Exception ex)
                     {
                         MessageBox.Show(ex.Message, ex.GetType().ToString());
                     }
-                } 
+                }
             }
         }
 
@@ -108,5 +114,6 @@ namespace TravelExpertsAPP
             package.PkgAgencyCommission = Convert.ToDouble(txtPkgAgencyCommission.Text);
 
         }
+
     }
 }

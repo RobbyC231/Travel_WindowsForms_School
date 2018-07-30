@@ -123,6 +123,27 @@ namespace TravelExpertsLibrary
             }
             return packageID;
         }
+        public static int GetNextPackageID()
+        {
+            int supplierID;
+            SqlConnection con = TravelExpertsDB.GetConnection();
+            string selectQuery = "SELECT IDENT_CURRENT('Packages') + IDENT_INCR('Packages')";
+            SqlCommand selectCmd = new SqlCommand(selectQuery, con);
+            try
+            {
+                con.Open();
+                supplierID = Convert.ToInt32(selectCmd.ExecuteScalar());
+                return supplierID;
+            }
+            catch (SqlException ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+                con.Close();
+            }
+        }
 
         public static bool UpdatePackages(Package oldPackage, Package newPackage)
         {

@@ -22,7 +22,7 @@ namespace TravelExpertsLibrary
             Supplier s = null;
             SqlConnection connection = TravelExpertsDB.GetConnection();
             string selectStatement = "SELECT SupplierId, SupName " +
-                                     "FROM Suppliers";
+                                     "FROM Suppliers ORDER BY SupplierId";
             SqlCommand cmd = new SqlCommand(selectStatement, connection);
             try
             {

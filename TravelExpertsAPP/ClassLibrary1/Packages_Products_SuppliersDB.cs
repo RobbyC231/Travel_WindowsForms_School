@@ -44,5 +44,29 @@ namespace TravelExpertsLibrary
             }
             return packProdSups;
         }
+
+        public static void Add(Product_Supplier productSupplier, Package package)
+        {
+            SqlConnection con = TravelExpertsDB.GetConnection();
+            string insertStatement = "INSERT INTO Packages_Products_Suppliers (PackageID, ProductSupplierID) " +
+                                        "VALUES (@PackageID, @ProductSupplierID)";
+            SqlCommand cmd = new SqlCommand(insertStatement, con);
+            cmd.Parameters.AddWithValue("@PackageID", package.PackageId);
+            cmd.Parameters.AddWithValue("@ProductSupplierID", productSupplier.ProductSupplierID);
+
+            try
+            {
+                con.Open();
+                cmd.ExecuteNonQuery();
+            }
+            catch (SqlException ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+                con.Close();
+            }
+        }
     }
 }

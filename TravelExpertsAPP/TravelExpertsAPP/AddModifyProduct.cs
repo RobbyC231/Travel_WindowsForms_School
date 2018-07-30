@@ -30,6 +30,7 @@ namespace TravelExpertsAPP
             if (addProdcut) //if addProduct is true then add button was picked
             {
                 this.Text = "Add Product";//changed form title
+                txtProdID.Text = ProductDB.GetNextProductID().ToString();
             }
             else //if modify button was picked
             {

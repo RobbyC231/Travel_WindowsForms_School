@@ -17,7 +17,7 @@ namespace TravelExpertsAPP
         private Supplier supplier;
 
         List<Package> packages;
-        private Package package;
+        public Package package;
 
         List<Packages_Products_Suppliers> packProdSups;
         private Packages_Products_Suppliers packProdSup;
@@ -33,12 +33,15 @@ namespace TravelExpertsAPP
             DisplaySupplier();
             DisplayProductSupplier();
             DisplayPackages();
+            DisplayPackageProdSup();
+
         }
 
         private void DisplayPackages()
         {
             packages = PackageDB.GetPackage();
             packageDataGridView.DataSource = packages;
+
         }
 
         private void DisplayProductSupplier()
@@ -71,7 +74,8 @@ namespace TravelExpertsAPP
             if (result == DialogResult.OK) //if accept button was clicked
             {
                 product = addModifyProducts.product; // TODO: might not need this code
-                DisplayProducts();
+                this.DisplayProducts();
+                this.DisplayPackages();
             }
         }
 
@@ -101,6 +105,7 @@ namespace TravelExpertsAPP
                 }
             }
             DisplayProducts();
+            DisplayPackages();
         }
 
         private void SelectedRowProduct()
@@ -120,7 +125,7 @@ namespace TravelExpertsAPP
             modifyProduct.product = product;
             DialogResult result = modifyProduct.ShowDialog();
             DisplayProducts();
-            
+            DisplayPackages();
         }
       
         /**************************************************************************************************************
@@ -154,6 +159,7 @@ namespace TravelExpertsAPP
             {
                 supplier = addSupplierForm.supplier;
                 DisplaySupplier();
+                DisplayPackages();
             }
         }
 
@@ -166,6 +172,7 @@ namespace TravelExpertsAPP
             modifySupplierForm.supplier = supplier;
             DialogResult result = modifySupplierForm.ShowDialog();
             DisplaySupplier();
+            DisplayPackages();
         }
 
         // Supplier's Delete Button
@@ -183,14 +190,17 @@ namespace TravelExpertsAPP
                     {
                         MessageBox.Show("Another user has updated or deleted product" + supplier.SupName, "Datebase Error");
                     }
-                    DisplaySupplier();
                 }
                 catch (Exception ex)
                 {
                     MessageBox.Show(ex.Message, ex.GetType().ToString());
                 }
+                DisplaySupplier();
+                DisplayPackages();
             }
         }
+
+        //end of Sneha code
 
         private void btnAddProductSupplier_Click(object sender, EventArgs e)
         {
@@ -201,6 +211,7 @@ namespace TravelExpertsAPP
             {
                 productSupplier = addProductsSupplier.productSupplier;
                 DisplayProductSupplier();
+                DisplayPackages();
             }
         }
 
@@ -224,6 +235,7 @@ namespace TravelExpertsAPP
                 }
             }
             DisplayProductSupplier();
+            DisplayPackages();
         }
 
         private void SelectRowProducts_Suppliers()
@@ -244,6 +256,7 @@ namespace TravelExpertsAPP
             modifyProductsSupplier.productSupplier = productSupplier;
             DialogResult result = modifyProductsSupplier.ShowDialog();
             DisplayProductSupplier();
+            DisplayPackages();
         }
 
         private void btnAddPackage_Click(object sender, EventArgs e)
@@ -305,9 +318,28 @@ namespace TravelExpertsAPP
 
         private void packageDataGridView_CellClick(object sender, DataGridViewCellEventArgs e)
         {
+            DisplayPackageProdSup();
+        }
+
+        private void DisplayPackageProdSup()
+        {
             SelectedRowPackage();
             packProdSups = Packages_Products_SuppliersDB.GetAllPackagesProductsSuppliers(package);
             packages_Products_SuppliersDataGridView.DataSource = packProdSups;
+        }
+
+        private void btnAddPackProdSup_Click(object sender, EventArgs e)
+        {
+            SelectedRowPackage();
+            AddModifyProdSup addModifyProdSup = new AddModifyProdSup();
+            addModifyProdSup.addPackageProdSup = true;
+            addModifyProdSup.package = package;
+            DialogResult result = addModifyProdSup.ShowDialog();
+            if (result == DialogResult.OK)
+            {
+                this.DisplayPackages();
+                this.DisplayProductSupplier();
+            }
         }
     }//end of class
 }//end of namespace
