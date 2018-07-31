@@ -48,7 +48,7 @@
             // productIDLabel
             // 
             productIDLabel.AutoSize = true;
-            productIDLabel.Location = new System.Drawing.Point(106, 112);
+            productIDLabel.Location = new System.Drawing.Point(68, 109);
             productIDLabel.Name = "productIDLabel";
             productIDLabel.Size = new System.Drawing.Size(61, 13);
             productIDLabel.TabIndex = 8;
@@ -57,27 +57,27 @@
             // supplierIdLabel
             // 
             supplierIdLabel.AutoSize = true;
-            supplierIdLabel.Location = new System.Drawing.Point(106, 139);
+            supplierIdLabel.Location = new System.Drawing.Point(68, 136);
             supplierIdLabel.Name = "supplierIdLabel";
-            supplierIdLabel.Size = new System.Drawing.Size(60, 13);
+            supplierIdLabel.Size = new System.Drawing.Size(62, 13);
             supplierIdLabel.TabIndex = 9;
-            supplierIdLabel.Text = "Supplier Id:";
+            supplierIdLabel.Text = "Supplier ID:";
             // 
             // label1
             // 
             this.label1.AutoSize = true;
             this.label1.Location = new System.Drawing.Point(68, 81);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(99, 13);
+            this.label1.Size = new System.Drawing.Size(102, 13);
             this.label1.TabIndex = 0;
-            this.label1.Text = "Product Supplier ID";
+            this.label1.Text = "Product Supplier ID:";
             // 
             // txtProdSupplierID
             // 
             this.txtProdSupplierID.Location = new System.Drawing.Point(190, 78);
             this.txtProdSupplierID.Name = "txtProdSupplierID";
             this.txtProdSupplierID.ReadOnly = true;
-            this.txtProdSupplierID.Size = new System.Drawing.Size(100, 20);
+            this.txtProdSupplierID.Size = new System.Drawing.Size(121, 20);
             this.txtProdSupplierID.TabIndex = 3;
             // 
             // btnAccept
@@ -134,6 +134,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.BackColor = System.Drawing.Color.Azure;
             this.ClientSize = new System.Drawing.Size(468, 268);
             this.Controls.Add(supplierIdLabel);
             this.Controls.Add(this.cbSupplierID);

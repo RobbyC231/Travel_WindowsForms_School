@@ -44,26 +44,26 @@
             // prodNameLabel
             // 
             prodNameLabel.AutoSize = true;
-            prodNameLabel.Location = new System.Drawing.Point(21, 38);
+            prodNameLabel.Location = new System.Drawing.Point(21, 35);
             prodNameLabel.Name = "prodNameLabel";
-            prodNameLabel.Size = new System.Drawing.Size(63, 13);
+            prodNameLabel.Size = new System.Drawing.Size(78, 13);
             prodNameLabel.TabIndex = 1;
-            prodNameLabel.Text = "Prod Name:";
+            prodNameLabel.Text = "Product Name:";
             // 
             // supNameLabel
             // 
             supNameLabel.AutoSize = true;
-            supNameLabel.Location = new System.Drawing.Point(21, 65);
+            supNameLabel.Location = new System.Drawing.Point(20, 62);
             supNameLabel.Name = "supNameLabel";
-            supNameLabel.Size = new System.Drawing.Size(60, 13);
+            supNameLabel.Size = new System.Drawing.Size(79, 13);
             supNameLabel.TabIndex = 3;
-            supNameLabel.Text = "Sup Name:";
+            supNameLabel.Text = "Supplier Name:";
             // 
             // cbProdName
             // 
             this.cbProdName.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.packages_Products_SuppliersBindingSource, "ProdName", true));
             this.cbProdName.FormattingEnabled = true;
-            this.cbProdName.Location = new System.Drawing.Point(90, 35);
+            this.cbProdName.Location = new System.Drawing.Point(106, 35);
             this.cbProdName.Name = "cbProdName";
             this.cbProdName.Size = new System.Drawing.Size(121, 21);
             this.cbProdName.TabIndex = 2;
@@ -77,7 +77,7 @@
             // 
             this.cbSupName.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.packages_Products_SuppliersBindingSource, "SupName", true));
             this.cbSupName.FormattingEnabled = true;
-            this.cbSupName.Location = new System.Drawing.Point(90, 62);
+            this.cbSupName.Location = new System.Drawing.Point(106, 62);
             this.cbSupName.Name = "cbSupName";
             this.cbSupName.Size = new System.Drawing.Size(121, 21);
             this.cbSupName.TabIndex = 4;
@@ -106,6 +106,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.BackColor = System.Drawing.Color.Azure;
             this.ClientSize = new System.Drawing.Size(285, 140);
             this.Controls.Add(this.btnCancel);
             this.Controls.Add(this.btnAccept);

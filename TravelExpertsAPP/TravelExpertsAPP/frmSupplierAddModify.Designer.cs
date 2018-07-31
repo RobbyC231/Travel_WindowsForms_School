@@ -39,15 +39,15 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(33, 42);
+            this.label1.Location = new System.Drawing.Point(33, 49);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(76, 13);
+            this.label1.Size = new System.Drawing.Size(82, 13);
             this.label1.TabIndex = 0;
-            this.label1.Text = "Supplier Name";
+            this.label1.Text = "Supplier Name :";
             // 
             // txtSupName
             // 
-            this.txtSupName.Location = new System.Drawing.Point(131, 42);
+            this.txtSupName.Location = new System.Drawing.Point(131, 49);
             this.txtSupName.Name = "txtSupName";
             this.txtSupName.Size = new System.Drawing.Size(172, 20);
             this.txtSupName.TabIndex = 2;
@@ -55,6 +55,7 @@
             // 
             // btnAccept
             // 
+            this.btnAccept.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.btnAccept.Location = new System.Drawing.Point(36, 116);
             this.btnAccept.Name = "btnAccept";
             this.btnAccept.Size = new System.Drawing.Size(75, 23);
@@ -66,6 +67,7 @@
             // btnCancel
             // 
             this.btnCancel.DialogResult = System.Windows.Forms.DialogResult.Cancel;
+            this.btnCancel.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.btnCancel.Location = new System.Drawing.Point(228, 116);
             this.btnCancel.Name = "btnCancel";
             this.btnCancel.Size = new System.Drawing.Size(75, 23);
@@ -86,14 +88,15 @@
             this.lblSupplierId.AutoSize = true;
             this.lblSupplierId.Location = new System.Drawing.Point(33, 20);
             this.lblSupplierId.Name = "lblSupplierId";
-            this.lblSupplierId.Size = new System.Drawing.Size(57, 13);
+            this.lblSupplierId.Size = new System.Drawing.Size(65, 13);
             this.lblSupplierId.TabIndex = 5;
-            this.lblSupplierId.Text = "Supplier Id";
+            this.lblSupplierId.Text = "Supplier ID :";
             // 
             // frmSupplierAddModify
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.BackColor = System.Drawing.Color.Azure;
             this.ClientSize = new System.Drawing.Size(334, 151);
             this.Controls.Add(this.txtSupplierId);
             this.Controls.Add(this.lblSupplierId);

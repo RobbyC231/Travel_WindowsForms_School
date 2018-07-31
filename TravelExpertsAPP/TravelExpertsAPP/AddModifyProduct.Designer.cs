@@ -44,7 +44,7 @@
             // prodNameLabel
             // 
             prodNameLabel.AutoSize = true;
-            prodNameLabel.Location = new System.Drawing.Point(20, 52);
+            prodNameLabel.Location = new System.Drawing.Point(20, 49);
             prodNameLabel.Name = "prodNameLabel";
             prodNameLabel.Size = new System.Drawing.Size(78, 13);
             prodNameLabel.TabIndex = 1;
@@ -53,7 +53,7 @@
             // label1
             // 
             label1.AutoSize = true;
-            label1.Location = new System.Drawing.Point(33, 26);
+            label1.Location = new System.Drawing.Point(20, 23);
             label1.Name = "label1";
             label1.Size = new System.Drawing.Size(61, 13);
             label1.TabIndex = 8;
@@ -106,6 +106,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoSize = true;
+            this.BackColor = System.Drawing.Color.Azure;
             this.ClientSize = new System.Drawing.Size(265, 137);
             this.Controls.Add(label1);
             this.Controls.Add(this.txtProdID);
