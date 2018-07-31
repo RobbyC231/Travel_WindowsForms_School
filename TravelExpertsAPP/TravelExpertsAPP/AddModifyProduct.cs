@@ -74,8 +74,7 @@ namespace TravelExpertsAPP
                     {
                         if (!ProductDB.UpdateProduct(product, newProduct))
                         {
-                            MessageBox.Show("Another user has updated or " +
-                                    "deleted that customer.", "Database Error");
+                            MessageBox.Show("Another user has updated or deleted " + product.ProdName, "Database Error");
                             this.DialogResult = DialogResult.Retry;
                         }
                         else

@@ -32,8 +32,8 @@
             System.Windows.Forms.Label prodNameLabel;
             System.Windows.Forms.Label supNameLabel;
             this.cbProdName = new System.Windows.Forms.ComboBox();
-            this.cbSupName = new System.Windows.Forms.ComboBox();
             this.packages_Products_SuppliersBindingSource = new System.Windows.Forms.BindingSource(this.components);
+            this.cbSupName = new System.Windows.Forms.ComboBox();
             this.btnAccept = new System.Windows.Forms.Button();
             this.btnCancel = new System.Windows.Forms.Button();
             prodNameLabel = new System.Windows.Forms.Label();
@@ -50,15 +50,6 @@
             prodNameLabel.TabIndex = 1;
             prodNameLabel.Text = "Prod Name:";
             // 
-            // cbProdName
-            // 
-            this.cbProdName.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.packages_Products_SuppliersBindingSource, "ProdName", true));
-            this.cbProdName.FormattingEnabled = true;
-            this.cbProdName.Location = new System.Drawing.Point(90, 35);
-            this.cbProdName.Name = "cbProdName";
-            this.cbProdName.Size = new System.Drawing.Size(121, 21);
-            this.cbProdName.TabIndex = 2;
-            // 
             // supNameLabel
             // 
             supNameLabel.AutoSize = true;
@@ -68,6 +59,20 @@
             supNameLabel.TabIndex = 3;
             supNameLabel.Text = "Sup Name:";
             // 
+            // cbProdName
+            // 
+            this.cbProdName.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.packages_Products_SuppliersBindingSource, "ProdName", true));
+            this.cbProdName.FormattingEnabled = true;
+            this.cbProdName.Location = new System.Drawing.Point(90, 35);
+            this.cbProdName.Name = "cbProdName";
+            this.cbProdName.Size = new System.Drawing.Size(121, 21);
+            this.cbProdName.TabIndex = 2;
+            this.cbProdName.SelectionChangeCommitted += new System.EventHandler(this.cbProdName_SelectionChangeCommitted);
+            // 
+            // packages_Products_SuppliersBindingSource
+            // 
+            this.packages_Products_SuppliersBindingSource.DataSource = typeof(TravelExpertsLibrary.Packages_Products_Suppliers);
+            // 
             // cbSupName
             // 
             this.cbSupName.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.packages_Products_SuppliersBindingSource, "SupName", true));
@@ -76,10 +81,6 @@
             this.cbSupName.Name = "cbSupName";
             this.cbSupName.Size = new System.Drawing.Size(121, 21);
             this.cbSupName.TabIndex = 4;
-            // 
-            // packages_Products_SuppliersBindingSource
-            // 
-            this.packages_Products_SuppliersBindingSource.DataSource = typeof(TravelExpertsLibrary.Packages_Products_Suppliers);
             // 
             // btnAccept
             // 

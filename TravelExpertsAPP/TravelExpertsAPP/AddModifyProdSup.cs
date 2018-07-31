@@ -16,6 +16,9 @@ namespace TravelExpertsAPP
         public bool addPackageProdSup;
         public Product_Supplier productSupplier;
         public Package package;
+        public Product product;
+        public Supplier supplier;
+        public Packages_Products_Suppliers packProdSup;
         public AddModifyProdSup()
         {
             InitializeComponent();
@@ -32,6 +35,8 @@ namespace TravelExpertsAPP
             }
             else
             {
+                cbProdName.SelectedValue = packProdSup.ProductID;
+                cbSupName.SelectedValue = packProdSup.SupplierID;
                 this.Text = "Modify Product Supplier";
             }
         }
@@ -80,11 +85,11 @@ namespace TravelExpertsAPP
                 else
                 {
                     Product_Supplier newProductSupplier = new Product_Supplier();
-                    newProductSupplier.ProductSupplierID = productSupplier.ProductSupplierID;
+                    newProductSupplier.ProductSupplierID = packProdSup.ProductSupplerID;
                     this.ProductSupplierData(newProductSupplier);
                     try
                     {
-                        if (!Product_SupplierDB.UpdateProduct_Supplier(productSupplier, newProductSupplier))
+                        if (!Product_SupplierDB.UpdateProduct_Supplier_Packages(packProdSup, newProductSupplier))
                         {
                             MessageBox.Show("Another user has updated or " +
                                     "deleted that customer.", "Database Error");
@@ -113,6 +118,18 @@ namespace TravelExpertsAPP
         {
             productSupplier.ProductID = Convert.ToInt32(cbProdName.SelectedValue);
             productSupplier.SupplierID = Convert.ToInt32(cbSupName.SelectedValue);
+        }
+
+        private void cbProdName_SelectionChangeCommitted(object sender, EventArgs e)
+        {
+            cbSupName.SelectedValue = -1;
+            List<Supplier> suppliers = new List<Supplier>();
+            product = new Product();
+            product.ProductID = (int)cbProdName.SelectedValue;
+            suppliers = SupplierDB.GetSuppliersForProducts(product);
+            cbSupName.DataSource = suppliers;
+            cbSupName.DisplayMember = "SupName";
+            cbSupName.ValueMember = "SupplierId";
         }
     }
 }

@@ -103,6 +103,47 @@ namespace TravelExpertsLibrary
             }
         }
 
+        public static bool UpdateProduct_Supplier_Packages(Packages_Products_Suppliers oldProduct_Supplier, Product_Supplier newProduct_Supplier)
+        {
+            SqlConnection con = TravelExpertsDB.GetConnection();
+            string updateStatement = "UPDATE Products_Suppliers " +
+                                "SET ProductID = @newProductID, " +
+                                "SupplierID = @newSupplierID " +
+                                "WHERE ProductSupplierID = @oldProductSupplierID " +
+                                "AND ProductID = @oldProductID " +
+                                "AND SupplierID = @oldSupplierID ";
+            SqlCommand cmd = new SqlCommand(updateStatement, con);
+            //new value to be entered
+            cmd.Parameters.AddWithValue("@newProductID", newProduct_Supplier.ProductID);
+            cmd.Parameters.AddWithValue("@newSupplierID", newProduct_Supplier.SupplierID);
+            //start adding old product supplier values
+            cmd.Parameters.AddWithValue("@oldProductSupplierID", oldProduct_Supplier.ProductSupplerID);
+            cmd.Parameters.AddWithValue("@oldProductID", oldProduct_Supplier.ProductID);
+            cmd.Parameters.AddWithValue("@oldSupplierID", oldProduct_Supplier.SupplierID);
+
+            try
+            {
+                con.Open();
+                int count = cmd.ExecuteNonQuery();
+                if (count > 0)
+                {
+                    return true;
+                }
+                else
+                {
+                    return false;
+                }
+            }
+            catch (SqlException ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+                con.Close();
+            }
+        }
+
         /// <summary>
         /// function is used to delete the data from Product_supplier table
         /// </summary>

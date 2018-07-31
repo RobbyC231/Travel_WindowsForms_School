@@ -25,7 +25,7 @@ namespace TravelExpertsLibrary
             List<Packages_Products_Suppliers> packProdSups = new List<Packages_Products_Suppliers>();
             Packages_Products_Suppliers packProdSup = null;
             SqlConnection con = TravelExpertsDB.GetConnection();
-            string selectStatement = "SELECT p.ProdName, s.SupName " +
+            string selectStatement = "SELECT p.ProdName, s.SupName, pps.ProductSupplierID, ps.ProductID, ps.SupplierID " +
                                      "FROM Packages_Products_Suppliers pps " +
                                      "INNER JOIN Products_Suppliers ps ON pps.ProductSupplierID = ps.ProductSupplierID " +
                                      "INNER JOIN Products p ON ps.ProductID = p.ProductID " +
@@ -40,6 +40,9 @@ namespace TravelExpertsLibrary
                 while (reader.Read()) //while there is still data to be read
                 {
                     packProdSup = new Packages_Products_Suppliers();
+                    packProdSup.ProductSupplerID = (int)reader["ProductSupplierID"];
+                    packProdSup.ProductID = (int)reader["ProductID"];
+                    packProdSup.SupplierID = (int)reader["SupplierID"];
                     packProdSup.ProdName = reader["ProdName"].ToString();
                     packProdSup.SupName = reader["SupName"].ToString();
                     packProdSups.Add(packProdSup); // add package products supplier object to the list
@@ -74,6 +77,32 @@ namespace TravelExpertsLibrary
             {
                 con.Open();
                 cmd.ExecuteNonQuery();
+            }
+            catch (SqlException ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+                con.Close();
+            }
+        }
+        public static bool Delete(Packages_Products_Suppliers packProdSup,Package package)
+        {
+
+            SqlConnection con = TravelExpertsDB.GetConnection();
+            string insertStatement = "DELETE FROM Packages_Products_Suppliers " +
+                                     "WHERE PackageID = @PackageID " +
+                                     "AND ProductSupplierID = @ProductSupplierID";
+            SqlCommand cmd = new SqlCommand(insertStatement, con);
+            cmd.Parameters.AddWithValue("@PackageID", package.PackageId);
+            cmd.Parameters.AddWithValue("@ProductSupplierID", packProdSup.ProductSupplerID);
+            try
+            {
+                con.Open();
+                int count = cmd.ExecuteNonQuery();
+                if (count > 0) return true;
+                else return false;
             }
             catch (SqlException ex)
             {

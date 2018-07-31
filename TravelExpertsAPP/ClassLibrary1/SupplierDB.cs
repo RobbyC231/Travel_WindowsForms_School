@@ -47,6 +47,42 @@ namespace TravelExpertsLibrary
             return suppliers;
         }
 
+        public static List<Supplier> GetSuppliersForProducts(Product product)
+        {
+            List<Supplier> suppliers = new List<Supplier>(); //empty list
+            Supplier s = null;
+            SqlConnection connection = TravelExpertsDB.GetConnection();
+            string selectStatement = "SELECT ps.SupplierID, SupName " +
+                                     "FROM Suppliers s " +
+                                     "INNER JOIN Products_Suppliers ps ON s.SupplierID = ps.SupplierID " +
+                                     "INNER JOIN Products p ON ps.ProductID = p.ProductID " +
+                                     "WHERE p.ProductID = @ProductID " +
+                                     "ORDER BY SupName";
+            SqlCommand cmd = new SqlCommand(selectStatement, connection);
+            cmd.Parameters.AddWithValue("@ProductID", product.ProductID);
+            try
+            {
+                connection.Open();
+                SqlDataReader reader = cmd.ExecuteReader();
+                while (reader.Read()) // while there is another record
+                {
+                    s = new Supplier();
+                    s.SupplierId = (int)reader["SupplierId"];
+                    s.SupName = reader["SupName"].ToString();
+                    suppliers.Add(s);
+                }
+            }
+            catch (SqlException ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+                connection.Close();
+            }
+            return suppliers;
+        }
+
         /// <summary>
         /// Adds a new supplier to the Suppliers table in TravelExperts database
         /// </summary>

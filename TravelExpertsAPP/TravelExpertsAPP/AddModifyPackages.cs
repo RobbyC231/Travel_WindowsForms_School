@@ -74,7 +74,7 @@ namespace TravelExpertsAPP
                     {
                         if (!PackageDB.UpdatePackages(package, newPackage))
                         {
-                            MessageBox.Show("Another user has updated or deleted" +
+                            MessageBox.Show("Another user has updated or deleted " +
                                    package.PkgName, "Database Error");
                             this.DialogResult = DialogResult.Retry;
                         }

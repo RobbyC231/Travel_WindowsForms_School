@@ -74,8 +74,7 @@ namespace TravelExpertsAPP
                     {
                         if (!SupplierDB.UpdateSupplier(supplier, newSupplier))
                         {
-                            MessageBox.Show("Another user has updated or " +
-                               "deleted that customer.", "Database Error");
+                            MessageBox.Show("Another user has updated or deleted " + supplier.SupName, "Database Error");
                             this.DialogResult = DialogResult.Retry;
                         }
                         else

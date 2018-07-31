@@ -80,6 +80,7 @@ namespace TravelExpertsAPP
                 product = addModifyProducts.product; // TODO: might not need this code
                 this.DisplayProducts();
                 this.DisplayPackages();
+                this.DisplayPackageProdSup();
             }
         }
 
@@ -110,8 +111,9 @@ namespace TravelExpertsAPP
                     MessageBox.Show(ex.Message, ex.GetType().ToString());
                 }
             }
-            DisplayProducts();
-            DisplayPackages();
+            this.DisplayProducts();
+            this.DisplayPackages();
+            this.DisplayPackageProdSup();
         }
         //get the selected row by user in product
         private void SelectedRowProduct()
@@ -130,8 +132,9 @@ namespace TravelExpertsAPP
             modifyProduct.addProdcut = false; //set add product to false indicating its modify button not add button pressed
             modifyProduct.product = product;
             DialogResult result = modifyProduct.ShowDialog(); //show new form
-            DisplayProducts();
-            DisplayPackages();
+            this.DisplayProducts();
+            this.DisplayPackages();
+            this.DisplayPackageProdSup();
         }
       
         /**************************************************************************************************************
@@ -165,8 +168,9 @@ namespace TravelExpertsAPP
             if (result == DialogResult.OK)//if user selects ok from add form
             {
                 supplier = addSupplierForm.supplier;
-                DisplaySupplier();
-                DisplayPackages();
+                this.DisplaySupplier();
+                this.DisplayPackages();
+                this.DisplayPackageProdSup();
             }
         }
 
@@ -179,8 +183,9 @@ namespace TravelExpertsAPP
             modifySupplierForm.addSupplier = false; //tells form the modift button was pressed
             modifySupplierForm.supplier = supplier; //passes values over to the supplier object in the form
             DialogResult result = modifySupplierForm.ShowDialog();
-            DisplaySupplier();
-            DisplayPackages();
+            this.DisplaySupplier();
+            this.DisplayPackages();
+            this.DisplayPackageProdSup();
         }
 
         // Supplier's Delete Button
@@ -203,8 +208,9 @@ namespace TravelExpertsAPP
                 {
                     MessageBox.Show(ex.Message, ex.GetType().ToString());
                 }
-                DisplaySupplier();
-                DisplayPackages();
+                this.DisplaySupplier();
+                this.DisplayPackages();
+                this.DisplayPackageProdSup();
             }
         }
         //end of Sneha code
@@ -217,8 +223,9 @@ namespace TravelExpertsAPP
             if (result == DialogResult.OK)
             {
                 productSupplier = addProductsSupplier.productSupplier;
-                DisplayProductSupplier();
-                DisplayPackages();
+                this.DisplayProductSupplier();
+                this.DisplayPackages();
+                this.DisplayPackageProdSup();
             }
         }
         //delete button pressed for product supplier tab
@@ -241,8 +248,9 @@ namespace TravelExpertsAPP
                     MessageBox.Show(ex.Message, ex.GetType().ToString());
                 }
             }
-            DisplayProductSupplier();
-            DisplayPackages();
+            this.DisplayProductSupplier();
+            this.DisplayPackages();
+            this.DisplayPackageProdSup();
         }
         //get selected rows for products suppliers table
         private void SelectRowProducts_Suppliers()
@@ -262,8 +270,9 @@ namespace TravelExpertsAPP
             modifyProductsSupplier.addProductSupplier = false;
             modifyProductsSupplier.productSupplier = productSupplier;
             DialogResult result = modifyProductsSupplier.ShowDialog();
-            DisplayProductSupplier();
-            DisplayPackages();
+            this.DisplayProductSupplier();
+            this.DisplayPackages();
+            this.DisplayPackageProdSup();
         }
         //add button pressed in package tab
         private void btnAddPackage_Click(object sender, EventArgs e)
@@ -275,6 +284,7 @@ namespace TravelExpertsAPP
             {
                 package = addModifyPackage.package;
                 this.DisplayPackages();
+                this.DisplayPackageProdSup();
             }
         }
         //delete button pressed in package tab
@@ -295,7 +305,8 @@ namespace TravelExpertsAPP
                 {
                     MessageBox.Show(ex.Message, ex.GetType().ToString());
                 }
-                DisplayPackages();
+                this.DisplayPackages();
+                this.DisplayPackageProdSup();
             }
 
         }
@@ -321,12 +332,13 @@ namespace TravelExpertsAPP
             modifyPackages.addPackage = false;
             modifyPackages.package = package;
             DialogResult result = modifyPackages.ShowDialog();
-            DisplayPackages();
+            this.DisplayPackages();
+            this.DisplayPackageProdSup();
         }
         //when user clicks row in table showing package details
         private void packageDataGridView_CellClick(object sender, DataGridViewCellEventArgs e)
         {
-            DisplayPackageProdSup(); //dispaly corresponding product and supplier info for selected package
+            this.DisplayPackageProdSup(); //dispaly corresponding product and supplier info for selected package
         }
         //dispaly prodcut supplier info for certain package
         private void DisplayPackageProdSup()
@@ -347,12 +359,54 @@ namespace TravelExpertsAPP
             {
                 this.DisplayPackages();
                 this.DisplayProductSupplier();
+                this.DisplayPackageProdSup();
             }
         }
 
-        private void product_SupplierDataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        private void btnModifyPackProdSup_Click(object sender, EventArgs e)
         {
+            Packages_Products_Suppliers packProdSup = packProdSups[packages_Products_SuppliersDataGridView.CurrentCell.RowIndex];
+            SelectedRowPackage();
+            AddModifyProdSup addModifyProdSup = new AddModifyProdSup();
+            addModifyProdSup.addPackageProdSup = false;
+            addModifyProdSup.package = package;
+            addModifyProdSup.packProdSup = packProdSup;
+            DialogResult result = addModifyProdSup.ShowDialog();
+            this.DisplayPackages();
+            this.DisplayPackageProdSup();
+        }
 
+        private void btnDeletePackProdSup_Click(object sender, EventArgs e)
+        {
+            DialogResult result = MessageBox.Show("Are you sure?", "Confirm Delete", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+            SelectedRowPackage();
+            SelectedRowProdSupPackages();
+            if (result == DialogResult.Yes)
+            {
+                try
+                {
+                    if (!Packages_Products_SuppliersDB.Delete(packProdSup, package))
+                    {
+                        MessageBox.Show("Another user has updated or deleted Product " + product.ProdName + " and " + supplier.SupName, "Datebase Error");
+                    }
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.Message, ex.GetType().ToString());
+                }
+                this.DisplayPackages();
+                this.DisplayPackageProdSup();
+            }
+        }
+
+        private void SelectedRowProdSupPackages()
+        {
+            packProdSup = new Packages_Products_Suppliers();
+            int index = packages_Products_SuppliersDataGridView.CurrentCell.RowIndex;
+            DataGridViewRow selectedRow = packages_Products_SuppliersDataGridView.Rows[index];
+            packProdSup.ProductSupplerID = (int)selectedRow.Cells[0].Value;
+            packProdSup.ProdName = selectedRow.Cells[1].Value.ToString();
+            packProdSup.SupName = selectedRow.Cells[2].Value.ToString();
         }
     }//end of class
 }//end of namespace
