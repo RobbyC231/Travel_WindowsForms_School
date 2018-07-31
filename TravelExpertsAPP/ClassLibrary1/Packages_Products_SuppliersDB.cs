@@ -4,11 +4,22 @@ using System.Data.SqlClient;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-
+/***************************************************************
+* Author : Robert Clements
+* Date : 26th July, 2018
+* Purpose: Connectes to travel experts database to access the packages products suppliers table.
+***************************************************************/
 namespace TravelExpertsLibrary
 {
     public class Packages_Products_SuppliersDB
     {
+        /// <summary>
+        /// gets product name and supplier name for certain package id
+        /// joins products suppliuer and pakcages product suppliers to match the product and supplier id to a package id
+        /// joins the package supplier to the supplier and product table to match a package id and supplier id with a package name and supplier name
+        /// </summary>
+        /// <param name="package"></param>
+        /// <returns> list of produt name and supplier name</returns>
         public static List<Packages_Products_Suppliers> GetAllPackagesProductsSuppliers(Package package)
         {
             List<Packages_Products_Suppliers> packProdSups = new List<Packages_Products_Suppliers>();
@@ -26,12 +37,12 @@ namespace TravelExpertsLibrary
             {
                 con.Open();
                 SqlDataReader reader = cmd.ExecuteReader();
-                while (reader.Read())
+                while (reader.Read()) //while there is still data to be read
                 {
                     packProdSup = new Packages_Products_Suppliers();
                     packProdSup.ProdName = reader["ProdName"].ToString();
                     packProdSup.SupName = reader["SupName"].ToString();
-                    packProdSups.Add(packProdSup);
+                    packProdSups.Add(packProdSup); // add package products supplier object to the list
                 }
             }
             catch (SqlException ex)
@@ -42,9 +53,14 @@ namespace TravelExpertsLibrary
             {
                 con.Close();
             }
-            return packProdSups;
+            return packProdSups; //list to be returned
         }
-
+        /// <summary>
+        /// adds row to package prodcut supplier connecting product and supplier info for a certain package
+        /// takes both a product supplier object and package object
+        /// </summary>
+        /// <param name="productSupplier"></param>
+        /// <param name="package"></param>
         public static void Add(Product_Supplier productSupplier, Package package)
         {
             SqlConnection con = TravelExpertsDB.GetConnection();

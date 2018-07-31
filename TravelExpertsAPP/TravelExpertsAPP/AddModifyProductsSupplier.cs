@@ -13,7 +13,7 @@ namespace TravelExpertsAPP
 {
     public partial class AddModifyProductsSupplier : Form
     {
-        public bool addProductSupplier;
+        public bool addProductSupplier; //informs page if add or modify button was pressed 
         public Product_Supplier productSupplier;
         public AddModifyProductsSupplier()
         {
@@ -22,28 +22,29 @@ namespace TravelExpertsAPP
 
         private void AddModifyProductsSupplier_Load(object sender, EventArgs e)
         {
-            this.LoadComboBox();
-            if (addProductSupplier)
+            this.LoadComboBox(); //load combo boxs with values
+            if (addProductSupplier)//if add was pressed
             {
                 this.Text = "Add Product Supplier";
+                //combo box has no selection
                 cbProductId.SelectedIndex = -1;
                 cbSupplierID.SelectedIndex = -1;
-                txtProdSupplierID.Text = Product_SupplierDB.GetNextProductSupplierID().ToString();
+                txtProdSupplierID.Text = Product_SupplierDB.GetNextProductSupplierID().ToString();//get next id value
             }
-            else
+            else//modify button was pressed
             {
                 this.Text = "Modify Product Supplier";
                 DisplayProductSuppliers();
             }
         }
-
+        //fills text box with values passed from prvious form
         private void DisplayProductSuppliers()
         {
             txtProdSupplierID.Text = productSupplier.ProductSupplierID.ToString();
             cbProductId.SelectedValue = productSupplier.ProductID;
             cbSupplierID.SelectedValue = productSupplier.SupplierID;
         }
-
+        //loads the combo boc and sets there display and value property
         private void LoadComboBox()
         {
             List<Product> products = new List<Product>();
@@ -66,12 +67,12 @@ namespace TravelExpertsAPP
             }
 
         }
-
+        //user clicks accept button 
         private void btnAccept_Click(object sender, EventArgs e)
         {
             if (ValidData())
             {
-                if (addProductSupplier)
+                if (addProductSupplier) //add button was pressed
                 {
                     productSupplier = new Product_Supplier();
                     this.ProductSupplierData(productSupplier);
@@ -85,7 +86,7 @@ namespace TravelExpertsAPP
                         MessageBox.Show(ex.Message, ex.GetType().ToString());
                     }
                 }
-                else
+                else //modify button was pressed
                 {
                     Product_Supplier newProductSupplier = new Product_Supplier();
                     newProductSupplier.ProductSupplierID = productSupplier.ProductSupplierID;
@@ -110,14 +111,14 @@ namespace TravelExpertsAPP
                 } 
             }
         }
-
+        //checks if text boxs have entered values
         private bool ValidData()
         {
             return
                 Validator.IsPresent(cbProductId) &&
                 Validator.IsPresent(cbSupplierID);
         }
-
+        //assign product supplier properties with values selected by user
         private void ProductSupplierData(Product_Supplier productSupplier)
         {
             productSupplier.ProductID = Convert.ToInt32(cbProductId.SelectedValue);

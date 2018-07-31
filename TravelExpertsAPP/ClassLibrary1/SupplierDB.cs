@@ -76,12 +76,16 @@ namespace TravelExpertsLibrary
                 connection.Close();
             }
         }
-
+        /***************************************************************
+        * Author : Robert Clements
+        * Date : 24th July, 2018
+        * Purpose: To get the next supplier id when the add button is clicked, this value is dispalyed to show the user what the id will be for the new supplier he is adding
+        ***************************************************************/
         public static int GetNextSupplierID()
         {
-            int supplierID;
-            SqlConnection con = TravelExpertsDB.GetConnection();
-            string selectQuery = "SELECT MAX(SupplierId)+1 FROM Suppliers";
+            int supplierID;//holds the supplier id value
+            SqlConnection con = TravelExpertsDB.GetConnection(); //calls connection method
+            string selectQuery = "SELECT MAX(SupplierId)+1 FROM Suppliers"; //gets max current supplier id and adds 1
             SqlCommand selectCmd = new SqlCommand(selectQuery, con);
             try
             {
@@ -98,6 +102,7 @@ namespace TravelExpertsLibrary
                 con.Close();
             }
         }
+        //end roberts works
 
         /// <summary>
         /// Updates existing supplier record

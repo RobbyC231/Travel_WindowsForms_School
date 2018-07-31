@@ -9,16 +9,15 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using TravelExpertsLibrary;
 /***************************************************************
- * Author : Sneha Patel(000783907)
+ * Author : Sneha Patel & Robert Clements
  * Date : 24th July, 2018
- * Purpose: The application will also require simple add/edit 
- *          access for maintaining the suppliers data.
+ * Purpose: 
  ***************************************************************/
 namespace TravelExpertsAPP
 {
     public partial class frmSupplierAddModify : Form
     {
-        public bool addSupplier;
+        public bool addSupplier; //informs form if add or modify button was pressed
         public Supplier supplier; // current supplier
         
         public frmSupplierAddModify()
@@ -28,29 +27,29 @@ namespace TravelExpertsAPP
 
         private void frmSupplierAddModify_Load(object sender, EventArgs e)
         {
-            if (addSupplier)
+            if (addSupplier)//add button was pressed
             {
                 this.Text = "Add Supplier";
-                txtSupplierId.Text = SupplierDB.GetNextSupplierID().ToString();
+                txtSupplierId.Text = SupplierDB.GetNextSupplierID().ToString();//get next supplier id
             }
-            else
+            else // modify button was pressed
             {
                 this.Text = "Modify Supplier";
                 this.DisplaySupplier();
             }
         }
-
+        // display the supplier values passed from the previous form
         private void DisplaySupplier()
         {
             txtSupplierId.Text = supplier.SupplierId.ToString();
             txtSupName.Text = supplier.SupName;
         }
-
+        //user pressed accept button
         private void btnAccept_Click(object sender, EventArgs e)
         {
-            if (ValidData())
+            if (ValidData()) //method to validate information
             {
-                if (addSupplier)
+                if (addSupplier) //adding a new value
                 {
                     supplier = new Supplier();
                     this.PutSupplierData(supplier);
@@ -66,7 +65,7 @@ namespace TravelExpertsAPP
                         MessageBox.Show(ex.Message, ex.GetType().ToString());
                     }
                 }
-                else
+                else //modify supplier
                 {
                     Supplier newSupplier = new Supplier();
                     newSupplier.SupplierId = supplier.SupplierId;
@@ -96,9 +95,9 @@ namespace TravelExpertsAPP
         private bool ValidData()
         {
             return
-                Validator.IsPresent(txtSupName);
+                Validator.IsPresent(txtSupName); //check if text box has entry
         }
-
+        //take values from text box and assign to supplier class
         private void PutSupplierData(Supplier supplier)
         {
             supplier.SupplierId = Convert.ToInt32(txtSupplierId.Text);

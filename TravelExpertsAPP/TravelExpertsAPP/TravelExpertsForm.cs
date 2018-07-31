@@ -2,25 +2,29 @@
 using System.Collections.Generic;
 using System.Windows.Forms;
 using TravelExpertsLibrary;
-
+/***************************************************************
+* Author : Robert Clements
+* Date : 23th July, 2018
+* Purpose: main for which is the first form user sees
+***************************************************************/
 namespace TravelExpertsAPP
 {
     public partial class TravelExpertsForm : Form
     {
-        List<Product> products; //holds list of returned products from database 
-        private Product product;
+        List<Product> products; //empty list
+        private Product product; //product class
 
-        List<Product_Supplier> productSuppliers;
-        private Product_Supplier productSupplier;
+        List<Product_Supplier> productSuppliers; //empty list
+        private Product_Supplier productSupplier; //product supplier class
         
         List<Supplier> suppliers; //empty list       
-        private Supplier supplier;
+        private Supplier supplier; //supplier class
 
-        List<Package> packages;
-        public Package package;
+        List<Package> packages; //empty list
+        public Package package; //package class
 
-        List<Packages_Products_Suppliers> packProdSups;
-        private Packages_Products_Suppliers packProdSup;
+        List<Packages_Products_Suppliers> packProdSups; //empty list
+        private Packages_Products_Suppliers packProdSup; //packages products suppliers object
        
         public TravelExpertsForm()
         {
@@ -30,20 +34,20 @@ namespace TravelExpertsAPP
         private void TravelExpertsForm_Load(object sender, EventArgs e)
         {
             DisplayProducts(); //calling method for displaying products
-            DisplaySupplier();
-            DisplayProductSupplier();
-            DisplayPackages();
-            DisplayPackageProdSup();
+            DisplaySupplier(); //calling method for displaying supplier
+            DisplayProductSupplier(); //calling method for displaying product supplier
+            DisplayPackages(); //calling method for displaying packages
+            DisplayPackageProdSup(); //calling method for displaying packages products suppliers
 
         }
-
+        //display packages
         private void DisplayPackages()
         {
             packages = PackageDB.GetPackage();
             packageDataGridView.DataSource = packages;
 
         }
-
+        //display product supplier
         private void DisplayProductSupplier()
         {
             productSuppliers = Product_SupplierDB.GetProduct_Supplier();
@@ -85,16 +89,18 @@ namespace TravelExpertsAPP
         /// </summary>
         private void btnDeleteProduct_Click(object sender, EventArgs e)
         {
+            //message box asking to confrim deletion
             DialogResult result = MessageBox.Show("Are you sure?", "Confirm Delete", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
 
             SelectedRowProduct();
-
+            //if user picks yes from message box
             if (result == DialogResult.Yes)
             {
                 try
                 {
-                    if (!ProductDB.DeleteProduct(product))
+                    if (!ProductDB.DeleteProduct(product)) //product delete method returns false
                     {
+                        //inform user someone else has changed the database
                         MessageBox.Show("Another user has updated or deleted product" + product.ProdName, "Datebase Error");
                     }
                     
@@ -107,7 +113,7 @@ namespace TravelExpertsAPP
             DisplayProducts();
             DisplayPackages();
         }
-
+        //get the selected row by user in product
         private void SelectedRowProduct()
         {
             product = new Product();
@@ -116,14 +122,14 @@ namespace TravelExpertsAPP
             product.ProductID = Convert.ToInt32(selectedRow.Cells[0].Value);
             product.ProdName = selectedRow.Cells[1].Value.ToString();
         }
-
+        //user clicks the modify button in the product tab 
         private void btnModifyProduct_Click(object sender, EventArgs e)
         {
-            SelectedRowProduct();
-            AddModifyProduct modifyProduct = new AddModifyProduct();
-            modifyProduct.addProdcut = false;
+            SelectedRowProduct();// get the row selected
+            AddModifyProduct modifyProduct = new AddModifyProduct(); //call for the new form
+            modifyProduct.addProdcut = false; //set add product to false indicating its modify button not add button pressed
             modifyProduct.product = product;
-            DialogResult result = modifyProduct.ShowDialog();
+            DialogResult result = modifyProduct.ShowDialog(); //show new form
             DisplayProducts();
             DisplayPackages();
         }
@@ -133,13 +139,13 @@ namespace TravelExpertsAPP
         * Date : 27th July, 2018
         * Purpose: Add, Modify and Delete Buttons Events
         **************************************************************************************************************/
-
+        //display supplier table
         private void DisplaySupplier()
         {
             suppliers = SupplierDB.GetAllSuppliers();
             supplierDataGridView.DataSource = suppliers;         
         }
-
+        //get user selected row for supplier table
         private void SelectedRowSupplier()
         {
             supplier = new Supplier();
@@ -149,13 +155,14 @@ namespace TravelExpertsAPP
             supplier.SupName = selectedRow.Cells[1].Value.ToString();
         }
          
-        // Supplier's Add Button
+        // Supplier's Add Button in supplier tab
         private void btnAddSupplier_Click(object sender, EventArgs e)
         {
+            // call for new form
             frmSupplierAddModify addSupplierForm = new frmSupplierAddModify();
-            addSupplierForm.addSupplier = true;
-            DialogResult result = addSupplierForm.ShowDialog();
-            if (result == DialogResult.OK)
+            addSupplierForm.addSupplier = true; //tells form the add button was pressed
+            DialogResult result = addSupplierForm.ShowDialog(); // show form
+            if (result == DialogResult.OK)//if user selects ok from add form
             {
                 supplier = addSupplierForm.supplier;
                 DisplaySupplier();
@@ -166,10 +173,11 @@ namespace TravelExpertsAPP
         // Supplier's Modify Button
         private void btnModifySupplier_Click(object sender, EventArgs e)
         {
-            SelectedRowSupplier();
+            SelectedRowSupplier(); // gets info for user selected row
+            //creates new form object
             frmSupplierAddModify modifySupplierForm = new frmSupplierAddModify();
-            modifySupplierForm.addSupplier = false;
-            modifySupplierForm.supplier = supplier;
+            modifySupplierForm.addSupplier = false; //tells form the modift button was pressed
+            modifySupplierForm.supplier = supplier; //passes values over to the supplier object in the form
             DialogResult result = modifySupplierForm.ShowDialog();
             DisplaySupplier();
             DisplayPackages();
@@ -180,13 +188,13 @@ namespace TravelExpertsAPP
         {
             DialogResult result = MessageBox.Show("DO you really want to delete this Supplier?", "Confirm Delete", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
 
-            SelectedRowSupplier();
+            SelectedRowSupplier();//get user selected row values
 
-            if(result == DialogResult.Yes)
+            if(result == DialogResult.Yes) //if user clicks accept delete 
             {
                 try
                 {
-                    if (!SupplierDB.DeleteSupplier(supplier))
+                    if (!SupplierDB.DeleteSupplier(supplier)) //delete does not happen in database
                     {
                         MessageBox.Show("Another user has updated or deleted product" + supplier.SupName, "Datebase Error");
                     }
@@ -199,9 +207,8 @@ namespace TravelExpertsAPP
                 DisplayPackages();
             }
         }
-
         //end of Sneha code
-
+        //add button clicked in prodcuts supplier tab
         private void btnAddProductSupplier_Click(object sender, EventArgs e)
         {
             AddModifyProductsSupplier addProductsSupplier = new AddModifyProductsSupplier();
@@ -214,7 +221,7 @@ namespace TravelExpertsAPP
                 DisplayPackages();
             }
         }
-
+        //delete button pressed for product supplier tab
         private void btnDeleteProductSupplier_Click(object sender, EventArgs e)
         {
             DialogResult result = MessageBox.Show("Are you sure?", "Confirm Delete", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
@@ -237,7 +244,7 @@ namespace TravelExpertsAPP
             DisplayProductSupplier();
             DisplayPackages();
         }
-
+        //get selected rows for products suppliers table
         private void SelectRowProducts_Suppliers()
         {
             productSupplier = new Product_Supplier();
@@ -247,7 +254,7 @@ namespace TravelExpertsAPP
             productSupplier.ProductID = Convert.ToInt32(selectedRow.Cells[1].Value);
             productSupplier.SupplierID = Convert.ToInt32(selectedRow.Cells[2].Value);
         }
-
+        //modify button pressed in products supplier tab
         private void btnModifyProductSupplier_Click(object sender, EventArgs e)
         {
             SelectRowProducts_Suppliers();
@@ -258,7 +265,7 @@ namespace TravelExpertsAPP
             DisplayProductSupplier();
             DisplayPackages();
         }
-
+        //add button pressed in package tab
         private void btnAddPackage_Click(object sender, EventArgs e)
         {
             AddModifyPackages addModifyPackage = new AddModifyPackages();
@@ -270,7 +277,7 @@ namespace TravelExpertsAPP
                 this.DisplayPackages();
             }
         }
-
+        //delete button pressed in package tab
         private void btnDeletePackage_Click(object sender, EventArgs e)
         {
             DialogResult result = MessageBox.Show("Are you sure?", "Confirm Delete", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
@@ -292,6 +299,7 @@ namespace TravelExpertsAPP
             }
 
         }
+        //get values for user selected row
         private void SelectedRowPackage()
         {
             package = new Package();
@@ -305,7 +313,7 @@ namespace TravelExpertsAPP
             package.PkgBasePrice = Convert.ToDouble(selectedRow.Cells[5].Value);
             package.PkgAgencyCommission = Convert.ToDouble(selectedRow.Cells[6].Value);
         }
-
+        //modify button pressed in package tab
         private void btnModifyPackage_Click(object sender, EventArgs e)
         {
             SelectedRowPackage();
@@ -315,19 +323,19 @@ namespace TravelExpertsAPP
             DialogResult result = modifyPackages.ShowDialog();
             DisplayPackages();
         }
-
+        //when user clicks row in table showing package details
         private void packageDataGridView_CellClick(object sender, DataGridViewCellEventArgs e)
         {
-            DisplayPackageProdSup();
+            DisplayPackageProdSup(); //dispaly corresponding product and supplier info for selected package
         }
-
+        //dispaly prodcut supplier info for certain package
         private void DisplayPackageProdSup()
         {
             SelectedRowPackage();
             packProdSups = Packages_Products_SuppliersDB.GetAllPackagesProductsSuppliers(package);
             packages_Products_SuppliersDataGridView.DataSource = packProdSups;
         }
-
+        //add button pressed for package product supplier table on the pakcage tab
         private void btnAddPackProdSup_Click(object sender, EventArgs e)
         {
             SelectedRowPackage();
@@ -340,6 +348,11 @@ namespace TravelExpertsAPP
                 this.DisplayPackages();
                 this.DisplayProductSupplier();
             }
+        }
+
+        private void product_SupplierDataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+
         }
     }//end of class
 }//end of namespace

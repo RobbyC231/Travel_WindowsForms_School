@@ -3,12 +3,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-
-/*
- * Author: Brian Liang
- * Date: July/Aug 2018
- */
-
+/***************************************************************
+* Author : Brain Lang
+* Date : 21th July, 2018
+* Purpose: sets properties of package class
+***************************************************************/
 namespace TravelExpertsLibrary
 
 {

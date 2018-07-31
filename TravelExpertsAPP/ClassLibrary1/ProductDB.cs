@@ -5,10 +5,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-/*
- * Author: Robert Clements
- * Date: July 22, 2018
- */
+/***************************************************************
+* Author : Robert Clements
+* Date : 26th July, 2018
+* Purpose: Connectes to travel experts database to access the Product table.
+***************************************************************/
 namespace TravelExpertsLibrary
 {
     public static class ProductDB
@@ -82,18 +83,21 @@ namespace TravelExpertsLibrary
             }
             return productID;
         }
-
+        /// <summary>
+        /// gets the next product id from the product id column
+        /// </summary>
+        /// <returns>returns the value of the product id</returns>
         public static int GetNextProductID()
         {
-            int supplierID;
+            int productId; //holds value of product id from database
             SqlConnection con = TravelExpertsDB.GetConnection();
-            string selectQuery = "SELECT IDENT_CURRENT('Products') + IDENT_INCR('Products')";
+            string selectQuery = "SELECT IDENT_CURRENT('Products') + IDENT_INCR('Products')"; //gets the current identity for the products table and then adds the identity increment value
             SqlCommand selectCmd = new SqlCommand(selectQuery, con);
             try
             {
                 con.Open();
-                supplierID = Convert.ToInt32(selectCmd.ExecuteScalar());
-                return supplierID;
+                productId = Convert.ToInt32(selectCmd.ExecuteScalar());
+                return productId;
             }
             catch (SqlException ex)
             {
@@ -105,15 +109,20 @@ namespace TravelExpertsLibrary
             }
 
         }
-            public static bool DeleteProduct(Product product)
+        /// <summary>
+        /// this is used to deleted a selected product by the user from the travel experts database
+        /// </summary>
+        /// <param name="product"></param>
+        /// <returns> returns a true or false value, true if the count of the rows affected is greater than 1 meaning the row was deleted </returns>
+        public static bool DeleteProduct(Product product)
         {
             SqlConnection con = TravelExpertsDB.GetConnection();
             string deleteStatement = "DELETE FROM Products " +
                                      "WHERE ProductID = @ProductID " +
                                      "AND ProdName = @ProdName";
             SqlCommand cmd = new SqlCommand(deleteStatement, con);
-            cmd.Parameters.AddWithValue("@ProductID", product.ProductID);
-            cmd.Parameters.AddWithValue("@ProdName", product.ProdName);
+            cmd.Parameters.AddWithValue("@ProductID", product.ProductID); //product id of the user chosen value to be deleted
+            cmd.Parameters.AddWithValue("@ProdName", product.ProdName); //product name of the user chosen value to be deleted
             try
             {
                 con.Open();
@@ -131,6 +140,12 @@ namespace TravelExpertsLibrary
             }
 
         }
+        /// <summary>
+        /// user picks a product to be updated this methods is called and updates that product in the database
+        /// </summary>
+        /// <param name="oldProduct"></param>
+        /// <param name="newProduct"></param>
+        /// <returns> true or false value, true if count is greater than 1 meaning more than 1 row was affected</returns>
         public static bool UpdateProduct(Product oldProduct, Product newProduct)
         {
             SqlConnection con = TravelExpertsDB.GetConnection();
@@ -139,10 +154,10 @@ namespace TravelExpertsLibrary
                                      "WHERE ProductID = @OldProductID " +
                                      "AND ProdName = @OldProdName";
             SqlCommand cmd = new SqlCommand(updateStatement, con);
-            cmd.Parameters.AddWithValue("@NewProdName", newProduct.ProdName);
+            cmd.Parameters.AddWithValue("@NewProdName", newProduct.ProdName); //new value entered in database 
             //start adding values of old product
-            cmd.Parameters.AddWithValue("@OldProductID", oldProduct.ProductID);
-            cmd.Parameters.AddWithValue("@OldProdName", oldProduct.ProdName);
+            cmd.Parameters.AddWithValue("@OldProductID", oldProduct.ProductID); 
+            cmd.Parameters.AddWithValue("@OldProdName", oldProduct.ProdName); //old name to be changed
             try
             {
                 con.Open();

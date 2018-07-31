@@ -14,31 +14,33 @@ namespace TravelExpertsLibrary
     {
 
         /// <summary>
-        /// The title that will appear in dialog boxes.
+        /// The title for the dialog boxes.
         /// </summary>
         public static string Title { get; set; } = "Entry Error";
 
         /// <summary>
-        /// Checks whether the user entered data into a text box.
+        /// Checks whether the user entered data into a text box and combo box.
         /// </summary>
         /// <param name="textBox">The text box control to be validated.</param>
         /// <returns>True if the user has entered data.</returns>
         public static bool IsPresent(Control control)
         {
+            //if control is type textbox
             if (control.GetType().ToString() == "System.Windows.Forms.TextBox")
             {
                 TextBox textBox = (TextBox)control;
-                if (textBox.Text == "")
+                if (textBox.Text == "")//if no user input
                 {
                     MessageBox.Show(textBox.Tag + " is a required field.", Title);
                     textBox.Focus();
                     return false;
                 }
             }
+            //if control is type combo box
             else if (control.GetType().ToString() == "System.Windows.Forms.ComboBox")
             {
                 ComboBox comboBox = (ComboBox)control;
-                if (comboBox.SelectedIndex == -1)
+                if (comboBox.SelectedIndex == -1)// if user has not made a selection
                 {
                     MessageBox.Show(comboBox.Tag + " is a required field.", "Entry Error");
                     comboBox.Focus();
@@ -89,12 +91,11 @@ namespace TravelExpertsLibrary
         }
 
         /// <summary>
-        /// Checks whether the user entered a value within a specified range into a text box.
+        /// checks if user entered a end date that is past the start date
         /// </summary>
-        /// <param name="textBox">The text box control to be validated.</param>
-        /// <param name="min">The minimum value for the range.</param>
-        /// <param name="max">The maximum value for the range.</param>
-        /// <returns>True if the user has entered a value within the specified range.</returns>
+        /// <param name="startDate"></param>
+        /// <param name="endDate"></param>
+        /// <returns>returns a true or false answer, false if start date is bigger than end date stopping it from being entered into the database</returns>
         public static bool EndAfterStart(DateTimePicker startDate, DateTimePicker endDate)
         {
             if (startDate.Value > endDate.Value)
@@ -105,7 +106,12 @@ namespace TravelExpertsLibrary
             }
             return true;
         }
-
+        /// <summary>
+        /// checks if user entered in a larger amount for the agent commission price
+        /// </summary>
+        /// <param name="basePrice"></param>
+        /// <param name="agentCommission"></param>
+        /// <returns> returns a false value if agenct commission is larger thatn base price, this stops it from being entered into the database</returns>
         public static bool AgentCommissionLessBasePrice(TextBox basePrice, TextBox agentCommission)
         {
             double baseP = Convert.ToDouble(basePrice.Text);

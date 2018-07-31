@@ -4,10 +4,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-/*
- * Author: Robert Clements
- * Date: July 24, 2018
- */ 
+/***************************************************************
+* Author : Brain Lang
+* Date : 24th July, 2018
+* Purpose: sets properties for product class
+***************************************************************/
 namespace TravelExpertsLibrary
 {
     /// <summary>
@@ -18,13 +19,5 @@ namespace TravelExpertsLibrary
         public Product() { }
         public int ProductID { get; set; }
         public string ProdName { get; set; }
-        //making copy of product to hold when updating database in case user cancels
-        public Product CopyProduct()
-        {
-            Product copy = new Product();
-            copy.ProductID = this.ProductID;
-            copy.ProdName = this.ProdName;
-            return copy;
-        }
     }
 }

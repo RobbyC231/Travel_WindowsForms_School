@@ -1,16 +1,19 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Data.SqlClient;
-
-/*
- * Author: Brian Liang
- * Date: July/Aug 2018
- */
-
+/***************************************************************
+* Author : Robert Clements & Brain Lang
+* Date : 21th July, 2018
+* Purpose: used to access the package table in the travel expert database
+***************************************************************/
 namespace TravelExpertsLibrary
 {
     public static class PackageDB
     {
+        /// <summary>
+        /// gets all the information from the package table
+        /// </summary>
+        /// <returns> list of package objects </returns>
         public static List<Package> GetPackage()
         {
             List<Package> packages = new List<Package>();
@@ -23,7 +26,7 @@ namespace TravelExpertsLibrary
             {
                 con.Open();
                 SqlDataReader reader = cmd.ExecuteReader();
-                while (reader.Read()) // found a package
+                while (reader.Read()) // reads while still info in database
                 {
                     pack = new Package();
                     pack.PackageId = (int)reader["PackageID"];
@@ -33,7 +36,7 @@ namespace TravelExpertsLibrary
                     pack.PkgDesc = reader["PkgDesc"].ToString();
                     pack.PkgBasePrice = Convert.ToDouble(reader["PkgBasePrice"]);
                     pack.PkgAgencyCommission = Convert.ToDouble(reader["PkgAgencyCommission"]);
-                    packages.Add(pack);
+                    packages.Add(pack); //adds package object to packages list
                 }
             }
             catch (SqlException ex)
@@ -44,9 +47,13 @@ namespace TravelExpertsLibrary
             {
                 con.Close();
             }
-            return packages;
+            return packages; //list of package objects 
         }
-
+        /// <summary>
+        /// used to deleted a user selected packagefrom the database
+        /// </summary>
+        /// <param name="package"></param>
+        /// <returns> true or false, true if count is greater than 1 menaing more than one row in the database was affected</returns>
         public static bool DeletePackage(Package package)
         {
             SqlConnection con = TravelExpertsDB.GetConnection();
@@ -59,6 +66,7 @@ namespace TravelExpertsLibrary
                                      "AND PkgBasePrice = @PkgBasePrice " +
                                      "AND PkgAgencyCommission = @PkgAgencyCommission";
             SqlCommand cmd = new SqlCommand(deleteStatement, con);
+            //add values to use to find the right value to delete
             cmd.Parameters.AddWithValue("@PackageId", package.PackageId);
             cmd.Parameters.AddWithValue("@PkgName", package.PkgName);
             cmd.Parameters.AddWithValue("@PkgStartDate", package.PkgStartDate);
@@ -69,7 +77,7 @@ namespace TravelExpertsLibrary
             try
             {
                 con.Open();
-                int count = cmd.ExecuteNonQuery();
+                int count = cmd.ExecuteNonQuery();// returns int for rows affected
                 if (count > 0)
                 {
                     return true;
@@ -89,14 +97,19 @@ namespace TravelExpertsLibrary
                 con.Close();
             }
         }
-
+        /// <summary>
+        /// inserts a new package into the database
+        /// </summary>
+        /// <param name="package"></param>
+        /// <returns> package id for the new item</returns>
         public static int AddPackage(Package package)
         {
-            int packageID;
+            int packageID;//new package id
             SqlConnection con = TravelExpertsDB.GetConnection();
             string insertStatement = "INSERT INTO Packages (PkgName, PkgStartDate, PkgEndDate, PkgDesc, PkgBasePrice, PkgAgencyCommission) " +
                                         "VALUES(@PkgName, @PkgStartDate, @PkgEndDate, @PkgDesc, @PkgBasePrice, @PkgAgencyCommission)";
             SqlCommand cmd = new SqlCommand(insertStatement, con);
+            //adding values to be inserted
             cmd.Parameters.AddWithValue("@PkgName", package.PkgName);
             cmd.Parameters.AddWithValue("@PkgStartDate", package.PkgStartDate);
             cmd.Parameters.AddWithValue("@PkgEndDate", package.PkgEndDate);
@@ -108,10 +121,11 @@ namespace TravelExpertsLibrary
             {
                 con.Open();
                 cmd.ExecuteNonQuery();
-
+                //TODO: might not need this code below
                 String selectQuery = "SELECT IDENT_CURRENT('Packages')";
                 SqlCommand selectCmd = new SqlCommand(selectQuery, con);
                 packageID = Convert.ToInt32(selectCmd.ExecuteScalar());
+                //
             }
             catch (SqlException ex)
             {
@@ -123,9 +137,13 @@ namespace TravelExpertsLibrary
             }
             return packageID;
         }
+        /// <summary>
+        /// gets the value of the new auto generated package id
+        /// </summary>
+        /// <returns> new supplier id</returns>
         public static int GetNextPackageID()
         {
-            int supplierID;
+            int supplierID;//supplier id auto generated
             SqlConnection con = TravelExpertsDB.GetConnection();
             string selectQuery = "SELECT IDENT_CURRENT('Packages') + IDENT_INCR('Packages')";
             SqlCommand selectCmd = new SqlCommand(selectQuery, con);
@@ -144,7 +162,12 @@ namespace TravelExpertsLibrary
                 con.Close();
             }
         }
-
+        /// <summary>
+        /// updates a package with new info user inputs 
+        /// </summary>
+        /// <param name="oldPackage"></param>
+        /// <param name="newPackage"></param>
+        /// <returns> true or false, true if number of rows affected are greated than 0 menaing update was succesful</returns>
         public static bool UpdatePackages(Package oldPackage, Package newPackage)
         {
             SqlConnection con = TravelExpertsDB.GetConnection();
