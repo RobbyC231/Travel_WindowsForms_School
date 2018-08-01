@@ -56,7 +56,7 @@
             // btnAccept
             // 
             this.btnAccept.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.btnAccept.Location = new System.Drawing.Point(36, 116);
+            this.btnAccept.Location = new System.Drawing.Point(131, 92);
             this.btnAccept.Name = "btnAccept";
             this.btnAccept.Size = new System.Drawing.Size(75, 23);
             this.btnAccept.TabIndex = 3;
@@ -68,7 +68,7 @@
             // 
             this.btnCancel.DialogResult = System.Windows.Forms.DialogResult.Cancel;
             this.btnCancel.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.btnCancel.Location = new System.Drawing.Point(228, 116);
+            this.btnCancel.Location = new System.Drawing.Point(228, 92);
             this.btnCancel.Name = "btnCancel";
             this.btnCancel.Size = new System.Drawing.Size(75, 23);
             this.btnCancel.TabIndex = 4;
@@ -80,7 +80,7 @@
             this.txtSupplierId.Location = new System.Drawing.Point(131, 20);
             this.txtSupplierId.Name = "txtSupplierId";
             this.txtSupplierId.ReadOnly = true;
-            this.txtSupplierId.Size = new System.Drawing.Size(172, 20);
+            this.txtSupplierId.Size = new System.Drawing.Size(75, 20);
             this.txtSupplierId.TabIndex = 6;
             // 
             // lblSupplierId
@@ -97,7 +97,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.Azure;
-            this.ClientSize = new System.Drawing.Size(334, 151);
+            this.ClientSize = new System.Drawing.Size(334, 141);
             this.Controls.Add(this.txtSupplierId);
             this.Controls.Add(this.lblSupplierId);
             this.Controls.Add(this.btnCancel);

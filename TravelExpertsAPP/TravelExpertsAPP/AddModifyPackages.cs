@@ -9,6 +9,11 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using TravelExpertsLibrary;
 
+/***************************************************************
+* Author : Robert Clements
+* Date : 23th July, 2018
+* Purpose: allows adding and modifing the package table
+***************************************************************/
 namespace TravelExpertsAPP
 {
     public partial class AddModifyPackages : Form
@@ -34,7 +39,7 @@ namespace TravelExpertsAPP
                 this.DisplayPackage();
             }
         }
-
+        //display the package when the form is created and pops ups
         private void DisplayPackage()
         {
             txtPackageId.Text = package.PackageId.ToString();
@@ -45,13 +50,13 @@ namespace TravelExpertsAPP
             dtpPkgEndDate.Text = package.PkgEndDate.ToShortDateString();
             dtpPkgStartDate.Text = package.PkgStartDate.ToShortDateString();
         }
-
+        //if the accpet button is clicked
         private void btnAccept_Click(object sender, EventArgs e)
         {
-            if (ValidDate())
+            if (ValidDate()) //checks to see if valid data is present
             {
 
-                if (addPackage)
+                if (addPackage) //if add button was picked on main form
                 {
                     package = new Package();
                     this.PackageData(package);
@@ -65,7 +70,7 @@ namespace TravelExpertsAPP
                         throw ex;
                     }
                 }
-                else
+                else //if modify button was picked on the main form
                 {
                     Package newPackage = new Package();
                     newPackage.PackageId = package.PackageId;
@@ -93,6 +98,10 @@ namespace TravelExpertsAPP
 
         private bool ValidDate()
         {
+            //checking to see that text box has input and are not blank
+            //checks to see if end date is later than start date
+            //checks to see that base price is larger than agency commission
+            //checks to see if base price and agency commission is a positive number
             return
                 Validator.IsPresent(txtPkgAgencyCommission) &&
                 Validator.IsPresent(txtBasePrice) &&
@@ -101,9 +110,11 @@ namespace TravelExpertsAPP
                 Validator.EndAfterStart(dtpPkgStartDate, dtpPkgEndDate) &&
                 Validator.IsDecimal(txtBasePrice) &&
                 Validator.IsDecimal(txtPkgAgencyCommission) &&
-                Validator.AgentCommissionLessBasePrice(txtBasePrice, txtPkgAgencyCommission);
+                Validator.AgentCommissionLessBasePrice(txtBasePrice, txtPkgAgencyCommission) &&
+                Validator.IsPostive(txtBasePrice) &&
+                Validator.IsPostive(txtPkgAgencyCommission);
         }
-
+        //sets the package object properties to the package values in the form
         private void PackageData(Package package)
         {
             package.PkgName = txtPkgName.Text;

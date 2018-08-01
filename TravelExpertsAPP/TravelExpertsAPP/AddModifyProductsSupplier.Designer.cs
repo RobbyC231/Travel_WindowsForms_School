@@ -48,7 +48,7 @@
             // productIDLabel
             // 
             productIDLabel.AutoSize = true;
-            productIDLabel.Location = new System.Drawing.Point(68, 109);
+            productIDLabel.Location = new System.Drawing.Point(36, 63);
             productIDLabel.Name = "productIDLabel";
             productIDLabel.Size = new System.Drawing.Size(61, 13);
             productIDLabel.TabIndex = 8;
@@ -57,7 +57,7 @@
             // supplierIdLabel
             // 
             supplierIdLabel.AutoSize = true;
-            supplierIdLabel.Location = new System.Drawing.Point(68, 136);
+            supplierIdLabel.Location = new System.Drawing.Point(36, 90);
             supplierIdLabel.Name = "supplierIdLabel";
             supplierIdLabel.Size = new System.Drawing.Size(62, 13);
             supplierIdLabel.TabIndex = 9;
@@ -66,7 +66,7 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(68, 81);
+            this.label1.Location = new System.Drawing.Point(36, 35);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(102, 13);
             this.label1.TabIndex = 0;
@@ -74,15 +74,15 @@
             // 
             // txtProdSupplierID
             // 
-            this.txtProdSupplierID.Location = new System.Drawing.Point(190, 78);
+            this.txtProdSupplierID.Location = new System.Drawing.Point(158, 32);
             this.txtProdSupplierID.Name = "txtProdSupplierID";
             this.txtProdSupplierID.ReadOnly = true;
-            this.txtProdSupplierID.Size = new System.Drawing.Size(121, 20);
+            this.txtProdSupplierID.Size = new System.Drawing.Size(75, 20);
             this.txtProdSupplierID.TabIndex = 3;
             // 
             // btnAccept
             // 
-            this.btnAccept.Location = new System.Drawing.Point(111, 215);
+            this.btnAccept.Location = new System.Drawing.Point(158, 140);
             this.btnAccept.Name = "btnAccept";
             this.btnAccept.Size = new System.Drawing.Size(75, 23);
             this.btnAccept.TabIndex = 6;
@@ -93,7 +93,7 @@
             // btnCancel
             // 
             this.btnCancel.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-            this.btnCancel.Location = new System.Drawing.Point(262, 215);
+            this.btnCancel.Location = new System.Drawing.Point(249, 140);
             this.btnCancel.Name = "btnCancel";
             this.btnCancel.Size = new System.Drawing.Size(75, 23);
             this.btnCancel.TabIndex = 7;
@@ -105,9 +105,9 @@
             this.cbProductId.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.productBindingSource, "ProductID", true));
             this.cbProductId.DataBindings.Add(new System.Windows.Forms.Binding("SelectedValue", this.productBindingSource, "ProductID", true));
             this.cbProductId.FormattingEnabled = true;
-            this.cbProductId.Location = new System.Drawing.Point(190, 109);
+            this.cbProductId.Location = new System.Drawing.Point(158, 63);
             this.cbProductId.Name = "cbProductId";
-            this.cbProductId.Size = new System.Drawing.Size(121, 21);
+            this.cbProductId.Size = new System.Drawing.Size(166, 21);
             this.cbProductId.TabIndex = 9;
             this.cbProductId.Tag = "Product ID";
             // 
@@ -120,9 +120,9 @@
             this.cbSupplierID.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.supplierBindingSource, "SupplierId", true));
             this.cbSupplierID.DataBindings.Add(new System.Windows.Forms.Binding("SelectedValue", this.supplierBindingSource, "SupplierId", true));
             this.cbSupplierID.FormattingEnabled = true;
-            this.cbSupplierID.Location = new System.Drawing.Point(190, 136);
+            this.cbSupplierID.Location = new System.Drawing.Point(158, 90);
             this.cbSupplierID.Name = "cbSupplierID";
-            this.cbSupplierID.Size = new System.Drawing.Size(121, 21);
+            this.cbSupplierID.Size = new System.Drawing.Size(166, 21);
             this.cbSupplierID.TabIndex = 10;
             this.cbSupplierID.Tag = "Supplier ID";
             // 
@@ -135,7 +135,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.Azure;
-            this.ClientSize = new System.Drawing.Size(468, 268);
+            this.ClientSize = new System.Drawing.Size(370, 200);
             this.Controls.Add(supplierIdLabel);
             this.Controls.Add(this.cbSupplierID);
             this.Controls.Add(productIDLabel);

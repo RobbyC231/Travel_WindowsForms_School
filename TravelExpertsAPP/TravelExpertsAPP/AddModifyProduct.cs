@@ -19,7 +19,7 @@ namespace TravelExpertsAPP
     public partial class AddModifyProduct : Form
     {
         public bool addProdcut; //holds boolean to show if add or modify button has been choosen
-        public Product product;
+        public Product product; 
         public AddModifyProduct()
         {
             InitializeComponent();
@@ -38,7 +38,7 @@ namespace TravelExpertsAPP
                 this.DisplayProduct();
             }
         }
-
+        //display product information 
         private void DisplayProduct()
         {
             txtProdID.Text = product.ProductID.ToString();

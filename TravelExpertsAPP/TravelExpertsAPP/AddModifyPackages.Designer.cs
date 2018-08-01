@@ -103,6 +103,24 @@
             pkgStartDateLabel.TabIndex = 13;
             pkgStartDateLabel.Text = "Package Start Date:";
             // 
+            // pkgBasePriceLabel
+            // 
+            pkgBasePriceLabel.AutoSize = true;
+            pkgBasePriceLabel.Location = new System.Drawing.Point(38, 170);
+            pkgBasePriceLabel.Name = "pkgBasePriceLabel";
+            pkgBasePriceLabel.Size = new System.Drawing.Size(107, 13);
+            pkgBasePriceLabel.TabIndex = 19;
+            pkgBasePriceLabel.Text = "Package Base Price:";
+            // 
+            // pkgAgencyCommissionLabel
+            // 
+            pkgAgencyCommissionLabel.AutoSize = true;
+            pkgAgencyCommissionLabel.Location = new System.Drawing.Point(38, 199);
+            pkgAgencyCommissionLabel.Name = "pkgAgencyCommissionLabel";
+            pkgAgencyCommissionLabel.Size = new System.Drawing.Size(126, 13);
+            pkgAgencyCommissionLabel.TabIndex = 17;
+            pkgAgencyCommissionLabel.Text = "Pkg Agency Commission:";
+            // 
             // txtPackageId
             // 
             this.txtPackageId.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.packageBindingSource, "PackageId", true));
@@ -155,7 +173,7 @@
             // 
             // btnAccept
             // 
-            this.btnAccept.Location = new System.Drawing.Point(46, 251);
+            this.btnAccept.Location = new System.Drawing.Point(173, 247);
             this.btnAccept.Name = "btnAccept";
             this.btnAccept.Size = new System.Drawing.Size(75, 23);
             this.btnAccept.TabIndex = 15;
@@ -166,7 +184,7 @@
             // btnCancel
             // 
             this.btnCancel.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-            this.btnCancel.Location = new System.Drawing.Point(254, 251);
+            this.btnCancel.Location = new System.Drawing.Point(298, 247);
             this.btnCancel.Name = "btnCancel";
             this.btnCancel.Size = new System.Drawing.Size(75, 23);
             this.btnCancel.TabIndex = 16;
@@ -185,24 +203,6 @@
             this.txtBasePrice.Size = new System.Drawing.Size(200, 20);
             this.txtBasePrice.TabIndex = 20;
             this.txtBasePrice.Tag = "Package Base Price";
-            // 
-            // pkgBasePriceLabel
-            // 
-            pkgBasePriceLabel.AutoSize = true;
-            pkgBasePriceLabel.Location = new System.Drawing.Point(38, 170);
-            pkgBasePriceLabel.Name = "pkgBasePriceLabel";
-            pkgBasePriceLabel.Size = new System.Drawing.Size(107, 13);
-            pkgBasePriceLabel.TabIndex = 19;
-            pkgBasePriceLabel.Text = "Package Base Price:";
-            // 
-            // pkgAgencyCommissionLabel
-            // 
-            pkgAgencyCommissionLabel.AutoSize = true;
-            pkgAgencyCommissionLabel.Location = new System.Drawing.Point(38, 199);
-            pkgAgencyCommissionLabel.Name = "pkgAgencyCommissionLabel";
-            pkgAgencyCommissionLabel.Size = new System.Drawing.Size(126, 13);
-            pkgAgencyCommissionLabel.TabIndex = 17;
-            pkgAgencyCommissionLabel.Text = "Pkg Agency Commission:";
             // 
             // txtPkgAgencyCommission
             // 

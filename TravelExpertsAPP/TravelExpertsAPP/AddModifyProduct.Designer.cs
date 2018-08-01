@@ -64,7 +64,7 @@
             this.txtProdName.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.productBindingSource, "ProdName", true));
             this.txtProdName.Location = new System.Drawing.Point(104, 49);
             this.txtProdName.Name = "txtProdName";
-            this.txtProdName.Size = new System.Drawing.Size(100, 20);
+            this.txtProdName.Size = new System.Drawing.Size(162, 20);
             this.txtProdName.TabIndex = 2;
             this.txtProdName.Tag = "Product Name";
             // 
@@ -74,7 +74,7 @@
             // 
             // btnAccept
             // 
-            this.btnAccept.Location = new System.Drawing.Point(36, 93);
+            this.btnAccept.Location = new System.Drawing.Point(104, 93);
             this.btnAccept.Name = "btnAccept";
             this.btnAccept.Size = new System.Drawing.Size(75, 23);
             this.btnAccept.TabIndex = 5;
@@ -85,7 +85,7 @@
             // btnCancel
             // 
             this.btnCancel.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-            this.btnCancel.Location = new System.Drawing.Point(142, 93);
+            this.btnCancel.Location = new System.Drawing.Point(191, 93);
             this.btnCancel.Name = "btnCancel";
             this.btnCancel.Size = new System.Drawing.Size(75, 23);
             this.btnCancel.TabIndex = 6;
@@ -98,7 +98,7 @@
             this.txtProdID.Location = new System.Drawing.Point(104, 23);
             this.txtProdID.Name = "txtProdID";
             this.txtProdID.ReadOnly = true;
-            this.txtProdID.Size = new System.Drawing.Size(100, 20);
+            this.txtProdID.Size = new System.Drawing.Size(72, 20);
             this.txtProdID.TabIndex = 7;
             // 
             // AddModifyProduct
@@ -107,7 +107,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoSize = true;
             this.BackColor = System.Drawing.Color.Azure;
-            this.ClientSize = new System.Drawing.Size(265, 137);
+            this.ClientSize = new System.Drawing.Size(293, 145);
             this.Controls.Add(label1);
             this.Controls.Add(this.txtProdID);
             this.Controls.Add(this.btnCancel);

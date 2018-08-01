@@ -26,7 +26,7 @@ namespace TravelExpertsLibrary
             List<Product_Supplier> productSuppliers = new List<Product_Supplier>(); //holds list of product_supplier objects
             Product_Supplier ps;
             SqlConnection con = TravelExpertsDB.GetConnection();
-            string selectStatement = "SELECT ProductSupplierID, ProdName, SupName " +
+            string selectStatement = "SELECT ProductSupplierID, ProdName, SupName, ps.ProductID, ps.SupplierID " +
                                      "FROM Products_Suppliers ps " +
                                      "INNER JOIN Products p ON ps.ProductID = p.ProductID " +
                                      "INNER JOIN Suppliers s ON ps.SupplierID = s.SupplierID " +
@@ -40,6 +40,8 @@ namespace TravelExpertsLibrary
                 {
                     ps = new Product_Supplier();
                     ps.ProductSupplierID = (int)reader["ProductSupplierID"];
+                    ps.ProductID = (int)reader["ProductID"];
+                    ps.SupplierID = (int)reader["SupplierID"];
                     ps.ProdName = reader["ProdName"].ToString();
                     ps.SupName = reader["SupName"].ToString();
                     productSuppliers.Add(ps); //adds product_supplier to list

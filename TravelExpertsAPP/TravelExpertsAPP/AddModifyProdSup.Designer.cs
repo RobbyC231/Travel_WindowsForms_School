@@ -65,7 +65,7 @@
             this.cbProdName.FormattingEnabled = true;
             this.cbProdName.Location = new System.Drawing.Point(106, 35);
             this.cbProdName.Name = "cbProdName";
-            this.cbProdName.Size = new System.Drawing.Size(121, 21);
+            this.cbProdName.Size = new System.Drawing.Size(167, 21);
             this.cbProdName.TabIndex = 2;
             this.cbProdName.SelectionChangeCommitted += new System.EventHandler(this.cbProdName_SelectionChangeCommitted);
             // 
@@ -79,12 +79,12 @@
             this.cbSupName.FormattingEnabled = true;
             this.cbSupName.Location = new System.Drawing.Point(106, 62);
             this.cbSupName.Name = "cbSupName";
-            this.cbSupName.Size = new System.Drawing.Size(121, 21);
+            this.cbSupName.Size = new System.Drawing.Size(167, 21);
             this.cbSupName.TabIndex = 4;
             // 
             // btnAccept
             // 
-            this.btnAccept.Location = new System.Drawing.Point(36, 105);
+            this.btnAccept.Location = new System.Drawing.Point(106, 105);
             this.btnAccept.Name = "btnAccept";
             this.btnAccept.Size = new System.Drawing.Size(75, 23);
             this.btnAccept.TabIndex = 5;
@@ -95,7 +95,7 @@
             // btnCancel
             // 
             this.btnCancel.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-            this.btnCancel.Location = new System.Drawing.Point(150, 105);
+            this.btnCancel.Location = new System.Drawing.Point(198, 105);
             this.btnCancel.Name = "btnCancel";
             this.btnCancel.Size = new System.Drawing.Size(75, 23);
             this.btnCancel.TabIndex = 6;

@@ -68,7 +68,27 @@ namespace TravelExpertsLibrary
                 textBox.Focus();
                 return false;
             }
+
         }
+        /// <summary>
+        /// checks to see if textbox is a positve number
+        /// </summary>
+        /// <param name="textBox"></param>
+        /// <returns> true or false, false if number is less then 0 </returns>
+        public static bool IsPostive(TextBox textBox)
+        {
+            decimal number = Convert.ToDecimal(textBox.Text);
+            if (number < 0)
+            {
+                MessageBox.Show(textBox.Tag + " must be a postive number", Title);
+                textBox.Focus();
+                return false;
+            }
+            else
+                return true;
+    
+        }
+
 
         /// <summary>
         /// Checks whether the user entered an int value into a text box.

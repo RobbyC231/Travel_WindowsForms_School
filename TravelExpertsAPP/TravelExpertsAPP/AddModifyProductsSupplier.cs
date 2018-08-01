@@ -75,7 +75,7 @@ namespace TravelExpertsAPP
                 if (addProductSupplier) //add button was pressed
                 {
                     productSupplier = new Product_Supplier();
-                    this.ProductSupplierData(productSupplier);
+                    this.ProductSupplierData(productSupplier); //set the product supplier data to the product supplier object
                     try
                     {
                         productSupplier.ProductSupplierID = Product_SupplierDB.AddProduct_Supplier(productSupplier);

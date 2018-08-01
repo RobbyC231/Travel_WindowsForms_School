@@ -4,10 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 /***************************************************************
- * Author : Brain Lang
+ * Author : Sneha Padel (000783907)
  * Date : 19th July, 2018
- * Purpose: The application will also require simple add/edit 
- *          access for maintaining the suppliers data.
+ * Purpose: sets properties for the supplier 
  ***************************************************************/
 namespace TravelExpertsLibrary
 {
