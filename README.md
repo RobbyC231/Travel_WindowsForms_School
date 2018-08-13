@@ -1,4 +1,4 @@
-# Travel_WindowsForms_School
+# Travel WindowsForms School
 
 School project for the Object Oriented Software Development Certificate at SAIT 
 
